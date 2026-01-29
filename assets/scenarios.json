@@ -1,0 +1,67 @@
+[
+  {
+    "id": "1",
+    "text": "Your boss asks you to lie to a client. Promotion guaranteed.",
+    "leftConsequences": {
+      "money": -10,
+      "reputation": 15,
+      "stress": 5
+    },
+    "rightConsequences": {
+      "money": 20,
+      "reputation": -15,
+      "stress": 10
+    },
+    "category": "Career",
+    "difficulty": 1
+  },
+  {
+    "id": "2",
+    "text": "Your ex texts you at 1:30 AM. \"I miss you.\"",
+    "leftConsequences": {
+      "stress": -10,
+      "relationship": -5
+    },
+    "rightConsequences": {
+      "relationship": 15,
+      "stress": 10,
+      "reputation": -5
+    },
+    "leftText": "IGNORE",
+    "rightText": "REPLY",
+    "category": "Dating",
+    "difficulty": 1
+  },
+  {
+    "id": "3",
+    "text": "You can bribe a traffic officer to avoid a fine.",
+    "leftConsequences": {
+      "money": -15,
+      "reputation": 5,
+      "stress": -5
+    },
+    "rightConsequences": {
+      "money": 10,
+      "reputation": -20,
+      "stress": 15
+    },
+    "category": "Ethics",
+    "difficulty": 2
+  },
+  {
+    "id": "4",
+    "text": "Fake experience on your CV for your dream job.",
+    "leftConsequences": {
+      "money": -20,
+      "reputation": 10,
+      "stress": -10
+    },
+    "rightConsequences": {
+      "money": 25,
+      "stress": 20,
+      "reputation": -25
+    },
+    "category": "Career",
+    "difficulty": 3
+  }
+]
