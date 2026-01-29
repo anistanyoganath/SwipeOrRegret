@@ -2,10 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:swipeorregret/app/app_routes.dart';
 import 'package:swipeorregret/app/game_constants.dart';
 import 'package:swipeorregret/core/widgets/stat_bar.dart';
 import 'package:swipeorregret/core/widgets/swipe_card.dart';
 import 'package:swipeorregret/features/game/game_controller.dart';
+import 'package:swipeorregret/features/game/models/game_state.dart';
 
 class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
@@ -67,6 +69,14 @@ class _GameScreenState extends State<GameScreen> {
     super.dispose();
   }
 
+  String _getGameOverReason(GameState gameState) {
+    if (gameState.money <= 0) return 'You went bankrupt!';
+    if (gameState.relationship <= 0) return 'You died alone!';
+    if (gameState.stress >= 100) return 'Stress overwhelmed you!';
+    if (gameState.reputation <= 0) return 'Your reputation was destroyed!';
+    return 'You regret everything!';
+  }
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider.value(
@@ -81,11 +91,24 @@ class _GameScreenState extends State<GameScreen> {
 
           if (controller.isGameOver) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              Navigator.pushReplacementNamed(context, '/game-over');
+              final gameState = controller.gameState;
+              final reason = _getGameOverReason(gameState);
+
+              Navigator.pushReplacementNamed(
+                context,
+                AppRoutes.gameOver,
+                arguments: {
+                  'finalScore': gameState.score,
+                  'reason': reason,
+                  'finalStats': {
+                    'money': gameState.money,
+                    'relationship': gameState.relationship,
+                    'stress': gameState.stress,
+                    'reputation': gameState.reputation,
+                  },
+                },
+              );
             });
-            return const Scaffold(
-              body: Center(child: CircularProgressIndicator()),
-            );
           }
 
           return Scaffold(

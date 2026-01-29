@@ -22,7 +22,16 @@ class SwipeOrRegretApp extends StatelessWidget {
         AppRoutes.splash: (context) => const SplashScreen(),
         AppRoutes.home: (context) => const HomeScreen(),
         AppRoutes.game: (context) => const GameScreen(),
-        AppRoutes.gameOver: (context) => const GameOverScreen(),
+        AppRoutes.gameOver: (context) {
+          final args =
+              ModalRoute.of(context)!.settings.arguments
+                  as Map<String, dynamic>;
+          return GameOverScreen(
+            finalScore: args['finalScore'],
+            reason: args['reason'],
+            finalStats: Map<String, int>.from(args['finalStats']),
+          );
+        },
         AppRoutes.settings: (context) => const SettingsScreen(),
       },
     );
