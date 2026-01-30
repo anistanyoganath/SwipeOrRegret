@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:swipeorregret/app/app_routes.dart';
+import 'package:swipeorregret/core/provider/local_provider.dart';
 import 'package:swipeorregret/core/widgets/primary_button.dart';
 import 'package:swipeorregret/features/settings/settings_controller.dart';
+import 'package:swipeorregret/l10n/app_localizations.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+
     return ChangeNotifierProvider(
       create: (_) => SettingsController(),
       child: Scaffold(
@@ -164,6 +168,69 @@ class SettingsScreen extends StatelessWidget {
                       ),
                     ),
                   ),
+                  const SizedBox(height: 32),
+
+                  Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            localizations?.language ?? 'Language',
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          ListTile(
+                            leading: const Icon(Icons.language),
+                            title: Text(localizations?.language ?? 'Language'),
+                            subtitle: Consumer<LocaleProvider>(
+                              builder: (context, localeProvider, child) {
+                                return Text(
+                                  _getLanguageName(localeProvider.locale),
+                                );
+                              },
+                            ),
+                            trailing: Consumer<LocaleProvider>(
+                              builder: (context, localeProvider, child) {
+                                return DropdownButton<Locale>(
+                                  value: localeProvider.locale,
+                                  onChanged: (Locale? newLocale) {
+                                    if (newLocale != null) {
+                                      localeProvider.setLocale(newLocale);
+                                    }
+                                  },
+                                  items: [
+                                    DropdownMenuItem(
+                                      value: const Locale('en'),
+                                      child: Text(
+                                        localizations?.english ?? 'English',
+                                      ),
+                                    ),
+                                    DropdownMenuItem(
+                                      value: const Locale('si'),
+                                      child: Text(
+                                        localizations?.sinhala ?? 'සිංහල',
+                                      ),
+                                    ),
+                                    DropdownMenuItem(
+                                      value: const Locale('ta'),
+                                      child: Text(
+                                        localizations?.tamil ?? 'தமிழ்',
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
 
                   const SizedBox(height: 32),
 
@@ -230,5 +297,16 @@ class SettingsScreen extends StatelessWidget {
         );
       },
     );
+  }
+
+  String _getLanguageName(Locale locale) {
+    switch (locale.languageCode) {
+      case 'si':
+        return 'සිංහල';
+      case 'ta':
+        return 'தமிழ்';
+      default:
+        return 'English';
+    }
   }
 }

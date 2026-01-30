@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:swipeorregret/app/app_routes.dart';
 import 'package:swipeorregret/app/game_constants.dart';
-import 'package:swipeorregret/core/widgets/stat_bar.dart';
 import 'package:swipeorregret/core/widgets/swipe_card.dart';
 import 'package:swipeorregret/features/game/game_controller.dart';
 import 'package:swipeorregret/features/game/models/game_state.dart';
+import 'package:swipeorregret/core/services/audio_service.dart';
+import 'package:swipeorregret/core/services/vibration_service.dart';
+import 'package:swipeorregret/core/widgets/animated_stat_bar.dart';
 
 class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
@@ -53,16 +55,43 @@ class _GameScreenState extends State<GameScreen> {
 
   void _onSwipeLeft() {
     _timer?.cancel();
-    _controller.makeDecision(false);
-    _startTimer();
+
+    // Play effects
+    AudioService().playSwipeSound();
+    VibrationService().vibrateSwipe();
+
+    // Animate card
+    _animateCardSwipe(false);
+
+    // Delay for animation then make decision
+    Future.delayed(const Duration(milliseconds: 300), () {
+      _controller.makeDecision(false);
+      _startTimer();
+    });
   }
 
   void _onSwipeRight() {
     _timer?.cancel();
-    _controller.makeDecision(true);
-    _startTimer();
+
+    // Play effects
+    AudioService().playSwipeSound();
+    VibrationService().vibrateSwipe();
+
+    // Animate card
+    _animateCardSwipe(true);
+
+    // Delay for animation then make decision
+    Future.delayed(const Duration(milliseconds: 300), () {
+      _controller.makeDecision(true);
+      _startTimer();
+    });
   }
 
+  // Add card animation
+  void _animateCardSwipe(bool isRight) {
+    // You can implement card swipe animation here
+    // Using Transform.translate or other animation methods
+  }
   @override
   void dispose() {
     _timer?.cancel();
@@ -161,25 +190,25 @@ class _GameScreenState extends State<GameScreen> {
                         crossAxisSpacing: 12,
                         mainAxisSpacing: 12,
                         children: [
-                          StatBar(
+                          AnimatedStatBar(
                             label: 'Money',
                             value: controller.gameState.money,
                             color: Colors.green,
                             icon: Icons.attach_money,
                           ),
-                          StatBar(
+                          AnimatedStatBar(
                             label: 'Relationship',
                             value: controller.gameState.relationship,
                             color: Colors.pink,
                             icon: Icons.favorite,
                           ),
-                          StatBar(
+                          AnimatedStatBar(
                             label: 'Stress',
                             value: controller.gameState.stress,
                             color: Colors.orange,
                             icon: Icons.psychology,
                           ),
-                          StatBar(
+                          AnimatedStatBar(
                             label: 'Reputation',
                             value: controller.gameState.reputation,
                             color: Colors.blue,

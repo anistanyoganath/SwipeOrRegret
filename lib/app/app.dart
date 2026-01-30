@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:swipeorregret/app/app_routes.dart';
 import 'package:swipeorregret/app/app_theme.dart';
-import 'package:swipeorregret/features/game/game_screen.dart';
-import 'package:swipeorregret/features/game_over/game_over_screen.dart';
-import 'package:swipeorregret/features/home/home_screen.dart';
-import 'package:swipeorregret/features/settings/settings_screen.dart';
-import 'package:swipeorregret/features/splash/splash_screen.dart';
+import 'package:swipeorregret/l10n/app_localizations.dart';
 
 class SwipeOrRegretApp extends StatelessWidget {
   const SwipeOrRegretApp({super.key});
@@ -18,22 +15,18 @@ class SwipeOrRegretApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       initialRoute: AppRoutes.splash,
-      routes: {
-        AppRoutes.splash: (context) => const SplashScreen(),
-        AppRoutes.home: (context) => const HomeScreen(),
-        AppRoutes.game: (context) => const GameScreen(),
-        AppRoutes.gameOver: (context) {
-          final args =
-              ModalRoute.of(context)!.settings.arguments
-                  as Map<String, dynamic>;
-          return GameOverScreen(
-            finalScore: args['finalScore'],
-            reason: args['reason'],
-            finalStats: Map<String, int>.from(args['finalStats']),
-          );
-        },
-        AppRoutes.settings: (context) => const SettingsScreen(),
-      },
+      routes: AppRoutes.routes,
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en', ''), // English
+        Locale('si', ''), // Sinhala
+        Locale('ta', ''), // Tamil
+      ],
     );
   }
 }

@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:swipeorregret/app/app_colors.dart';
 import 'package:swipeorregret/app/app_routes.dart';
 import 'package:swipeorregret/core/widgets/primary_button.dart';
 import 'package:swipeorregret/features/home/home_controller.dart';
+import 'package:swipeorregret/l10n/app_localizations.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+
     return ChangeNotifierProvider(
       create: (_) => HomeController(),
       child: Scaffold(
@@ -29,8 +31,8 @@ class HomeScreen extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              'SWIPE OR REGRET',
+                            Text(
+                              localizations?.appTitle ?? 'SWIPE OR REGRET',
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.w900,

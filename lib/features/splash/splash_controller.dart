@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:swipeorregret/core/services/audio_service.dart';
+import 'package:swipeorregret/core/services/vibration_service.dart';
 import 'package:swipeorregret/core/utils/ads/ad_consent.dart';
 import 'package:swipeorregret/features/game/models/game_state.dart';
 
@@ -53,7 +55,18 @@ class SplashController extends ChangeNotifier {
     // Initialize AdMob
     await MobileAds.instance.initialize();
 
-    // Initialize audio service
-    // await AudioService().initialize();
+    await AudioService().initialize();
+
+    // Initialize Vibration
+    await VibrationService().initialize();
+
+    // Initialize localization
+    // final localeProvider = context.read<LocaleProvider>();
+    // await localeProvider.loadLocale();
+
+    // Play background music
+    if (AudioService().musicEnabled) {
+      await AudioService().playBGM('sounds/bgm.mp3');
+    }
   }
 }

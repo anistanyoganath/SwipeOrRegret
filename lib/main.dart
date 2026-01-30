@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'app/app.dart';
+import 'package:provider/provider.dart';
+import 'package:swipeorregret/app/app.dart';
+import 'package:swipeorregret/core/provider/local_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Lock orientation to portrait
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
 
-  runApp(const SwipeOrRegretApp());
+  runApp(
+    MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => LocaleProvider())],
+      child: const SwipeOrRegretApp(),
+    ),
+  );
 }
