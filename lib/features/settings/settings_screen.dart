@@ -17,7 +17,7 @@ class SettingsScreen extends StatelessWidget {
       create: (_) => SettingsController(),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Settings'),
+          title: Text(localizations?.settings ?? 'Settings'),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () => Navigator.pop(context),

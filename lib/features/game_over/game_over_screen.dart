@@ -19,7 +19,7 @@ class GameOverScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void _showReviveSuccessDialog(BuildContext context) {
+    void showReviveSuccessDialog(BuildContext context) {
       showDialog(
         context: context,
         barrierDismissible: false,
@@ -324,7 +324,7 @@ class GameOverScreen extends StatelessWidget {
                               child: OutlinedButton.icon(
                                 onPressed: () {
                                   controller.watchAdForRevive(context, () {
-                                    _showReviveSuccessDialog(context);
+                                    showReviveSuccessDialog(context);
                                   });
                                 },
                                 icon: const Icon(

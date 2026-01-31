@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:swipeorregret/core/services/audio_service.dart';
 import 'package:swipeorregret/core/utils/ads/ads_manager.dart';
 
 class GameOverController extends ChangeNotifier {
@@ -23,6 +24,7 @@ class GameOverController extends ChangeNotifier {
     _saveHighScore();
     _incrementGamesPlayed();
     _saveGameStateForRevival();
+    AudioService().playGameOverSound();
   }
 
   Future<void> _saveGameStateForRevival() async {

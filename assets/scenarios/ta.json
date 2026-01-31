@@ -1,0 +1,37 @@
+[
+  {
+    "id": "1",
+    "text": "உங்கள் மேலாளர் ஒரு வாடிக்கையாளருக்கு பொய் சொல்லும்படி கேட்கிறார். பதவி உயர்வு உத்தரவாதம்.",
+    "leftConsequences": {
+      "money": -10,
+      "reputation": 15,
+      "stress": 5
+    },
+    "rightConsequences": {
+      "money": 20,
+      "reputation": -15,
+      "stress": 10
+    },
+    "leftText": "இல்லை",
+    "rightText": "ஆம்",
+    "category": "வேலை",
+    "difficulty": 1
+  },
+  {
+    "id": "2",
+    "text": "உங்கள் முன்னாள் காதலர்/காதலி இரவு 1:30 மணிக்கு செய்தி அனுப்புகிறார். \"எனக்கு நீங்கள் நினைவிருக்கிறீர்கள்.\"",
+    "leftConsequences": {
+      "stress": -10,
+      "relationship": -5
+    },
+    "rightConsequences": {
+      "relationship": 15,
+      "stress": 10,
+      "reputation": -5
+    },
+    "leftText": "புறக்கணி",
+    "rightText": "பதில் அனுப்பு",
+    "category": "காதல்",
+    "difficulty": 1
+  }
+]

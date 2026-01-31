@@ -1,0 +1,37 @@
+[
+  {
+    "id": "1",
+    "text": "ඔබේ අධිකාරී ඔබට රහස් පාරිභෝගිකයෙකුට බොරු කීමට කියයි. උසස්වීම සහතිකයි.",
+    "leftConsequences": {
+      "money": -10,
+      "reputation": 15,
+      "stress": 5
+    },
+    "rightConsequences": {
+      "money": 20,
+      "reputation": -15,
+      "stress": 10
+    },
+    "leftText": "නැත",
+    "rightText": "ඔව්",
+    "category": "වෘත්තිය",
+    "difficulty": 1
+  },
+  {
+    "id": "2",
+    "text": "ඔබේ හිටපු සහකරු/සහකාරිය රාත්‍රී 1:30ට පණිවිඩයක් එවයි. \"මට ඔයාව මග හැරුනා.\"",
+    "leftConsequences": {
+      "stress": -10,
+      "relationship": -5
+    },
+    "rightConsequences": {
+      "relationship": 15,
+      "stress": 10,
+      "reputation": -5
+    },
+    "leftText": "නොසලකා හරින්න",
+    "rightText": "පිළිතුරු දෙන්න",
+    "category": "දික්කසාද",
+    "difficulty": 1
+  }
+]

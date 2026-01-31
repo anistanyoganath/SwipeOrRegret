@@ -40,7 +40,7 @@ class HomeScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              'One choice. No undo.',
+                              localizations?.tagline ?? 'One choice. No undo.',
                               style: TextStyle(
                                 fontSize: 14,
                                 color: Colors.grey[600],
@@ -224,7 +224,7 @@ class HomeScreen extends StatelessWidget {
 
                 // Play button
                 PrimaryButton(
-                  text: 'START GAME',
+                  text: localizations?.play ?? 'START GAME',
                   onPressed: () {
                     Navigator.pushNamed(context, AppRoutes.game);
                   },
@@ -238,7 +238,7 @@ class HomeScreen extends StatelessWidget {
                   builder: (context, controller, child) {
                     if (controller.hasSavedGame) {
                       return PrimaryButton(
-                        text: 'CONTINUE GAME',
+                        text: localizations?.continueGame ?? 'CONTINUE',
                         onPressed: () {
                           Navigator.pushNamed(context, AppRoutes.game);
                         },
@@ -283,7 +283,7 @@ class HomeScreen extends StatelessWidget {
                               },
                             ),
                             Text(
-                              'High Score',
+                              localizations?.highScore ?? 'High Score',
                               style: TextStyle(
                                 fontSize: 12,
                                 color: Colors.grey[600],
@@ -324,7 +324,7 @@ class HomeScreen extends StatelessWidget {
                               },
                             ),
                             Text(
-                              'Games Played',
+                              localizations?.gamesPlayed ?? 'Games Played',
                               style: TextStyle(
                                 fontSize: 12,
                                 color: Colors.grey[600],
@@ -348,7 +348,7 @@ class HomeScreen extends StatelessWidget {
                           Navigator.pushNamed(context, AppRoutes.settings);
                         },
                         icon: const Icon(Icons.settings),
-                        label: const Text('Settings'),
+                        label: Text(localizations?.settings ?? 'Settings'),
                         style: OutlinedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 16),
                           shape: RoundedRectangleBorder(

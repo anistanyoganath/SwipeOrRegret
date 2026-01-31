@@ -23,7 +23,7 @@ class VibrationService {
   Future<void> vibrateSwipe() async {
     if (!_vibrationEnabled) return;
 
-    if (await Vibration.hasVibrator() ?? false) {
+    if (await Vibration.hasVibrator()) {
       Vibration.vibrate(duration: 50, amplitude: 128);
     }
   }
@@ -31,7 +31,7 @@ class VibrationService {
   Future<void> vibrateDecision() async {
     if (!_vibrationEnabled) return;
 
-    if (await Vibration.hasVibrator() ?? false) {
+    if (await Vibration.hasVibrator()) {
       Vibration.vibrate(duration: 100, amplitude: 255);
     }
   }
@@ -39,7 +39,7 @@ class VibrationService {
   Future<void> vibrateGameOver() async {
     if (!_vibrationEnabled) return;
 
-    if (await Vibration.hasVibrator() ?? false) {
+    if (await Vibration.hasVibrator()) {
       Vibration.vibrate(
         pattern: [0, 100, 200, 100, 200, 100],
         intensities: [0, 255, 0, 255, 0, 255],
@@ -50,7 +50,7 @@ class VibrationService {
   Future<void> vibrateButton() async {
     if (!_vibrationEnabled) return;
 
-    if (await Vibration.hasVibrator() ?? false) {
+    if (await Vibration.hasVibrator()) {
       HapticFeedback.lightImpact();
     }
   }

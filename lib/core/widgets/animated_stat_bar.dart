@@ -156,7 +156,7 @@ class _AnimatedStatBarState extends State<AnimatedStatBar>
               ],
             ),
           ),
-          const SizedBox(width: 8),
+          const SizedBox(width: 6),
           AnimatedBuilder(
             animation: _controller,
             builder: (context, child) {

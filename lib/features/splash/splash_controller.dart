@@ -13,13 +13,13 @@ class SplashController extends ChangeNotifier {
   bool get isLoading => _isLoading;
   GameState? get gameState => _gameState;
 
-  Future<void> initializeApp() async {
+  Future<void> initializeApp(BuildContext context) async {
     try {
       // Load saved game state
       await _loadGameState();
 
       // Initialize services (Firebase, Ads, etc.)
-      await _initializeServices();
+      await _initializeServices(context);
 
       // Simulate minimum splash time
       await Future.delayed(const Duration(milliseconds: 1500));
@@ -49,7 +49,7 @@ class SplashController extends ChangeNotifier {
     }
   }
 
-  Future<void> _initializeServices() async {
+  Future<void> _initializeServices(BuildContext context) async {
     consenting.updateConsent();
 
     // Initialize AdMob
@@ -59,10 +59,6 @@ class SplashController extends ChangeNotifier {
 
     // Initialize Vibration
     await VibrationService().initialize();
-
-    // Initialize localization
-    // final localeProvider = context.read<LocaleProvider>();
-    // await localeProvider.loadLocale();
 
     // Play background music
     if (AudioService().musicEnabled) {

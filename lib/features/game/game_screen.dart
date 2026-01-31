@@ -10,6 +10,7 @@ import 'package:swipeorregret/features/game/models/game_state.dart';
 import 'package:swipeorregret/core/services/audio_service.dart';
 import 'package:swipeorregret/core/services/vibration_service.dart';
 import 'package:swipeorregret/core/widgets/animated_stat_bar.dart';
+import 'package:swipeorregret/l10n/app_localizations.dart';
 
 class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
@@ -108,6 +109,8 @@ class _GameScreenState extends State<GameScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+
     return ChangeNotifierProvider.value(
       value: _controller,
       child: Consumer<GameController>(
@@ -174,7 +177,7 @@ class _GameScreenState extends State<GameScreen> {
                           const Icon(Icons.calendar_today, color: Colors.blue),
                           const SizedBox(width: 8),
                           Text(
-                            'Day ${controller.gameState.streakDays}',
+                            '${localizations?.day ?? "Day "} ${controller.gameState.streakDays}',
                             style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
@@ -191,25 +194,26 @@ class _GameScreenState extends State<GameScreen> {
                         mainAxisSpacing: 12,
                         children: [
                           AnimatedStatBar(
-                            label: 'Money',
+                            label: localizations?.money ?? 'Money',
                             value: controller.gameState.money,
                             color: Colors.green,
                             icon: Icons.attach_money,
                           ),
                           AnimatedStatBar(
-                            label: 'Relationship',
+                            label:
+                                localizations?.relationship ?? 'Relationship',
                             value: controller.gameState.relationship,
                             color: Colors.pink,
                             icon: Icons.favorite,
                           ),
                           AnimatedStatBar(
-                            label: 'Stress',
+                            label: localizations?.stress ?? 'Stress',
                             value: controller.gameState.stress,
                             color: Colors.orange,
                             icon: Icons.psychology,
                           ),
                           AnimatedStatBar(
-                            label: 'Reputation',
+                            label: localizations?.reputation ?? 'Reputation',
                             value: controller.gameState.reputation,
                             color: Colors.blue,
                             icon: Icons.star,
@@ -263,7 +267,8 @@ class _GameScreenState extends State<GameScreen> {
                 Padding(
                   padding: const EdgeInsets.all(16),
                   child: Text(
-                    'Swipe left or right to decide',
+                    localizations?.swipeToDecide ??
+                        'Swipe left or right to decide',
                     style: TextStyle(color: Colors.grey[600], fontSize: 14),
                   ),
                 ),

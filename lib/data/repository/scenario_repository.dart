@@ -1,17 +1,21 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:swipeorregret/features/game/models/scenario.dart';
 
 class ScenarioRepository {
   List<Scenario> _scenarios = [];
 
-  Future<List<Scenario>> getScenarios() async {
-    if (_scenarios.isNotEmpty) {
+  Future<List<Scenario>> getScenarios({String? languageCode}) async {
+    if (_scenarios.isNotEmpty && languageCode == null) {
       return _scenarios;
     }
 
     try {
-      final jsonString = await rootBundle.loadString('assets/scenarios.json');
+      final lang = languageCode ?? 'en';
+      final jsonString = await rootBundle.loadString(
+        'assets/scenarios/$lang.json',
+      );
       final jsonData = json.decode(jsonString) as List;
 
       _scenarios = jsonData.map((item) => Scenario.fromJson(item)).toList();
@@ -19,9 +23,22 @@ class ScenarioRepository {
 
       return _scenarios;
     } catch (e) {
-      // Fallback scenarios
+      print('Error loading scenarios for language $languageCode: $e');
+
+      // Fallback to English
+      if (languageCode != 'en') {
+        return await getScenarios(languageCode: 'en');
+      }
+
+      // If English also fails, use default scenarios
       return _getDefaultScenarios();
     }
+  }
+
+  // Get scenarios based on current locale
+  Future<List<Scenario>> getLocalizedScenarios(BuildContext context) async {
+    final locale = Localizations.localeOf(context);
+    return await getScenarios(languageCode: locale.languageCode);
   }
 
   List<Scenario> _getDefaultScenarios() {
@@ -33,16 +50,6 @@ class ScenarioRepository {
         rightConsequences: {'money': 20, 'reputation': -15, 'stress': 10},
         category: 'Career',
       ),
-      Scenario(
-        id: '2',
-        text: 'Your ex texts you at 1:30 AM. "I miss you."',
-        leftConsequences: {'stress': -10, 'relationship': -5},
-        rightConsequences: {'relationship': 15, 'stress': 10, 'reputation': -5},
-        leftText: 'IGNORE',
-        rightText: 'REPLY',
-        category: 'Dating',
-      ),
-      // Add more default scenarios...
     ];
   }
 }
