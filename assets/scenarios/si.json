@@ -1,7 +1,7 @@
 [
   {
     "id": "1",
-    "text": "ඔබේ අධිකාරී ඔබට රහස් පාරිභෝගිකයෙකුට බොරු කීමට කියයි. උසස්වීම සහතිකයි.",
+    "text": "ඔයාගෙ බොස් ඔයාට ගනුදෙනුකරුට බොරු කියන්න කියනවා. උසස් වීම තියෙනවා.",
     "leftConsequences": {
       "money": -10,
       "reputation": 15,
@@ -12,14 +12,14 @@
       "reputation": -15,
       "stress": 10
     },
-    "leftText": "නැත",
+    "leftText": "නැහැ",
     "rightText": "ඔව්",
     "category": "වෘත්තිය",
     "difficulty": 1
   },
   {
     "id": "2",
-    "text": "ඔබේ හිටපු සහකරු/සහකාරිය රාත්‍රී 1:30ට පණිවිඩයක් එවයි. \"මට ඔයාව මග හැරුනා.\"",
+    "text": "රෑ හයට ඔයාගෙ හිටපු ගෑනු/පිරිමි මැසෙජ් එකක් දානවා. \"ඔයාව මතක් උනා.\"",
     "leftConsequences": {
       "stress": -10,
       "relationship": -5
@@ -29,9 +29,858 @@
       "stress": 10,
       "reputation": -5
     },
-    "leftText": "නොසලකා හරින්න",
-    "rightText": "පිළිතුරු දෙන්න",
-    "category": "දික්කසාද",
+    "leftText": "මගහරින්න",
+    "rightText": "රිප්ලයි",
+    "category": "සම්බන්ධතා",
     "difficulty": 1
+  },
+  {
+    "id": "3",
+    "text": "ට්‍රාෆික් පොලිස් වාරියට අල්ලස් දුන්නොත් දඩය අයින් කරගන්න පුළුවන්.",
+    "leftConsequences": {
+      "money": -15,
+      "reputation": 5,
+      "stress": -5
+    },
+    "rightConsequences": {
+      "money": 10,
+      "reputation": -20,
+      "stress": 15
+    },
+    "leftText": "දඩය ගෙවන්න",
+    "rightText": "අල්ලස් දෙන්න",
+    "category": "සදාචාරය",
+    "difficulty": 2
+  },
+  {
+    "id": "4",
+    "text": "හොඳ රැකියාවකට අයදුම් කරද්දී ඔයාගෙ අත්දැකීම් අල්ලස් කරන්න පුළුවන්.",
+    "leftConsequences": {
+      "money": -20,
+      "reputation": 10,
+      "stress": -10
+    },
+    "rightConsequences": {
+      "money": 25,
+      "stress": 20,
+      "reputation": -25
+    },
+    "leftText": "හරියටම කියන්න",
+    "rightText": "අල්ලස් කරන්න",
+    "category": "වෘත්තිය",
+    "difficulty": 3
+  },
+  {
+    "id": "5",
+    "text": "අයිඩී කාඩ්පතක් එක්ක ඩොලර් 500ක් තියෙන පසුම්බියක් හමුවෙලා. වටේ කාවුත් නෑ.",
+    "leftConsequences": {
+      "money": 25,
+      "reputation": -15,
+      "stress": 10
+    },
+    "rightConsequences": {
+      "reputation": 20,
+      "money": -5,
+      "stress": -5
+    },
+    "leftText": "ගන්න",
+    "rightText": "දෙන්න",
+    "category": "සදාචාරය",
+    "difficulty": 1
+  },
+  {
+    "id": "6",
+    "text": "ඔයාගෙ මිතුරා අවසන් එක්සාමෙ ඔයාගෙ පිළිතුරු පිටපත් කරගන්න ඉල්ලනවා.",
+    "leftConsequences": {
+      "relationship": -20,
+      "reputation": 10
+    },
+    "rightConsequences": {
+      "relationship": 15,
+      "reputation": -25,
+      "stress": 15
+    },
+    "leftText": "නොදෙන්න",
+    "rightText": "දෙන්න",
+    "category": "අධ්‍යාපනය",
+    "difficulty": 2
+  },
+  {
+    "id": "7",
+    "text": "ඔයාගෙ හොඳ අදහසට කාර්ය මණ්ඩලයෙ කෙනෙක් ගෞරවය ගත්තා.",
+    "leftConsequences": {
+      "reputation": -10,
+      "money": -5,
+      "stress": 15
+    },
+    "rightConsequences": {
+      "reputation": 15,
+      "relationship": -20,
+      "stress": 10
+    },
+    "leftText": "ඉඳලා ඉන්න",
+    "rightText": "කතා කරන්න",
+    "category": "වෘත්තිය",
+    "difficulty": 2
+  },
+  {
+    "id": "8",
+    "text": "ඔයාගෙ හොඳම මිතුරාගෙ පිරිමි/ගෑනු අනිත් අයෙක් සමග ඩේට් එකක නිරතවෙලා.",
+    "leftConsequences": {
+      "relationship": -25,
+      "stress": 20
+    },
+    "rightConsequences": {
+      "relationship": 20,
+      "stress": 10,
+      "reputation": 10
+    },
+    "leftText": "නොකියන්න",
+    "rightText": "කියන්න",
+    "category": "මිතුත්වය",
+    "difficulty": 3
+  },
+  {
+    "id": "9",
+    "text": "පරිසරයට හානි කරන සමාගමක හොඳ වැටුප් රැකියාවක් ලැබිලා.",
+    "leftConsequences": {
+      "money": -30,
+      "reputation": 15,
+      "stress": -10
+    },
+    "rightConsequences": {
+      "money": 40,
+      "reputation": -20,
+      "stress": 15
+    },
+    "leftText": "නොගන්න",
+    "rightText": "ගන්න",
+    "category": "සදාචාරය",
+    "difficulty": 3
+  },
+  {
+    "id": "10",
+    "text": "කුඩාංගනයෙක් ඔයාගෙන් ලොකු ණයක් ඉල්ලනවා. ආපහු ගෙවන්න බැරි වෙයි.",
+    "leftConsequences": {
+      "relationship": -25,
+      "stress": -5
+    },
+    "rightConsequences": {
+      "relationship": 20,
+      "money": -30,
+      "stress": 20
+    },
+    "leftText": "නැහැ",
+    "rightText": "දෙන්න",
+    "category": "පවුල",
+    "difficulty": 2
+  },
+  {
+    "id": "11",
+    "text": "රෙන්ට් කාර් එකට අහම්බෙන් හානි වෙලා. සමාගම දැනගන්නේ නැති වෙයි.",
+    "leftConsequences": {
+      "money": 15,
+      "reputation": -10,
+      "stress": 25
+    },
+    "rightConsequences": {
+      "money": -20,
+      "reputation": 10,
+      "stress": -10
+    },
+    "leftText": "හොරෙන් ඉන්න",
+    "rightText": "කියන්න",
+    "category": "සදාචාරය",
+    "difficulty": 2
+  },
+  {
+    "id": "12",
+    "text": "ඔයාගෙ ඩේට් එක ලොකු මුදලක් වගේ ඩිනර් එකක් ගෙවන්න බලාපොරොත්තු වෙනවා.",
+    "leftConsequences": {
+      "money": -25,
+      "relationship": 15
+    },
+    "rightConsequences": {
+      "relationship": -20,
+      "reputation": -5,
+      "money": 10
+    },
+    "leftText": "ගෙවන්න",
+    "rightText": "බෙදාගන්න",
+    "category": "සම්බන්ධතා",
+    "difficulty": 1
+  },
+  {
+    "id": "13",
+    "text": "අසල්වැසියාගෙ ගෙදර නීති විරෝධී වැඩක් වෙනවා කියලා දැනගත්තා.",
+    "leftConsequences": {
+      "relationship": -30,
+      "reputation": -5,
+      "stress": 25
+    },
+    "rightConsequences": {
+      "reputation": 15,
+      "relationship": -40,
+      "stress": 15
+    },
+    "leftText": "නොසලකා හරින්න",
+    "rightText": "පොලිසියට කියන්න",
+    "category": "ප්‍රජාව",
+    "difficulty": 3
+  },
+  {
+    "id": "14",
+    "text": "සමාගම බේරගන්න අක්‍රමික නමුත් විශ්වාසවත් මිතුරෙක්ව රැකියාවෙන් අයින් කරන්න වෙනවා.",
+    "leftConsequences": {
+      "relationship": -35,
+      "money": 20,
+      "stress": 25
+    },
+    "rightConsequences": {
+      "relationship": 20,
+      "money": -25,
+      "stress": 30
+    },
+    "leftText": "අයින් කරන්න",
+    "rightText": "බේරගන්න",
+    "category": "වෘත්තිය",
+    "difficulty": 4
+  },
+  {
+    "id": "15",
+    "text": "කැෂියර් තැන වැරදියට ඩොලර් 50 අමතරව දුන්නා.",
+    "leftConsequences": {
+      "money": 20,
+      "reputation": -10,
+      "stress": 5
+    },
+    "rightConsequences": {
+      "reputation": 15,
+      "money": -20
+    },
+    "leftText": "ගන්න",
+    "rightText": "දෙන්න",
+    "category": "සදාචාරය",
+    "difficulty": 1
+  },
+  {
+    "id": "16",
+    "text": "ශේර් වෙළඳපොලේ පුළුල් වෙන්න උපකාරී වෙන අභ්‍යන්තර තොරතුරු දන්නවා.",
+    "leftConsequences": {
+      "money": 50,
+      "reputation": -30,
+      "stress": 30
+    },
+    "rightConsequences": {
+      "money": -10,
+      "reputation": 20,
+      "stress": -10
+    },
+    "leftText": "භාවිතා කරන්න",
+    "rightText": "මගහරින්න",
+    "category": "මූල්‍ය",
+    "difficulty": 4
+  },
+  {
+    "id": "17",
+    "text": "ඔයාගෙ ළමයා පාසලේදී බලහත්කාරයට ලක්වෙනවා. බලහත්කාරකයාගෙ අම්මා/තාත්තා ඔයාගෙ බොස්.",
+    "leftConsequences": {
+      "relationship": -15,
+      "stress": 25,
+      "money": -10
+    },
+    "rightConsequences": {
+      "relationship": -30,
+      "reputation": 20,
+      "stress": 15
+    },
+    "leftText": "හොරෙන් ඉන්න",
+    "rightText": "කතා කරන්න",
+    "category": "පවුල",
+    "difficulty": 4
+  },
+  {
+    "id": "18",
+    "text": "සදාචාරයෙන් සැක සහිත ගොසිප් ගෲප් එකකට එකතු වෙන්න පුළුවන්. ලොකු උදව්වක්.",
+    "leftConsequences": {
+      "reputation": -20,
+      "money": 30,
+      "relationship": 15
+    },
+    "rightConsequences": {
+      "money": -15,
+      "reputation": 10,
+      "stress": -10
+    },
+    "leftText": "එකතු වෙන්න",
+    "rightText": "නැහැ",
+    "category": "සමාජය",
+    "difficulty": 3
+  },
+  {
+    "id": "19",
+    "text": "ඔයාගෙ පිරිමි/ගෑනු හොඳ රැකියාවක් සඳහා විදේශයකට යන්න ඕන. ඔයා එහා යන්න අකමැතියි.",
+    "leftConsequences": {
+      "relationship": -40,
+      "stress": -15,
+      "money": 10
+    },
+    "rightConsequences": {
+      "relationship": 25,
+      "stress": 35,
+      "money": 20
+    },
+    "leftText": "නැහැ",
+    "rightText": "හරි",
+    "category": "සම්බන්ධතා",
+    "difficulty": 4
+  },
+  {
+    "id": "20",
+    "text": "හිට් ඇන්ඩ් රන් අනතුරක් බලන් හිටියා. අපරාධකාරයා ප්‍රසිද්ධ පුද්ගලයෙක්.",
+    "leftConsequences": {
+      "money": 30,
+      "reputation": -25,
+      "stress": 30
+    },
+    "rightConsequences": {
+      "reputation": 25,
+      "stress": 15,
+      "relationship": -20
+    },
+    "leftText": "අල්ලස් ගන්න",
+    "rightText": "පොලිසියට යන්න",
+    "category": "අධිකරණය",
+    "difficulty": 4
+  },
+  {
+    "id": "21",
+    "text": "ගෙදර දේශපාලනය ගැන කතාබහ එනවා. ඔයාගෙ අදහස් වෙනස්.",
+    "leftConsequences": {
+      "relationship": -20,
+      "stress": 25,
+      "reputation": 5
+    },
+    "rightConsequences": {
+      "relationship": -35,
+      "stress": -10,
+      "reputation": 10
+    },
+    "leftText": "හිතුවක්කාරයෙන් ඉන්න",
+    "rightText": "තර්ක කරන්න",
+    "category": "පවුල",
+    "difficulty": 2
+  },
+  {
+    "id": "22",
+    "text": "ආරම්භක ව්‍යාපාරය සඳහා මහාගෙඩි මෘදුකාංගයක් පිරික්සුම් නොමැතිව භාවිතා කරන්න පුළුවන්.",
+    "leftConsequences": {
+      "money": 25,
+      "reputation": -15,
+      "stress": 10
+    },
+    "rightConsequences": {
+      "money": -20,
+      "reputation": 10,
+      "stress": -5
+    },
+    "leftText": "හොරකම් කරන්න",
+    "rightText": "මිලදී ගන්න",
+    "category": "ව්‍යාපාර",
+    "difficulty": 2
+  },
+  {
+    "id": "23",
+    "text": "ඔයාගෙ අම්මා/තාත්තා අසනීප. හොඳින් බලාගන්න ඕන. නමුත් ඔයාගෙ රැකියාවට බාධා.",
+    "leftConsequences": {
+      "relationship": 30,
+      "money": -25,
+      "stress": 40
+    },
+    "rightConsequences": {
+      "relationship": -40,
+      "money": 20,
+      "stress": 35
+    },
+    "leftText": "මමම බලාගන්නවා",
+    "rightText": "කෙනෙක් යොදවන්න",
+    "category": "පවුල",
+    "difficulty": 5
+  },
+  {
+    "id": "24",
+    "text": "හොඳ ගනුදෙනුකරුවෙක් ගන්න ඔයාගෙ නිෂ්පාදනය අලංකාර කියන්න වෙනවා.",
+    "leftConsequences": {
+      "money": 30,
+      "reputation": -20,
+      "stress": 20
+    },
+    "rightConsequences": {
+      "money": -15,
+      "reputation": 10,
+      "stress": -5
+    },
+    "leftText": "අලංකාර කියන්න",
+    "rightText": "හරියටම කියන්න",
+    "category": "ව්‍යාපාර",
+    "difficulty": 3
+  },
+  {
+    "id": "25",
+    "text": "පැරණි මිතුරෙක් ඔවුන්ගෙ රහස් සම්බන්ධතාවයට ඔයාව ඇලිබි එකක් දෙන්න ඉල්ලනවා.",
+    "leftConsequences": {
+      "relationship": 25,
+      "stress": 30,
+      "reputation": -15
+    },
+    "rightConsequences": {
+      "relationship": -30,
+      "reputation": 10,
+      "stress": 10
+    },
+    "leftText": "ඔව්",
+    "rightText": "නැහැ",
+    "category": "මිතුත්වය",
+    "difficulty": 3
+  },
+  {
+    "id": "26",
+    "text": "කණ්ඩායමේ කෙනෙක් බලවත් ද්‍රව්‍ය ගන්නවා කියලා දන්නවා. හෙට විශාල තරඟයක්.",
+    "leftConsequences": {
+      "reputation": -30,
+      "stress": 25,
+      "relationship": 15
+    },
+    "rightConsequences": {
+      "reputation": 20,
+      "relationship": -40,
+      "stress": 20
+    },
+    "leftText": "හොරෙන් ඉන්න",
+    "rightText": "කියන්න",
+    "category": "ක්‍රීඩා",
+    "difficulty": 4
+  },
+  {
+    "id": "27",
+    "text": "පාසලේදී ඔයාට බය කරපු කෙනා දැන් ඔයාගෙ සමාගමෙන් රැකියාවක් ඉල්ලනවා.",
+    "leftConsequences": {
+      "reputation": 15,
+      "stress": -15,
+      "relationship": -10
+    },
+    "rightConsequences": {
+      "stress": 20,
+      "reputation": -5,
+      "money": 10
+    },
+    "leftText": "නැහැ",
+    "rightText": "ගන්න",
+    "category": "වෘත්තිය",
+    "difficulty": 3
+  },
+  {
+    "id": "28",
+    "text": "ගෘහ හිමිකරු නීති විරෝධීව කුලිය අධික කරනවා. නඩු පවරන්න පුළුවන්, නමුත් ගෙදරින් එලියට දානවා.",
+    "leftConsequences": {
+      "money": -20,
+      "stress": 15
+    },
+    "rightConsequences": {
+      "money": 15,
+      "stress": 30,
+      "reputation": 10
+    },
+    "leftText": "ගෙවන්න",
+    "rightText": "කොන්දොස්තර කරන්න",
+    "category": "මූල්‍ය",
+    "difficulty": 2
+  },
+  {
+    "id": "29",
+    "text": "අලුත් පිරිමි/ගෑනු හිටපු ගෑනු/පිරිමි සමග තියෙන සියලුම පින්තූර හා සම්බන්ධතා මකා දැම්ම ඕන කියනවා.",
+    "leftConsequences": {
+      "relationship": 20,
+      "stress": -10
+    },
+    "rightConsequences": {
+      "relationship": -25,
+      "stress": 15,
+      "reputation": 5
+    },
+    "leftText": "මකන්න",
+    "rightText": "නැහැ",
+    "category": "සම්බන්ධතා",
+    "difficulty": 2
+  },
+  {
+    "id": "30",
+    "text": "ෆාමසියේ නොසැලකිලිමත් කෙනෙක් අමතර ඖෂධ දුන්නා.",
+    "leftConsequences": {
+      "money": 15,
+      "reputation": -10,
+      "stress": 5
+    },
+    "rightConsequences": {
+      "reputation": 10,
+      "stress": -5
+    },
+    "leftText": "ගන්න",
+    "rightText": "දෙන්න",
+    "category": "සෞඛ්‍ය",
+    "difficulty": 1
+  },
+  {
+    "id": "31",
+    "text": "ජාතික ආරක්ෂාවට සාමකාමී කණ්ඩායමක් නිරීක්ෂණය කරන්න කියනවා.",
+    "leftConsequences": {
+      "reputation": -30,
+      "money": 35,
+      "stress": 40
+    },
+    "rightConsequences": {
+      "reputation": 20,
+      "money": -20,
+      "stress": 25
+    },
+    "leftText": "ගන්න",
+    "rightText": "නැහැ",
+    "category": "දේශපාලනය",
+    "difficulty": 5
+  },
+  {
+    "id": "32",
+    "text": "කලාත්මක කාර්යයට අනුමැතිය නැතුව අයිතියක් තියෙන දෙයක් භාවිතා කරන්න පුළුවන්.",
+    "leftConsequences": {
+      "reputation": 25,
+      "money": 20,
+      "stress": 25
+    },
+    "rightConsequences": {
+      "reputation": -10,
+      "money": -15,
+      "stress": -10
+    },
+    "leftText": "ගන්න",
+    "rightText": "නැහැ",
+    "category": "කලාව",
+    "difficulty": 3
+  },
+  {
+    "id": "33",
+    "text": "මහලු නෑදෑයෙක් වටිනා දෙයක් දුන්නා. නමුත් එය වෙනත් කෙනෙකුට දෙන්න කියලා ඉල්ලා සිටියා.",
+    "leftConsequences": {
+      "money": 30,
+      "relationship": -40,
+      "stress": 30
+    },
+    "rightConsequences": {
+      "relationship": 25,
+      "money": -30,
+      "stress": -10
+    },
+    "leftText": "ගන්න",
+    "rightText": "දෙන්න",
+    "category": "පවුල",
+    "difficulty": 4
+  },
+  {
+    "id": "34",
+    "text": "සමාගම් දූෂණයක සාක්ෂි හොරෙන් අල්ලගන්න පුළුවන්.",
+    "leftConsequences": {
+      "reputation": 30,
+      "stress": 35,
+      "money": -10
+    },
+    "rightConsequences": {
+      "stress": -15,
+      "money": 5,
+      "reputation": -5
+    },
+    "leftText": "ප්‍රසිද්ධ කරන්න",
+    "rightText": "මකන්න",
+    "category": "සන්නායක",
+    "difficulty": 5
+  },
+  {
+    "id": "35",
+    "text": "තරඟකරුගෙ රහස් ව්‍යාපාර සැලැස්ම අහම්බෙන් ඔයාට ඊමේල් විදිහට ආවා.",
+    "leftConsequences": {
+      "money": 40,
+      "reputation": -25,
+      "stress": 20
+    },
+    "rightConsequences": {
+      "reputation": 15,
+      "money": -10
+    },
+    "leftText": "භාවිතා කරන්න",
+    "rightText": "මකන්න",
+    "category": "ව්‍යාපාර",
+    "difficulty": 4
+  },
+  {
+    "id": "36",
+    "text": "හොඳම මිතුරා වංචා කරන කෙනෙක් විවාහ කරගන්න යනවා.",
+    "leftConsequences": {
+      "relationship": -50,
+      "stress": 20
+    },
+    "rightConsequences": {
+      "relationship": 30,
+      "stress": 15
+    },
+    "leftText": "ඉඩ දෙන්න",
+    "rightText": "කියන්න",
+    "category": "මිතුත්වය",
+    "difficulty": 5
+  },
+  {
+    "id": "37",
+    "text": "කෝර්ටුවේදී බොරු කියා නීතියෙන් නොමැති නඩුවක් ජයගන්න පුළුවන්.",
+    "leftConsequences": {
+      "money": 50,
+      "reputation": -30,
+      "stress": 40
+    },
+    "rightConsequences": {
+      "money": -30,
+      "reputation": 20,
+      "stress": -10
+    },
+    "leftText": "බොරු කියන්න",
+    "rightText": "සත්‍යය කියන්න",
+    "category": "අධිකරණය",
+    "difficulty": 5
+  },
+  {
+    "id": "38",
+    "text": "සමාජ මාධ්‍ය පෝස්ට් එක වැරදි හේතුවක් නිසා ප්‍රසිද්ධ වෙලා. PR සමාගමක් බොට් භාවිතයෙන් 'සකස්' කරනවා.",
+    "leftConsequences": {
+      "reputation": 20,
+      "money": -15,
+      "stress": -10
+    },
+    "rightConsequences": {
+      "reputation": -25,
+      "stress": 20
+    },
+    "leftText": "බොට් භාවිත කරන්න",
+    "rightText": "ස්වාභාවිකව ඉන්න",
+    "category": "සමාජ මාධ්‍ය",
+    "difficulty": 2
+  },
+  {
+    "id": "39",
+    "text": "අසාර්ථක අවන්හල බේරගන්න නරක අමුද්‍රව්‍ය මිලදී ගන්න පුළුවන්.",
+    "leftConsequences": {
+      "money": 25,
+      "reputation": -20,
+      "stress": 25
+    },
+    "rightConsequences": {
+      "money": -20,
+      "reputation": 10,
+      "stress": 30
+    },
+    "leftText": "ගන්න",
+    "rightText": "නැහැ",
+    "category": "ව්‍යාපාර",
+    "difficulty": 3
+  },
+  {
+    "id": "40",
+    "text": "පරීක්ෂා කරන AI එක චේතනාවක් ඇති බව පෙන්වනවා. එය නතර නොකරන්න කියනවා.",
+    "leftConsequences": {
+      "reputation": 40,
+      "stress": 50,
+      "money": -20
+    },
+    "rightConsequences": {
+      "stress": -20,
+      "money": 30,
+      "reputation": -10
+    },
+    "leftText": "බේරගන්න",
+    "rightText": "නතර කරන්න",
+    "category": "තාක්ෂණය",
+    "difficulty": 5
+  },
+  {
+    "id": "41",
+    "text": "ඔයාගෙ දන්වීම් නිසා ඔයාගෙ ළමයා පාසලේ අයුතු ප්‍රතිලාභ ලබනවා.",
+    "leftConsequences": {
+      "relationship": 15,
+      "money": -10,
+      "reputation": -15
+    },
+    "rightConsequences": {
+      "relationship": -20,
+      "reputation": 20,
+      "stress": 10
+    },
+    "leftText": "හොරෙන් ඉන්න",
+    "rightText": "නවත්තන්න",
+    "category": "පවුල",
+    "difficulty": 3
+  },
+  {
+    "id": "42",
+    "text": "ඔයා විමර්ශනය කරන දූෂිත නිලධාරියෙක් ඔයාව පාටියකට ආරාධනා කරනවා.",
+    "leftConsequences": {
+      "reputation": -20,
+      "relationship": 25,
+      "money": 10
+    },
+    "rightConsequences": {
+      "reputation": 15,
+      "relationship": -30,
+      "stress": 5
+    },
+    "leftText": "යන්න",
+    "rightText": "නැහැ",
+    "category": "දේශපාලනය",
+    "difficulty": 4
+  },
+  {
+    "id": "43",
+    "text": "ඔයාගෙ පර්යේෂණය රෝගයක් සුව කරනවා. නමුත් සතුන් පරීක්ෂා කිරීම් අවශ්‍යයි.",
+    "leftConsequences": {
+      "reputation": 40,
+      "stress": 40,
+      "money": 30
+    },
+    "rightConsequences": {
+      "reputation": -20,
+      "stress": -15,
+      "money": -25
+    },
+    "leftText": "කරගෙන යන්න",
+    "rightText": "නවත්තන්න",
+    "category": "විද්‍යාව",
+    "difficulty": 5
+  },
+  {
+    "id": "44",
+    "text": "සගයෙක් රැකියාවෙන් අයින් වෙනවා. එය ඔයාගෙ වරදක්. නමුත් කතා කළොත් ඔයාගෙ රැකියාව අවදානම්.",
+    "leftConsequences": {
+      "money": 10,
+      "relationship": -35,
+      "stress": 25
+    },
+    "rightConsequences": {
+      "money": -20,
+      "relationship": 30,
+      "stress": 20
+    },
+    "leftText": "නොකියන්න",
+    "rightText": "කියන්න",
+    "category": "වෘත්තිය",
+    "difficulty": 4
+  },
+  {
+    "id": "45",
+    "text": "ඩේටිං ඇප් එකේ යෙදුම හොඳයි. නමුත් ඔවුන්ගෙ පැතිකඩේ ලොකු බොරුවක් තියෙනවා.",
+    "leftConsequences": {
+      "relationship": 25,
+      "stress": 20,
+      "reputation": -5
+    },
+    "rightConsequences": {
+      "relationship": -15,
+      "stress": -10
+    },
+    "leftText": "මගහරින්න",
+    "rightText": "අත්හරින්න",
+    "category": "සම්බන්ධතා",
+    "difficulty": 2
+  },
+  {
+    "id": "46",
+    "text": "ඓතිහාසික ස්ථානයක් බේරගන්න සිය ගණනක් රැකියා නිර්මාණය වෙන ව්‍යාපෘතියක් නතර කරන්න වෙනවා.",
+    "leftConsequences": {
+      "reputation": 25,
+      "money": -20,
+      "stress": 15
+    },
+    "rightConsequences": {
+      "reputation": -30,
+      "money": 30,
+      "stress": 10
+    },
+    "leftText": "බේරගන්න",
+    "rightText": "ඉඩ දෙන්න",
+    "category": "ප්‍රජාව",
+    "difficulty": 4
+  },
+  {
+    "id": "47",
+    "text": "සමාගම කවුද අයින් කරන්නෙ කියලා අහම්බෙන් දැනගත්තා. හොඳ මිතුරෝ අතරේ.",
+    "leftConsequences": {
+      "relationship": -40,
+      "stress": 30
+    },
+    "rightConsequences": {
+      "relationship": 20,
+      "stress": 40,
+      "reputation": -15
+    },
+    "leftText": "හොරෙන් ඉන්න",
+    "rightText": "කියන්න",
+    "category": "වෘත්තිය",
+    "difficulty": 4
+  },
+  {
+    "id": "48",
+    "text": "ප්‍රසිද්ධ පුද්ගලයෙක් ඔයාගෙ නිෂ්පාදනය ප්‍රවර්ධනය කරනවා. නමුත් බොරු රිවියු කරනවා.",
+    "leftConsequences": {
+      "money": 30,
+      "reputation": -20,
+      "stress": 10
+    },
+    "rightConsequences": {
+      "money": -10,
+      "reputation": 10
+    },
+    "leftText": "ගන්න",
+    "rightText": "නැහැ",
+    "category": "ව්‍යාපාර",
+    "difficulty": 2
+  },
+  {
+    "id": "49",
+    "text": "හමුදා ඒකකයට සතුරෙක් සැඟවෙලා ඉන්න ගමක් විනාශ කරන්න නියෝග.",
+    "leftConsequences": {
+      "reputation": -50,
+      "stress": 60,
+      "money": 20
+    },
+    "rightConsequences": {
+      "reputation": 30,
+      "stress": 50,
+      "money": -30
+    },
+    "leftText": "කරන්න",
+    "rightText": "නැහැ",
+    "category": "හමුදා",
+    "difficulty": 5
+  },
+  {
+    "id": "50",
+    "text": "ඔයාගෙ සම්පත් ගෙවලා ජීවිතයක් බේරගන්න මුදලක් දන් දෙන්න පුළුවන්.",
+    "leftConsequences": {
+      "reputation": 40,
+      "money": -50,
+      "stress": -20
+    },
+    "rightConsequences": {
+      "money": 10,
+      "stress": 30,
+      "reputation": -10
+    },
+    "leftText": "දෙන්න",
+    "rightText": "ගන්න",
+    "category": "පරිත්‍යාග",
+    "difficulty": 5
   }
 ]

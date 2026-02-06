@@ -18,7 +18,7 @@ class GameState {
     this.score = 0,
     this.currentScenarioIndex = 0,
     this.lastPlayed,
-    this.streakDays = 0,
+    this.streakDays = 1,
   });
 
   Map<String, dynamic> toJson() => {
@@ -50,6 +50,8 @@ class GameState {
   bool get isGameOver {
     return money <= 0 || relationship <= 0 || stress >= 100 || reputation <= 0;
   }
+
+  bool get hasSavedGame => score > 0 || currentScenarioIndex > 0;
 
   void updateStats(Map<String, int> consequences) {
     money = (money + (consequences['money'] ?? 0)).clamp(

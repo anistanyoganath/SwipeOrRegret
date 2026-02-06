@@ -8,9 +8,9 @@ class AppTheme {
       case 'si': // Sinhala
         return 'Noto Sans Sinhala';
       case 'ta': // Tamil
-        return 'Noto Sans Tamil'; // Google Fonts name
+        return 'Noto Sans Tamil';
       default: // English and others
-        return 'Inter'; // Google Fonts name
+        return 'Inter';
     }
   }
 
@@ -21,10 +21,10 @@ class AppTheme {
     FontWeight? fontWeight,
     Color? color,
     double? height,
+    double? letterSpacing,
   }) {
     final fontFamily = _getGoogleFontFamily(locale);
 
-    // Create Google Fonts TextStyle
     switch (fontFamily) {
       case 'Noto Sans Sinhala':
         return GoogleFonts.notoSansSinhala(
@@ -32,6 +32,7 @@ class AppTheme {
           fontWeight: fontWeight,
           color: color,
           height: height,
+          letterSpacing: letterSpacing,
         );
       case 'Noto Sans Tamil':
         return GoogleFonts.notoSansTamil(
@@ -39,6 +40,7 @@ class AppTheme {
           fontWeight: fontWeight,
           color: color,
           height: height,
+          letterSpacing: letterSpacing,
         );
       default: // 'Inter' and fallback
         return GoogleFonts.inter(
@@ -46,190 +48,428 @@ class AppTheme {
           fontWeight: fontWeight,
           color: color,
           height: height,
+          letterSpacing: letterSpacing,
         );
     }
   }
 
-  // Theme data with dynamic fonts
+  // Theme data with dynamic fonts - Material 3 enabled
   static ThemeData getLightTheme(Locale locale) {
+    final colorScheme = const ColorScheme.light(
+      primary: Colors.deepPurple,
+      secondary: Colors.purple,
+      surface: Colors.white,
+      background: Color(0xFFF5F5F5),
+      error: Color(0xFFB00020),
+      onPrimary: Colors.white,
+      onSecondary: Colors.white,
+      onSurface: Color(0xFF1C1B1F),
+      onBackground: Color(0xFF1C1B1F),
+      onError: Colors.white,
+      brightness: Brightness.light,
+    );
+
+    final textTheme = TextTheme(
+      displayLarge: getTextStyle(
+        locale: locale,
+        fontSize: 57,
+        fontWeight: FontWeight.w400,
+        letterSpacing: -0.25,
+      ),
+      displayMedium: getTextStyle(
+        locale: locale,
+        fontSize: 45,
+        fontWeight: FontWeight.w400,
+      ),
+      displaySmall: getTextStyle(
+        locale: locale,
+        fontSize: 36,
+        fontWeight: FontWeight.w400,
+      ),
+      headlineLarge: getTextStyle(
+        locale: locale,
+        fontSize: 32,
+        fontWeight: FontWeight.w400,
+      ),
+      headlineMedium: getTextStyle(
+        locale: locale,
+        fontSize: 28,
+        fontWeight: FontWeight.w400,
+      ),
+      headlineSmall: getTextStyle(
+        locale: locale,
+        fontSize: 24,
+        fontWeight: FontWeight.w400,
+      ),
+      titleLarge: getTextStyle(
+        locale: locale,
+        fontSize: 22,
+        fontWeight: FontWeight.w500,
+      ),
+      titleMedium: getTextStyle(
+        locale: locale,
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.15,
+      ),
+      titleSmall: getTextStyle(
+        locale: locale,
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.1,
+      ),
+      bodyLarge: getTextStyle(
+        locale: locale,
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.5,
+      ),
+      bodyMedium: getTextStyle(
+        locale: locale,
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.25,
+      ),
+      bodySmall: getTextStyle(
+        locale: locale,
+        fontSize: 12,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.4,
+      ),
+      labelLarge: getTextStyle(
+        locale: locale,
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.1,
+      ),
+      labelMedium: getTextStyle(
+        locale: locale,
+        fontSize: 12,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.5,
+      ),
+      labelSmall: getTextStyle(
+        locale: locale,
+        fontSize: 11,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.5,
+      ),
+    );
+
     return ThemeData(
-      primarySwatch: Colors.deepPurple,
-      scaffoldBackgroundColor: const Color(0xFFF5F5F5),
+      useMaterial3: true, // Enable Material 3
+      colorScheme: colorScheme,
+      fontFamily: _getGoogleFontFamily(locale),
+      textTheme: textTheme,
+
+      // App Bar
       appBarTheme: AppBarTheme(
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        elevation: 1,
-        titleTextStyle: getTextStyle(
-          locale: locale,
-          fontSize: 20,
+        backgroundColor: colorScheme.surface,
+        foregroundColor: colorScheme.onSurface,
+        elevation: 0,
+        surfaceTintColor: Colors.transparent,
+        titleTextStyle: textTheme.titleLarge?.copyWith(
           fontWeight: FontWeight.w600,
-          color: Colors.black,
         ),
       ),
-      textTheme: TextTheme(
-        displayLarge: getTextStyle(
-          locale: locale,
-          fontSize: 96,
-          fontWeight: FontWeight.w300,
+
+      // Buttons
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: colorScheme.primary,
+          foregroundColor: colorScheme.onPrimary,
+          textStyle: textTheme.labelLarge,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         ),
-        displayMedium: getTextStyle(
-          locale: locale,
-          fontSize: 60,
-          fontWeight: FontWeight.w400,
+      ),
+
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          foregroundColor: colorScheme.primary,
+          side: BorderSide(color: colorScheme.primary),
+          textStyle: textTheme.labelLarge,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         ),
-        displaySmall: getTextStyle(
-          locale: locale,
-          fontSize: 48,
-          fontWeight: FontWeight.w400,
+      ),
+
+      // Input decoration
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: colorScheme.surface,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: colorScheme.outline),
         ),
-        headlineMedium: getTextStyle(
-          locale: locale,
-          fontSize: 34,
-          fontWeight: FontWeight.w400,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: colorScheme.outline),
         ),
-        headlineSmall: getTextStyle(
-          locale: locale,
-          fontSize: 24,
-          fontWeight: FontWeight.w400,
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: colorScheme.primary, width: 2),
         ),
-        titleLarge: getTextStyle(
-          locale: locale,
-          fontSize: 20,
-          fontWeight: FontWeight.w500,
+      ),
+
+      // Card
+      cardTheme: CardThemeData(
+        color: colorScheme.surface,
+        elevation: 1,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        surfaceTintColor: Colors.transparent,
+      ),
+
+      // Dialog
+      dialogTheme: DialogThemeData(
+        backgroundColor: colorScheme.surface,
+        surfaceTintColor: Colors.transparent,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+      ),
+
+      // Bottom sheet
+      bottomSheetTheme: BottomSheetThemeData(
+        backgroundColor: colorScheme.surface,
+        surfaceTintColor: Colors.transparent,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
         ),
-        titleMedium: getTextStyle(
-          locale: locale,
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-        ),
-        titleSmall: getTextStyle(
-          locale: locale,
-          fontSize: 14,
-          fontWeight: FontWeight.w500,
-        ),
-        bodyLarge: getTextStyle(
-          locale: locale,
-          fontSize: 16,
-          fontWeight: FontWeight.w400,
-        ),
-        bodyMedium: getTextStyle(
-          locale: locale,
-          fontSize: 14,
-          fontWeight: FontWeight.w400,
-        ),
-        bodySmall: getTextStyle(
-          locale: locale,
-          fontSize: 12,
-          fontWeight: FontWeight.w400,
-        ),
-        labelLarge: getTextStyle(
-          locale: locale,
-          fontSize: 14,
-          fontWeight: FontWeight.w500,
-        ),
-        labelSmall: getTextStyle(
-          locale: locale,
-          fontSize: 10,
-          fontWeight: FontWeight.w400,
-        ),
+      ),
+
+      // Divider
+      dividerTheme: DividerThemeData(
+        color: colorScheme.outline.withOpacity(0.2),
+        thickness: 1,
+        space: 1,
+      ),
+
+      // Chip
+      chipTheme: ChipThemeData(
+        backgroundColor: colorScheme.surfaceVariant,
+        labelStyle: textTheme.labelMedium,
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       ),
     );
   }
 
   static ThemeData getDarkTheme(Locale locale) {
-    final lightTheme = getLightTheme(locale);
+    final colorScheme = const ColorScheme.dark(
+      primary: Colors.deepPurpleAccent,
+      secondary: Colors.purpleAccent,
+      surface: Color(0xFF1E1E1E),
+      background: Color(0xFF121212),
+      error: Color(0xFFCF6679),
+      onPrimary: Colors.black,
+      onSecondary: Colors.black,
+      onSurface: Colors.white,
+      onBackground: Colors.white,
+      onError: Colors.black,
+      brightness: Brightness.dark,
+    );
 
-    return lightTheme.copyWith(
-      scaffoldBackgroundColor: const Color(0xFF121212),
+    final textTheme = TextTheme(
+      displayLarge: getTextStyle(
+        locale: locale,
+        fontSize: 57,
+        fontWeight: FontWeight.w400,
+        letterSpacing: -0.25,
+        color: Colors.white,
+      ),
+      displayMedium: getTextStyle(
+        locale: locale,
+        fontSize: 45,
+        fontWeight: FontWeight.w400,
+        color: Colors.white,
+      ),
+      displaySmall: getTextStyle(
+        locale: locale,
+        fontSize: 36,
+        fontWeight: FontWeight.w400,
+        color: Colors.white,
+      ),
+      headlineLarge: getTextStyle(
+        locale: locale,
+        fontSize: 32,
+        fontWeight: FontWeight.w400,
+        color: Colors.white,
+      ),
+      headlineMedium: getTextStyle(
+        locale: locale,
+        fontSize: 28,
+        fontWeight: FontWeight.w400,
+        color: Colors.white,
+      ),
+      headlineSmall: getTextStyle(
+        locale: locale,
+        fontSize: 24,
+        fontWeight: FontWeight.w400,
+        color: Colors.white,
+      ),
+      titleLarge: getTextStyle(
+        locale: locale,
+        fontSize: 22,
+        fontWeight: FontWeight.w500,
+        color: Colors.white,
+      ),
+      titleMedium: getTextStyle(
+        locale: locale,
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.15,
+        color: Colors.white,
+      ),
+      titleSmall: getTextStyle(
+        locale: locale,
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.1,
+        color: Colors.white,
+      ),
+      bodyLarge: getTextStyle(
+        locale: locale,
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.5,
+        color: Colors.white.withOpacity(0.87),
+      ),
+      bodyMedium: getTextStyle(
+        locale: locale,
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.25,
+        color: Colors.white.withOpacity(0.87),
+      ),
+      bodySmall: getTextStyle(
+        locale: locale,
+        fontSize: 12,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.4,
+        color: Colors.white.withOpacity(0.6),
+      ),
+      labelLarge: getTextStyle(
+        locale: locale,
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.1,
+        color: Colors.white,
+      ),
+      labelMedium: getTextStyle(
+        locale: locale,
+        fontSize: 12,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.5,
+        color: Colors.white,
+      ),
+      labelSmall: getTextStyle(
+        locale: locale,
+        fontSize: 11,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.5,
+        color: Colors.white.withOpacity(0.6),
+      ),
+    );
+
+    return ThemeData(
+      useMaterial3: true,
+      brightness: Brightness.dark,
+      colorScheme: colorScheme,
+      fontFamily: _getGoogleFontFamily(locale),
+      textTheme: textTheme,
+
+      // App Bar
       appBarTheme: AppBarTheme(
-        backgroundColor: const Color(0xFF1E1E1E),
-        elevation: 1,
-        titleTextStyle: getTextStyle(
-          locale: locale,
-          fontSize: 20,
+        backgroundColor: colorScheme.surface,
+        foregroundColor: colorScheme.onSurface,
+        elevation: 0,
+        surfaceTintColor: Colors.transparent,
+        titleTextStyle: textTheme.titleLarge?.copyWith(
           fontWeight: FontWeight.w600,
-          color: Colors.white,
         ),
       ),
-      textTheme: TextTheme(
-        displayLarge: getTextStyle(
-          locale: locale,
-          fontSize: 96,
-          fontWeight: FontWeight.w300,
-          color: Colors.white,
+
+      // Buttons
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: colorScheme.primary,
+          foregroundColor: colorScheme.onPrimary,
+          textStyle: textTheme.labelLarge,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         ),
-        displayMedium: getTextStyle(
-          locale: locale,
-          fontSize: 60,
-          fontWeight: FontWeight.w400,
-          color: Colors.white,
+      ),
+
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          foregroundColor: colorScheme.primary,
+          side: BorderSide(color: colorScheme.primary),
+          textStyle: textTheme.labelLarge,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         ),
-        displaySmall: getTextStyle(
-          locale: locale,
-          fontSize: 48,
-          fontWeight: FontWeight.w400,
-          color: Colors.white,
+      ),
+
+      // Input decoration
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: colorScheme.surface,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: colorScheme.outline),
         ),
-        headlineMedium: getTextStyle(
-          locale: locale,
-          fontSize: 34,
-          fontWeight: FontWeight.w400,
-          color: Colors.white,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: colorScheme.outline),
         ),
-        headlineSmall: getTextStyle(
-          locale: locale,
-          fontSize: 24,
-          fontWeight: FontWeight.w400,
-          color: Colors.white,
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: colorScheme.primary, width: 2),
         ),
-        titleLarge: getTextStyle(
-          locale: locale,
-          fontSize: 20,
-          fontWeight: FontWeight.w500,
-          color: Colors.white,
+      ),
+
+      // Card
+      cardTheme: CardThemeData(
+        color: colorScheme.surface,
+        elevation: 1,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        surfaceTintColor: Colors.transparent,
+      ),
+
+      // Dialog
+      dialogTheme: DialogThemeData(
+        backgroundColor: colorScheme.surface,
+        surfaceTintColor: Colors.transparent,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+      ),
+
+      // Bottom sheet
+      bottomSheetTheme: BottomSheetThemeData(
+        backgroundColor: colorScheme.surface,
+        surfaceTintColor: Colors.transparent,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
         ),
-        titleMedium: getTextStyle(
-          locale: locale,
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-          color: Colors.white,
-        ),
-        titleSmall: getTextStyle(
-          locale: locale,
-          fontSize: 14,
-          fontWeight: FontWeight.w500,
-          color: Colors.white,
-        ),
-        bodyLarge: getTextStyle(
-          locale: locale,
-          fontSize: 16,
-          fontWeight: FontWeight.w400,
-          color: Colors.white70,
-        ),
-        bodyMedium: getTextStyle(
-          locale: locale,
-          fontSize: 14,
-          fontWeight: FontWeight.w400,
-          color: Colors.white70,
-        ),
-        bodySmall: getTextStyle(
-          locale: locale,
-          fontSize: 12,
-          fontWeight: FontWeight.w400,
-          color: Colors.white60,
-        ),
-        labelLarge: getTextStyle(
-          locale: locale,
-          fontSize: 14,
-          fontWeight: FontWeight.w500,
-          color: Colors.white,
-        ),
-        labelSmall: getTextStyle(
-          locale: locale,
-          fontSize: 10,
-          fontWeight: FontWeight.w400,
-          color: Colors.white60,
-        ),
+      ),
+
+      // Divider
+      dividerTheme: DividerThemeData(
+        color: colorScheme.outline.withOpacity(0.3),
+        thickness: 1,
+        space: 1,
+      ),
+
+      // Chip
+      chipTheme: ChipThemeData(
+        backgroundColor: colorScheme.surfaceVariant,
+        labelStyle: textTheme.labelMedium,
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       ),
     );
   }

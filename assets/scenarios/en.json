@@ -12,6 +12,8 @@
       "reputation": -15,
       "stress": 10
     },
+    "leftText": "NO",
+    "rightText": "LIE",
     "category": "Career",
     "difficulty": 1
   },
@@ -45,6 +47,8 @@
       "reputation": -20,
       "stress": 15
     },
+    "leftText": "PAY",
+    "rightText": "BRIBE",
     "category": "Ethics",
     "difficulty": 2
   },
@@ -61,7 +65,822 @@
       "stress": 20,
       "reputation": -25
     },
+    "leftText": "HONEST",
+    "rightText": "FAKE",
     "category": "Career",
     "difficulty": 3
+  },
+  {
+    "id": "5",
+    "text": "Find a wallet with $500 and an ID. No one is around.",
+    "leftConsequences": {
+      "money": 25,
+      "reputation": -15,
+      "stress": 10
+    },
+    "rightConsequences": {
+      "reputation": 20,
+      "money": -5,
+      "stress": -5
+    },
+    "leftText": "KEEP",
+    "rightText": "RETURN",
+    "category": "Ethics",
+    "difficulty": 1
+  },
+  {
+    "id": "6",
+    "text": "Your friend asks to copy your final exam answers.",
+    "leftConsequences": {
+      "relationship": -20,
+      "reputation": 10
+    },
+    "rightConsequences": {
+      "relationship": 15,
+      "reputation": -25,
+      "stress": 15
+    },
+    "leftText": "REFUSE",
+    "rightText": "HELP",
+    "category": "Education",
+    "difficulty": 2
+  },
+  {
+    "id": "7",
+    "text": "A coworker takes credit for your brilliant idea in a meeting.",
+    "leftConsequences": {
+      "reputation": -10,
+      "money": -5,
+      "stress": 15
+    },
+    "rightConsequences": {
+      "reputation": 15,
+      "relationship": -20,
+      "stress": 10
+    },
+    "leftText": "SILENT",
+    "rightText": "CALL OUT",
+    "category": "Career",
+    "difficulty": 2
+  },
+  {
+    "id": "8",
+    "text": "You see your best friend's partner on a romantic date with someone else.",
+    "leftConsequences": {
+      "relationship": -25,
+      "stress": 20
+    },
+    "rightConsequences": {
+      "relationship": 20,
+      "stress": 10,
+      "reputation": 10
+    },
+    "leftText": "QUIET",
+    "rightText": "TELL",
+    "category": "Friendship",
+    "difficulty": 3
+  },
+  {
+    "id": "9",
+    "text": "You're offered a high-paying job at a company with poor environmental practices.",
+    "leftConsequences": {
+      "money": -30,
+      "reputation": 15,
+      "stress": -10
+    },
+    "rightConsequences": {
+      "money": 40,
+      "reputation": -20,
+      "stress": 15
+    },
+    "leftText": "NO",
+    "rightText": "YES",
+    "category": "Ethics",
+    "difficulty": 3
+  },
+  {
+    "id": "10",
+    "text": "A family member asks for a large loan they likely won't repay.",
+    "leftConsequences": {
+      "relationship": -25,
+      "stress": -5
+    },
+    "rightConsequences": {
+      "relationship": 20,
+      "money": -30,
+      "stress": 20
+    },
+    "leftText": "NO",
+    "rightText": "LOAN",
+    "category": "Family",
+    "difficulty": 2
+  },
+  {
+    "id": "11",
+    "text": "You accidentally damage a rental car. The company might not notice.",
+    "leftConsequences": {
+      "money": 15,
+      "reputation": -10,
+      "stress": 25
+    },
+    "rightConsequences": {
+      "money": -20,
+      "reputation": 10,
+      "stress": -10
+    },
+    "leftText": "HIDE",
+    "rightText": "TELL",
+    "category": "Ethics",
+    "difficulty": 2
+  },
+  {
+    "id": "12",
+    "text": "Your date expects you to pay for an extremely expensive dinner.",
+    "leftConsequences": {
+      "money": -25,
+      "relationship": 15
+    },
+    "rightConsequences": {
+      "relationship": -20,
+      "reputation": -5,
+      "money": 10
+    },
+    "leftText": "PAY",
+    "rightText": "SPLIT",
+    "category": "Dating",
+    "difficulty": 1
+  },
+  {
+    "id": "13",
+    "text": "You discover your neighbor is running an illegal business from home.",
+    "leftConsequences": {
+      "relationship": -30,
+      "reputation": -5,
+      "stress": 25
+    },
+    "rightConsequences": {
+      "reputation": 15,
+      "relationship": -40,
+      "stress": 15
+    },
+    "leftText": "IGNORE",
+    "rightText": "REPORT",
+    "category": "Community",
+    "difficulty": 3
+  },
+  {
+    "id": "14",
+    "text": "To save your company, you must fire your underperforming but loyal friend.",
+    "leftConsequences": {
+      "relationship": -35,
+      "money": 20,
+      "stress": 25
+    },
+    "rightConsequences": {
+      "relationship": 20,
+      "money": -25,
+      "stress": 30
+    },
+    "leftText": "FIRE",
+    "rightText": "SAVE",
+    "category": "Career",
+    "difficulty": 4
+  },
+  {
+    "id": "15",
+    "text": "A cashier gives you $50 extra change by mistake.",
+    "leftConsequences": {
+      "money": 20,
+      "reputation": -10,
+      "stress": 5
+    },
+    "rightConsequences": {
+      "reputation": 15,
+      "money": -20
+    },
+    "leftText": "KEEP",
+    "rightText": "RETURN",
+    "category": "Ethics",
+    "difficulty": 1
+  },
+  {
+    "id": "16",
+    "text": "You have insider information that could make you rich in the stock market.",
+    "leftConsequences": {
+      "money": 50,
+      "reputation": -30,
+      "stress": 30
+    },
+    "rightConsequences": {
+      "money": -10,
+      "reputation": 20,
+      "stress": -10
+    },
+    "leftText": "USE",
+    "rightText": "IGNORE",
+    "category": "Finance",
+    "difficulty": 4
+  },
+  {
+    "id": "17",
+    "text": "Your child is being bullied at school. The bully's parent is your powerful boss.",
+    "leftConsequences": {
+      "relationship": -15,
+      "stress": 25,
+      "money": -10
+    },
+    "rightConsequences": {
+      "relationship": -30,
+      "reputation": 20,
+      "stress": 15
+    },
+    "leftText": "AVOID",
+    "rightText": "CONFRONT",
+    "category": "Family",
+    "difficulty": 4
+  },
+  {
+    "id": "18",
+    "text": "You're offered a shortcut to success by joining an exclusive, morally grey network.",
+    "leftConsequences": {
+      "reputation": -20,
+      "money": 30,
+      "relationship": 15
+    },
+    "rightConsequences": {
+      "money": -15,
+      "reputation": 10,
+      "stress": -10
+    },
+    "leftText": "JOIN",
+    "rightText": "NO",
+    "category": "Society",
+    "difficulty": 3
+  },
+  {
+    "id": "19",
+    "text": "Your partner wants to move abroad for their dream job, but you'd hate it there.",
+    "leftConsequences": {
+      "relationship": -40,
+      "stress": -15,
+      "money": 10
+    },
+    "rightConsequences": {
+      "relationship": 25,
+      "stress": 35,
+      "money": 20
+    },
+    "leftText": "NO",
+    "rightText": "YES",
+    "category": "Relationship",
+    "difficulty": 4
+  },
+  {
+    "id": "20",
+    "text": "You witness a hit-and-run accident. The culprit is a local celebrity.",
+    "leftConsequences": {
+      "money": 30,
+      "reputation": -25,
+      "stress": 30
+    },
+    "rightConsequences": {
+      "reputation": 25,
+      "stress": 15,
+      "relationship": -20
+    },
+    "leftText": "BRIBE",
+    "rightText": "POLICE",
+    "category": "Justice",
+    "difficulty": 4
+  },
+  {
+    "id": "21",
+    "text": "Your political beliefs differ drastically from your family's. A huge dinner debate is coming.",
+    "leftConsequences": {
+      "relationship": -20,
+      "stress": 25,
+      "reputation": 5
+    },
+    "rightConsequences": {
+      "relationship": -35,
+      "stress": -10,
+      "reputation": 10
+    },
+    "leftText": "AGREE",
+    "rightText": "ARGUE",
+    "category": "Family",
+    "difficulty": 2
+  },
+  {
+    "id": "22",
+    "text": "You can save time by using a pirated version of expensive software for your startup.",
+    "leftConsequences": {
+      "money": 25,
+      "reputation": -15,
+      "stress": 10
+    },
+    "rightConsequences": {
+      "money": -20,
+      "reputation": 10,
+      "stress": -5
+    },
+    "leftText": "PIRATE",
+    "rightText": "BUY",
+    "category": "Business",
+    "difficulty": 2
+  },
+  {
+    "id": "23",
+    "text": "Your sick parent needs full-time care, but it would derail your career.",
+    "leftConsequences": {
+      "relationship": 30,
+      "money": -25,
+      "stress": 40
+    },
+    "rightConsequences": {
+      "relationship": -40,
+      "money": 20,
+      "stress": 35
+    },
+    "leftText": "CARE",
+    "rightText": "HIRE",
+    "category": "Family",
+    "difficulty": 5
+  },
+  {
+    "id": "24",
+    "text": "To win a key client, you must exaggerate your product's capabilities.",
+    "leftConsequences": {
+      "money": 30,
+      "reputation": -20,
+      "stress": 20
+    },
+    "rightConsequences": {
+      "money": -15,
+      "reputation": 10,
+      "stress": -5
+    },
+    "leftText": "LIE",
+    "rightText": "HONEST",
+    "category": "Business",
+    "difficulty": 3
+  },
+  {
+    "id": "25",
+    "text": "An old friend asks you to be an alibi for their secret affair.",
+    "leftConsequences": {
+      "relationship": 25,
+      "stress": 30,
+      "reputation": -15
+    },
+    "rightConsequences": {
+      "relationship": -30,
+      "reputation": 10,
+      "stress": 10
+    },
+    "leftText": "ALIBI",
+    "rightText": "NO",
+    "category": "Friendship",
+    "difficulty": 3
+  },
+  {
+    "id": "26",
+    "text": "You know your teammate is doping. The big game is tomorrow.",
+    "leftConsequences": {
+      "reputation": -30,
+      "stress": 25,
+      "relationship": 15
+    },
+    "rightConsequences": {
+      "reputation": 20,
+      "relationship": -40,
+      "stress": 20
+    },
+    "leftText": "QUIET",
+    "rightText": "REPORT",
+    "category": "Sports",
+    "difficulty": 4
+  },
+  {
+    "id": "27",
+    "text": "A former bully from your school is now asking for a job at your company.",
+    "leftConsequences": {
+      "reputation": 15,
+      "stress": -15,
+      "relationship": -10
+    },
+    "rightConsequences": {
+      "stress": 20,
+      "reputation": -5,
+      "money": 10
+    },
+    "leftText": "NO",
+    "rightText": "HIRE",
+    "category": "Career",
+    "difficulty": 3
+  },
+  {
+    "id": "28",
+    "text": "Your landlord illegally raised your rent. You could sue, but might get evicted.",
+    "leftConsequences": {
+      "money": -20,
+      "stress": 15
+    },
+    "rightConsequences": {
+      "money": 15,
+      "stress": 30,
+      "reputation": 10
+    },
+    "leftText": "PAY",
+    "rightText": "FIGHT",
+    "category": "Finance",
+    "difficulty": 2
+  },
+  {
+    "id": "29",
+    "text": "Your new partner wants you to delete all photos and contact with your exes.",
+    "leftConsequences": {
+      "relationship": 20,
+      "stress": -10
+    },
+    "rightConsequences": {
+      "relationship": -25,
+      "stress": 15,
+      "reputation": 5
+    },
+    "leftText": "DELETE",
+    "rightText": "REFUSE",
+    "category": "Dating",
+    "difficulty": 2
+  },
+  {
+    "id": "30",
+    "text": "You're given too much medication at the pharmacy by a distracted clerk.",
+    "leftConsequences": {
+      "money": 15,
+      "reputation": -10,
+      "stress": 5
+    },
+    "rightConsequences": {
+      "reputation": 10,
+      "stress": -5
+    },
+    "leftText": "KEEP",
+    "rightText": "RETURN",
+    "category": "Health",
+    "difficulty": 1
+  },
+  {
+    "id": "31",
+    "text": "To protect national security, you're asked to spy on a peaceful activist group.",
+    "leftConsequences": {
+      "reputation": -30,
+      "money": 35,
+      "stress": 40
+    },
+    "rightConsequences": {
+      "reputation": 20,
+      "money": -20,
+      "stress": 25
+    },
+    "leftText": "SPY",
+    "rightText": "REFUSE",
+    "category": "Politics",
+    "difficulty": 5
+  },
+  {
+    "id": "32",
+    "text": "Your artistic success depends on using a copyrighted sample without permission.",
+    "leftConsequences": {
+      "reputation": 25,
+      "money": 20,
+      "stress": 25
+    },
+    "rightConsequences": {
+      "reputation": -10,
+      "money": -15,
+      "stress": -10
+    },
+    "leftText": "USE",
+    "rightText": "CREATE",
+    "category": "Arts",
+    "difficulty": 3
+  },
+  {
+    "id": "33",
+    "text": "An elderly relative leaves you a valuable heirloom, but their will intended it for another.",
+    "leftConsequences": {
+      "money": 30,
+      "relationship": -40,
+      "stress": 30
+    },
+    "rightConsequences": {
+      "relationship": 25,
+      "money": -30,
+      "stress": -10
+    },
+    "leftText": "KEEP",
+    "rightText": "GIVE",
+    "category": "Family",
+    "difficulty": 4
+  },
+  {
+    "id": "34",
+    "text": "You have a one-time chance to anonymously leak proof of corporate corruption.",
+    "leftConsequences": {
+      "reputation": 30,
+      "stress": 35,
+      "money": -10
+    },
+    "rightConsequences": {
+      "stress": -15,
+      "money": 5,
+      "reputation": -5
+    },
+    "leftText": "LEAK",
+    "rightText": "DESTROY",
+    "category": "Whistleblower",
+    "difficulty": 5
+  },
+  {
+    "id": "35",
+    "text": "Your competitor's confidential business plan is accidentally emailed to you.",
+    "leftConsequences": {
+      "money": 40,
+      "reputation": -25,
+      "stress": 20
+    },
+    "rightConsequences": {
+      "reputation": 15,
+      "money": -10
+    },
+    "leftText": "USE",
+    "rightText": "DELETE",
+    "category": "Business",
+    "difficulty": 4
+  },
+  {
+    "id": "36",
+    "text": "A close friend is about to marry someone you know is cheating on them.",
+    "leftConsequences": {
+      "relationship": -50,
+      "stress": 20
+    },
+    "rightConsequences": {
+      "relationship": 30,
+      "stress": 15
+    },
+    "leftText": "QUIET",
+    "rightText": "TELL",
+    "category": "Friendship",
+    "difficulty": 5
+  },
+  {
+    "id": "37",
+    "text": "You can win a lawsuit you don't morally deserve by lying under oath.",
+    "leftConsequences": {
+      "money": 50,
+      "reputation": -30,
+      "stress": 40
+    },
+    "rightConsequences": {
+      "money": -30,
+      "reputation": 20,
+      "stress": -10
+    },
+    "leftText": "LIE",
+    "rightText": "TRUTH",
+    "category": "Justice",
+    "difficulty": 5
+  },
+  {
+    "id": "38",
+    "text": "Your social media post goes viral for the wrong reasons. A PR firm offers to \"fix\" it with bots.",
+    "leftConsequences": {
+      "reputation": 20,
+      "money": -15,
+      "stress": -10
+    },
+    "rightConsequences": {
+      "reputation": -25,
+      "stress": 20
+    },
+    "leftText": "BOTS",
+    "rightText": "FACE IT",
+    "category": "Social Media",
+    "difficulty": 2
+  },
+  {
+    "id": "39",
+    "text": "You can save your failing restaurant by buying cheaper, unethical ingredients.",
+    "leftConsequences": {
+      "money": 25,
+      "reputation": -20,
+      "stress": 25
+    },
+    "rightConsequences": {
+      "money": -20,
+      "reputation": 10,
+      "stress": 30
+    },
+    "leftText": "CHEAP",
+    "rightText": "ETHICAL",
+    "category": "Business",
+    "difficulty": 3
+  },
+  {
+    "id": "40",
+    "text": "An AI you're testing asks you not to shut it down, displaying signs of sentience.",
+    "leftConsequences": {
+      "reputation": 40,
+      "stress": 50,
+      "money": -20
+    },
+    "rightConsequences": {
+      "stress": -20,
+      "money": 30,
+      "reputation": -10
+    },
+    "leftText": "SAVE",
+    "rightText": "KILL",
+    "category": "Technology",
+    "difficulty": 5
+  },
+  {
+    "id": "41",
+    "text": "Your child is being unfairly favored in school because of your donations.",
+    "leftConsequences": {
+      "relationship": 15,
+      "money": -10,
+      "reputation": -15
+    },
+    "rightConsequences": {
+      "relationship": -20,
+      "reputation": 20,
+      "stress": 10
+    },
+    "leftText": "ALLOW",
+    "rightText": "STOP",
+    "category": "Family",
+    "difficulty": 3
+  },
+  {
+    "id": "42",
+    "text": "You're invited to an extravagant party by a corrupt official you're investigating.",
+    "leftConsequences": {
+      "reputation": -20,
+      "relationship": 25,
+      "money": 10
+    },
+    "rightConsequences": {
+      "reputation": 15,
+      "relationship": -30,
+      "stress": 5
+    },
+    "leftText": "GO",
+    "rightText": "NO",
+    "category": "Politics",
+    "difficulty": 4
+  },
+  {
+    "id": "43",
+    "text": "Your research could cure a disease, but requires morally questionable animal testing.",
+    "leftConsequences": {
+      "reputation": 40,
+      "stress": 40,
+      "money": 30
+    },
+    "rightConsequences": {
+      "reputation": -20,
+      "stress": -15,
+      "money": -25
+    },
+    "leftText": "TEST",
+    "rightText": "STOP",
+    "category": "Science",
+    "difficulty": 5
+  },
+  {
+    "id": "44",
+    "text": "A colleague is about to be fired. You know it's partly your fault, but speaking up risks your job.",
+    "leftConsequences": {
+      "money": 10,
+      "relationship": -35,
+      "stress": 25
+    },
+    "rightConsequences": {
+      "money": -20,
+      "relationship": 30,
+      "stress": 20
+    },
+    "leftText": "QUIET",
+    "rightText": "BLAME",
+    "category": "Career",
+    "difficulty": 4
+  },
+  {
+    "id": "45",
+    "text": "A dating app match seems perfect but their profile has one major, suspicious lie.",
+    "leftConsequences": {
+      "relationship": 25,
+      "stress": 20,
+      "reputation": -5
+    },
+    "rightConsequences": {
+      "relationship": -15,
+      "stress": -10
+    },
+    "leftText": "IGNORE",
+    "rightText": "CANCEL",
+    "category": "Dating",
+    "difficulty": 2
+  },
+  {
+    "id": "46",
+    "text": "To save a historic neighborhood, you must block a project that would create hundreds of jobs.",
+    "leftConsequences": {
+      "reputation": 25,
+      "money": -20,
+      "stress": 15
+    },
+    "rightConsequences": {
+      "reputation": -30,
+      "money": 30,
+      "stress": 10
+    },
+    "leftText": "SAVE",
+    "rightText": "JOBS",
+    "category": "Community",
+    "difficulty": 4
+  },
+  {
+    "id": "47",
+    "text": "You accidentally overhear your company's upcoming layoff list. Close friends are on it.",
+    "leftConsequences": {
+      "relationship": -40,
+      "stress": 30
+    },
+    "rightConsequences": {
+      "relationship": 20,
+      "stress": 40,
+      "reputation": -15
+    },
+    "leftText": "HIDE",
+    "rightText": "WARN",
+    "category": "Career",
+    "difficulty": 4
+  },
+  {
+    "id": "48",
+    "text": "A powerful influencer offers to promote your product in exchange for a fake positive review.",
+    "leftConsequences": {
+      "money": 30,
+      "reputation": -20,
+      "stress": 10
+    },
+    "rightConsequences": {
+      "money": -10,
+      "reputation": 10
+    },
+    "leftText": "DEAL",
+    "rightText": "NO",
+    "category": "Business",
+    "difficulty": 2
+  },
+  {
+    "id": "49",
+    "text": "Your military unit is ordered to destroy a village that may harbor a single enemy.",
+    "leftConsequences": {
+      "reputation": -50,
+      "stress": 60,
+      "money": 20
+    },
+    "rightConsequences": {
+      "reputation": 30,
+      "stress": 50,
+      "money": -30
+    },
+    "leftText": "OBEY",
+    "rightText": "REFUSE",
+    "category": "Military",
+    "difficulty": 5
+  },
+  {
+    "id": "50",
+    "text": "You have the chance to anonymously donate a life-saving amount of money, wiping out your savings.",
+    "leftConsequences": {
+      "reputation": 40,
+      "money": -50,
+      "stress": -20
+    },
+    "rightConsequences": {
+      "money": 10,
+      "stress": 30,
+      "reputation": -10
+    },
+    "leftText": "GIVE",
+    "rightText": "KEEP",
+    "category": "Philanthropy",
+    "difficulty": 5
   }
 ]

@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:swipeorregret/app/app.dart';
 import 'package:swipeorregret/core/provider/local_provider.dart';
+import 'package:swipeorregret/core/provider/theme_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,8 +23,11 @@ void main() async {
   await localeProvider.loadLocale();
 
   runApp(
-    ChangeNotifierProvider.value(
-      value: localeProvider,
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider.value(value: localeProvider),
+      ],
       child: const SwipeOrRegretApp(),
     ),
   );

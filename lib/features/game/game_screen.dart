@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:swipeorregret/app/app_routes.dart';
+import 'package:swipeorregret/app/app_theme.dart';
 import 'package:swipeorregret/app/game_constants.dart';
+import 'package:swipeorregret/core/provider/local_provider.dart';
 import 'package:swipeorregret/core/widgets/swipe_card.dart';
 import 'package:swipeorregret/features/game/game_controller.dart';
 import 'package:swipeorregret/features/game/models/game_state.dart';
@@ -32,7 +34,8 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   Future<void> _loadGame() async {
-    await _controller.loadGame();
+    final localeCode = context.read<LocaleProvider>().locale.languageCode;
+    await _controller.loadGame(localeCode);
     _startTimer();
   }
 
@@ -52,6 +55,16 @@ class _GameScreenState extends State<GameScreen> {
         _startTimer();
       }
     });
+  }
+
+  void _pauseTimer() {
+    _timer?.cancel();
+  }
+
+  void _resumeTimer() {
+    if (!_controller.isGameOver) {
+      _startTimer();
+    }
   }
 
   void _onSwipeLeft() {
@@ -110,14 +123,20 @@ class _GameScreenState extends State<GameScreen> {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final locale = Localizations.localeOf(context);
 
     return ChangeNotifierProvider.value(
       value: _controller,
       child: Consumer<GameController>(
         builder: (context, controller, child) {
           if (controller.isLoading) {
-            return const Scaffold(
-              body: Center(child: CircularProgressIndicator()),
+            return Scaffold(
+              backgroundColor: colorScheme.background,
+              body: Center(
+                child: CircularProgressIndicator(color: colorScheme.primary),
+              ),
             );
           }
 
@@ -144,13 +163,35 @@ class _GameScreenState extends State<GameScreen> {
           }
 
           return Scaffold(
+            backgroundColor: colorScheme.background,
             appBar: AppBar(
-              title: const Text('Swipe or Regret'),
+              backgroundColor: colorScheme.surface,
+              foregroundColor: colorScheme.onSurface,
+              elevation: 0,
+              surfaceTintColor: Colors.transparent,
+              title: Text(
+                localizations?.appTitle ?? 'Swipe or Regret',
+                style: AppTheme.getTextStyle(
+                  locale: locale,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                  color: colorScheme.onSurface,
+                ),
+              ),
               actions: [
                 IconButton(
-                  icon: const Icon(Icons.settings),
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/settings');
+                  icon: Icon(Icons.settings, color: colorScheme.onSurface),
+                  onPressed: () async {
+                    // Pause the timer
+                    _pauseTimer();
+
+                    // Navigate to settings
+                    await Navigator.pushNamed(context, AppRoutes.settings);
+
+                    // Resume timer only if we returned normally
+                    if (mounted) {
+                      _resumeTimer();
+                    }
                   },
                 ),
               ],
@@ -164,23 +205,30 @@ class _GameScreenState extends State<GameScreen> {
                     children: [
                       Row(
                         children: [
-                          const Icon(Icons.emoji_events, color: Colors.amber),
+                          Icon(Icons.emoji_events, color: Colors.amber),
                           const SizedBox(width: 8),
                           Text(
                             'Score: ${controller.gameState.score}',
-                            style: const TextStyle(
+                            style: AppTheme.getTextStyle(
+                              locale: locale,
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
+                              color: colorScheme.onSurface,
                             ),
                           ),
                           const Spacer(),
-                          const Icon(Icons.calendar_today, color: Colors.blue),
+                          Icon(
+                            Icons.calendar_today,
+                            color: colorScheme.primary,
+                          ),
                           const SizedBox(width: 8),
                           Text(
-                            '${localizations?.day ?? "Day "} ${controller.gameState.streakDays}',
-                            style: const TextStyle(
+                            '${localizations?.day ?? "Day "}${controller.gameState.streakDays}',
+                            style: AppTheme.getTextStyle(
+                              locale: locale,
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
+                              color: colorScheme.onSurface,
                             ),
                           ),
                         ],
@@ -198,6 +246,7 @@ class _GameScreenState extends State<GameScreen> {
                             value: controller.gameState.money,
                             color: Colors.green,
                             icon: Icons.attach_money,
+                            locale: locale,
                           ),
                           AnimatedStatBar(
                             label:
@@ -205,18 +254,21 @@ class _GameScreenState extends State<GameScreen> {
                             value: controller.gameState.relationship,
                             color: Colors.pink,
                             icon: Icons.favorite,
+                            locale: locale,
                           ),
                           AnimatedStatBar(
                             label: localizations?.stress ?? 'Stress',
                             value: controller.gameState.stress,
                             color: Colors.orange,
                             icon: Icons.psychology,
+                            locale: locale,
                           ),
                           AnimatedStatBar(
                             label: localizations?.reputation ?? 'Reputation',
                             value: controller.gameState.reputation,
                             color: Colors.blue,
                             icon: Icons.star,
+                            locale: locale,
                           ),
                         ],
                       ),
@@ -231,18 +283,19 @@ class _GameScreenState extends State<GameScreen> {
                     child: Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: Colors.deepPurple.withOpacity(0.1),
+                        color: colorScheme.primary.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
-                          color: Colors.deepPurple.withOpacity(0.3),
+                          color: colorScheme.primary.withOpacity(0.3),
                         ),
                       ),
                       child: Text(
                         controller.lastDecisionOutcome!,
-                        style: const TextStyle(
+                        style: AppTheme.getTextStyle(
+                          locale: locale,
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
-                          color: Colors.deepPurple,
+                          color: colorScheme.primary,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -269,7 +322,12 @@ class _GameScreenState extends State<GameScreen> {
                   child: Text(
                     localizations?.swipeToDecide ??
                         'Swipe left or right to decide',
-                    style: TextStyle(color: Colors.grey[600], fontSize: 14),
+                    style: AppTheme.getTextStyle(
+                      locale: locale,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: colorScheme.onSurface.withOpacity(0.6),
+                    ),
                   ),
                 ),
               ],

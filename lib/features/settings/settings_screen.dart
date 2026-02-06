@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:swipeorregret/app/app_routes.dart';
 import 'package:swipeorregret/core/provider/local_provider.dart';
-import 'package:swipeorregret/core/widgets/primary_button.dart';
+import 'package:swipeorregret/core/provider/theme_provider.dart';
 import 'package:swipeorregret/features/settings/settings_controller.dart';
 import 'package:swipeorregret/l10n/app_localizations.dart';
 
@@ -12,12 +12,19 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
+    final theme = Theme.of(context);
 
     return ChangeNotifierProvider(
       create: (_) => SettingsController(),
       child: Scaffold(
         appBar: AppBar(
-          title: Text(localizations?.settings ?? 'Settings'),
+          title: Text(
+            localizations?.settings ?? 'Settings',
+            style: theme.textTheme.headlineSmall?.copyWith(
+              fontWeight: FontWeight.w800,
+              color: theme.colorScheme.onSurface,
+            ),
+          ),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () => Navigator.pop(context),
@@ -29,28 +36,74 @@ class SettingsScreen extends StatelessWidget {
             builder: (context, controller, child) {
               return ListView(
                 children: [
-                  // Sound Settings
+                  // Appearance Card
                   Card(
+                    color: theme.cardColor,
                     child: Padding(
                       padding: const EdgeInsets.all(16),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
+                            'Appearance',
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+
+                          // Theme toggle with proper listening
+                          Consumer<ThemeProvider>(
+                            builder: (context, themeProvider, child) {
+                              return SwitchListTile(
+                                title: Text(
+                                  'Dark Mode',
+                                  style: theme.textTheme.bodyLarge,
+                                ),
+                                value: themeProvider.isDarkMode,
+                                onChanged: (value) {
+                                  themeProvider.setThemeMode(
+                                    value ? ThemeMode.dark : ThemeMode.light,
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 16),
+
+                  // Sound Settings Card
+                  Card(
+                    color: theme.cardColor,
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
                             'Audio',
-                            style: TextStyle(
-                              fontSize: 18,
+                            style: theme.textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                           const SizedBox(height: 16),
                           SwitchListTile(
-                            title: const Text('Sound Effects'),
+                            title: Text(
+                              'Sound Effects',
+                              style: theme.textTheme.bodyLarge,
+                            ),
                             value: controller.soundEnabled,
                             onChanged: controller.toggleSound,
                           ),
                           SwitchListTile(
-                            title: const Text('Background Music'),
+                            title: Text(
+                              'Background Music',
+                              style: theme.textTheme.bodyLarge,
+                            ),
                             value: controller.musicEnabled,
                             onChanged: controller.toggleMusic,
                           ),
@@ -61,28 +114,34 @@ class SettingsScreen extends StatelessWidget {
 
                   const SizedBox(height: 16),
 
-                  // Game Settings
+                  // Game Settings Card
                   Card(
+                    color: theme.cardColor,
                     child: Padding(
                       padding: const EdgeInsets.all(16),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             'Game Settings',
-                            style: TextStyle(
-                              fontSize: 18,
+                            style: theme.textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                           const SizedBox(height: 16),
                           SwitchListTile(
-                            title: const Text('Vibration'),
+                            title: Text(
+                              'Vibration',
+                              style: theme.textTheme.bodyLarge,
+                            ),
                             value: controller.vibrationEnabled,
                             onChanged: controller.toggleVibration,
                           ),
                           SwitchListTile(
-                            title: const Text('Show Timer'),
+                            title: Text(
+                              'Show Timer',
+                              style: theme.textTheme.bodyLarge,
+                            ),
                             value: controller.showTimer,
                             onChanged: controller.toggleShowTimer,
                           ),
@@ -93,33 +152,49 @@ class SettingsScreen extends StatelessWidget {
 
                   const SizedBox(height: 16),
 
-                  // Data Management
+                  // Data Management Card
                   Card(
+                    color: theme.cardColor,
                     child: Padding(
                       padding: const EdgeInsets.all(16),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             'Data',
-                            style: TextStyle(
-                              fontSize: 18,
+                            style: theme.textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                           const SizedBox(height: 16),
                           ListTile(
-                            leading: const Icon(Icons.delete),
-                            title: const Text('Reset Game Data'),
-                            subtitle: const Text(
+                            leading: Icon(
+                              Icons.delete,
+                              color: theme.iconTheme.color,
+                            ),
+                            title: Text(
+                              'Reset Game Data',
+                              style: theme.textTheme.bodyLarge,
+                            ),
+                            subtitle: Text(
                               'Clear all progress and start fresh',
+                              style: theme.textTheme.bodySmall,
                             ),
                             onTap: () => _showResetDialog(context, controller),
                           ),
                           ListTile(
-                            leading: const Icon(Icons.cloud_download),
-                            title: const Text('Load More Scenarios'),
-                            subtitle: const Text('Download additional content'),
+                            leading: Icon(
+                              Icons.cloud_download,
+                              color: theme.iconTheme.color,
+                            ),
+                            title: Text(
+                              'Load More Scenarios',
+                              style: theme.textTheme.bodyLarge,
+                            ),
+                            subtitle: Text(
+                              'Download additional content',
+                              style: theme.textTheme.bodySmall,
+                            ),
                             onTap: controller.loadMoreScenarios,
                           ),
                         ],
@@ -129,48 +204,78 @@ class SettingsScreen extends StatelessWidget {
 
                   const SizedBox(height: 16),
 
-                  // About
+                  // About Card
                   Card(
+                    color: theme.cardColor,
                     child: Padding(
                       padding: const EdgeInsets.all(16),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             'About',
-                            style: TextStyle(
-                              fontSize: 18,
+                            style: theme.textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                           const SizedBox(height: 16),
                           ListTile(
-                            leading: const Icon(Icons.info),
-                            title: const Text('Version'),
-                            subtitle: const Text('1.0.0'),
+                            leading: Icon(
+                              Icons.info,
+                              color: theme.iconTheme.color,
+                            ),
+                            title: Text(
+                              'Version',
+                              style: theme.textTheme.bodyLarge,
+                            ),
+                            subtitle: Text(
+                              '1.0.0',
+                              style: theme.textTheme.bodySmall,
+                            ),
                           ),
                           ListTile(
-                            leading: const Icon(Icons.star),
-                            title: const Text('Rate App'),
+                            leading: Icon(
+                              Icons.star,
+                              color: theme.iconTheme.color,
+                            ),
+                            title: Text(
+                              'Rate App',
+                              style: theme.textTheme.bodyLarge,
+                            ),
                             onTap: controller.rateApp,
                           ),
                           ListTile(
-                            leading: const Icon(Icons.share),
-                            title: const Text('Share App'),
+                            leading: Icon(
+                              Icons.share,
+                              color: theme.iconTheme.color,
+                            ),
+                            title: Text(
+                              'Share App',
+                              style: theme.textTheme.bodyLarge,
+                            ),
                             onTap: controller.shareApp,
                           ),
                           ListTile(
-                            leading: const Icon(Icons.privacy_tip),
-                            title: const Text('Privacy Policy'),
+                            leading: Icon(
+                              Icons.privacy_tip,
+                              color: theme.iconTheme.color,
+                            ),
+                            title: Text(
+                              'Privacy Policy',
+                              style: theme.textTheme.bodyLarge,
+                            ),
                             onTap: () => controller.openPrivacyPolicy(),
                           ),
                         ],
                       ),
                     ),
                   ),
+
                   const SizedBox(height: 32),
 
+                  // Language Card
                   Card(
+                    color: theme.cardColor,
                     child: Padding(
                       padding: const EdgeInsets.all(16),
                       child: Column(
@@ -178,25 +283,27 @@ class SettingsScreen extends StatelessWidget {
                         children: [
                           Text(
                             localizations?.language ?? 'Language',
-                            style: const TextStyle(
-                              fontSize: 18,
+                            style: theme.textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                           const SizedBox(height: 16),
-                          ListTile(
-                            leading: const Icon(Icons.language),
-                            title: Text(localizations?.language ?? 'Language'),
-                            subtitle: Consumer<LocaleProvider>(
-                              builder: (context, localeProvider, child) {
-                                return Text(
+                          Consumer<LocaleProvider>(
+                            builder: (context, localeProvider, child) {
+                              return ListTile(
+                                leading: Icon(
+                                  Icons.language,
+                                  color: theme.iconTheme.color,
+                                ),
+                                title: Text(
+                                  localizations?.language ?? 'Language',
+                                  style: theme.textTheme.bodyLarge,
+                                ),
+                                subtitle: Text(
                                   _getLanguageName(localeProvider.locale),
-                                );
-                              },
-                            ),
-                            trailing: Consumer<LocaleProvider>(
-                              builder: (context, localeProvider, child) {
-                                return DropdownButton<Locale>(
+                                  style: theme.textTheme.bodySmall,
+                                ),
+                                trailing: DropdownButton<Locale>(
                                   value: localeProvider.locale,
                                   onChanged: (Locale? newLocale) {
                                     if (newLocale != null) {
@@ -208,24 +315,35 @@ class SettingsScreen extends StatelessWidget {
                                       value: const Locale('en'),
                                       child: Text(
                                         localizations?.english ?? 'English',
+                                        style: Theme.of(
+                                          context,
+                                        ).textTheme.bodyLarge,
                                       ),
                                     ),
                                     DropdownMenuItem(
                                       value: const Locale('si'),
                                       child: Text(
                                         localizations?.sinhala ?? 'සිංහල',
+                                        style: Theme.of(
+                                          context,
+                                        ).textTheme.bodyLarge,
                                       ),
                                     ),
                                     DropdownMenuItem(
                                       value: const Locale('ta'),
                                       child: Text(
                                         localizations?.tamil ?? 'தமிழ்',
+                                        style: Theme.of(
+                                          context,
+                                        ).textTheme.bodyLarge,
                                       ),
                                     ),
                                   ],
-                                );
-                              },
-                            ),
+                                  dropdownColor: theme.cardColor,
+                                  style: theme.textTheme.bodyLarge,
+                                ),
+                              );
+                            },
                           ),
                         ],
                       ),
@@ -234,15 +352,7 @@ class SettingsScreen extends StatelessWidget {
 
                   const SizedBox(height: 32),
 
-                  // Reset and Logout buttons
-                  PrimaryButton(
-                    text: 'RESET PROGRESS',
-                    onPressed: () => _showResetDialog(context, controller),
-                    backgroundColor: Colors.red,
-                  ),
-
-                  const SizedBox(height: 16),
-
+                  // Back to Home Button
                   OutlinedButton(
                     onPressed: () {
                       Navigator.pushNamedAndRemoveUntil(
@@ -252,6 +362,8 @@ class SettingsScreen extends StatelessWidget {
                       );
                     },
                     style: OutlinedButton.styleFrom(
+                      foregroundColor: theme.colorScheme.primary,
+                      side: BorderSide(color: theme.colorScheme.primary),
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -269,29 +381,45 @@ class SettingsScreen extends StatelessWidget {
   }
 
   void _showResetDialog(BuildContext context, SettingsController controller) {
+    final theme = Theme.of(context);
+
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Reset Progress'),
-          content: const Text(
+          backgroundColor: theme.cardColor,
+          title: Text('Reset Progress', style: theme.textTheme.titleLarge),
+          content: Text(
             'Are you sure you want to reset all game progress? '
             'This action cannot be undone.',
+            style: theme.textTheme.bodyMedium,
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text('CANCEL'),
+              child: Text('CANCEL', style: theme.textTheme.bodyLarge),
             ),
             TextButton(
               onPressed: () {
                 controller.resetProgress();
                 Navigator.pop(context);
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Progress reset successfully')),
+                  SnackBar(
+                    content: Text(
+                      'Progress reset successfully',
+                      style: theme.textTheme.bodyMedium,
+                    ),
+                    backgroundColor: theme.colorScheme.errorContainer,
+                    behavior: SnackBarBehavior.floating,
+                  ),
                 );
               },
-              child: const Text('RESET', style: TextStyle(color: Colors.red)),
+              child: Text(
+                'RESET',
+                style: theme.textTheme.bodyLarge?.copyWith(
+                  color: theme.colorScheme.error,
+                ),
+              ),
             ),
           ],
         );

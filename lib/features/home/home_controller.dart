@@ -11,6 +11,7 @@ class HomeController extends ChangeNotifier {
   int get totalGames => _totalGames;
   int get streakDays => _streakDays;
   bool get hasSavedGame => _hasSavedGame;
+  Function get loadStats => _loadStats;
 
   HomeController() {
     _loadStats();

@@ -46,6 +46,7 @@ dependencies:
   audioplayers: ^6.5.1
   vibration: ^3.1.5
   google_fonts: ^6.0.0
+  games_services: ^5.0.0
 
 dev_dependencies:
   flutter_test:

@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:swipeorregret/app/app_routes.dart';
 import 'package:swipeorregret/app/app_theme.dart';
 import 'package:swipeorregret/core/provider/local_provider.dart';
+import 'package:swipeorregret/core/provider/theme_provider.dart';
 import 'package:swipeorregret/l10n/app_localizations.dart';
 
 class SwipeOrRegretApp extends StatelessWidget {
@@ -11,14 +12,15 @@ class SwipeOrRegretApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<LocaleProvider>(
-      builder: (context, localeProvider, child) {
+    return Consumer2<LocaleProvider, ThemeProvider>(
+      builder: (context, localeProvider, themeProvider, child) {
         return MaterialApp(
           title: 'Swipe or Regret',
           debugShowCheckedModeBanner: false,
           theme: AppTheme.getLightTheme(localeProvider.locale),
           darkTheme: AppTheme.getDarkTheme(localeProvider.locale),
           locale: localeProvider.locale,
+          themeMode: themeProvider.themeMode,
           initialRoute: AppRoutes.splash,
           routes: AppRoutes.routes,
           localizationsDelegates: const [

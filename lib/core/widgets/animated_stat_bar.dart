@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:swipeorregret/app/app_colors.dart';
+import 'package:swipeorregret/app/app_theme.dart';
 
 class AnimatedStatBar extends StatefulWidget {
   final String label;
@@ -8,6 +8,7 @@ class AnimatedStatBar extends StatefulWidget {
   final IconData icon;
   final int? previousValue;
   final Duration animationDuration;
+  final Locale locale;
 
   const AnimatedStatBar({
     super.key,
@@ -16,6 +17,7 @@ class AnimatedStatBar extends StatefulWidget {
     required this.color,
     required this.icon,
     this.previousValue,
+    required this.locale,
     this.animationDuration = const Duration(milliseconds: 500),
   });
 
@@ -82,11 +84,11 @@ class _AnimatedStatBarState extends State<AnimatedStatBar>
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
       decoration: BoxDecoration(
-        color: AppColors.cardBackground,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Theme.of(context).colorScheme.shadow.withOpacity(0.05),
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),
@@ -104,10 +106,13 @@ class _AnimatedStatBarState extends State<AnimatedStatBar>
                   children: [
                     Text(
                       widget.label,
-                      style: const TextStyle(
+                      style: AppTheme.getTextStyle(
+                        locale: widget.locale,
                         fontSize: 12,
                         fontWeight: FontWeight.w500,
-                        color: AppColors.textSecondary,
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.onSurface.withOpacity(0.6),
                       ),
                     ),
                     const Spacer(),
@@ -129,7 +134,8 @@ class _AnimatedStatBarState extends State<AnimatedStatBar>
                           ),
                           child: Text(
                             '${widget.value > _previousValue! ? '+' : ''}${widget.value - _previousValue!}',
-                            style: TextStyle(
+                            style: AppTheme.getTextStyle(
+                              locale: widget.locale,
                               fontSize: 10,
                               fontWeight: FontWeight.w600,
                               color: widget.value > _previousValue!
@@ -162,7 +168,8 @@ class _AnimatedStatBarState extends State<AnimatedStatBar>
             builder: (context, child) {
               return Text(
                 '${_valueAnimation.value}',
-                style: TextStyle(
+                style: AppTheme.getTextStyle(
+                  locale: widget.locale,
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: widget.color,

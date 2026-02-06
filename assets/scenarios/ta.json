@@ -1,7 +1,7 @@
 [
   {
     "id": "1",
-    "text": "உங்கள் மேலாளர் ஒரு வாடிக்கையாளருக்கு பொய் சொல்லும்படி கேட்கிறார். பதவி உயர்வு உத்தரவாதம்.",
+    "text": "முதலாளி ஒரு வாடிக்கையாளரிடம் பொய் சொல்லச் சொல்கிறார். பதவி உயர்வு கிடைக்கும்.",
     "leftConsequences": {
       "money": -10,
       "reputation": 15,
@@ -12,14 +12,14 @@
       "reputation": -15,
       "stress": 10
     },
-    "leftText": "இல்லை",
-    "rightText": "ஆம்",
-    "category": "வேலை",
+    "leftText": "வேண்டாம்",
+    "rightText": "சொல்லு",
+    "category": "தொழில்",
     "difficulty": 1
   },
   {
     "id": "2",
-    "text": "உங்கள் முன்னாள் காதலர்/காதலி இரவு 1:30 மணிக்கு செய்தி அனுப்புகிறார். \"எனக்கு நீங்கள் நினைவிருக்கிறீர்கள்.\"",
+    "text": "ராத்திரி ஒன்றரை மணிக்கு முன்னாள் காதலர்/காதலி 'உன்னை நினைத்தேன்' என்று மெசேஜ் அனுப்பியிருக்கார்.",
     "leftConsequences": {
       "stress": -10,
       "relationship": -5
@@ -29,9 +29,858 @@
       "stress": 10,
       "reputation": -5
     },
-    "leftText": "புறக்கணி",
-    "rightText": "பதில் அனுப்பு",
+    "leftText": "பாக்காதே",
+    "rightText": "ரெப்ளை",
     "category": "காதல்",
     "difficulty": 1
+  },
+  {
+    "id": "3",
+    "text": "போலீஸ்காரருக்கு கையூட்டு கொடுத்தால் தண்டனை தப்பிக்கலாம்.",
+    "leftConsequences": {
+      "money": -15,
+      "reputation": 5,
+      "stress": -5
+    },
+    "rightConsequences": {
+      "money": 10,
+      "reputation": -20,
+      "stress": 15
+    },
+    "leftText": "கட்டு",
+    "rightText": "கையூட்டு",
+    "category": "நெறிமுறை",
+    "difficulty": 2
+  },
+  {
+    "id": "4",
+    "text": "நல்ல வேலை கிடைக்க வேண்டியிருக்கிறது. விண்ணப்பத்தில் பொய் அனுபவம் சேர்த்துக்கலாம்.",
+    "leftConsequences": {
+      "money": -20,
+      "reputation": 10,
+      "stress": -10
+    },
+    "rightConsequences": {
+      "money": 25,
+      "stress": 20,
+      "reputation": -25
+    },
+    "leftText": "சொல்லாதே",
+    "rightText": "சொல்லு",
+    "category": "தொழில்",
+    "difficulty": 3
+  },
+  {
+    "id": "5",
+    "text": "அடையாள அட்டையோடு பணப்பையை கண்டுபிடித்தீர்கள். 500 டாலர் இருக்கு. யாரும் பார்க்கல.",
+    "leftConsequences": {
+      "money": 25,
+      "reputation": -15,
+      "stress": 10
+    },
+    "rightConsequences": {
+      "reputation": 20,
+      "money": -5,
+      "stress": -5
+    },
+    "leftText": "வச்சுக்க",
+    "rightText": "கொடு",
+    "category": "நெறிமுறை",
+    "difficulty": 1
+  },
+  {
+    "id": "6",
+    "text": "நண்பர்/நண்பி ஏஸாமில் நகல் எடுக்க உங்கள் பதில்களை கேட்கிறார்.",
+    "leftConsequences": {
+      "relationship": -20,
+      "reputation": 10
+    },
+    "rightConsequences": {
+      "relationship": 15,
+      "reputation": -25,
+      "stress": 15
+    },
+    "leftText": "குடுக்க முடியாது",
+    "rightText": "கொடு",
+    "category": "கல்வி",
+    "difficulty": 2
+  },
+  {
+    "id": "7",
+    "text": "உங்க ஐடியாவுக்கு ஒரு கோலீக்ஸ் மீட்டிங்கில் கிரெடிட் வாங்கிகிட்டாரு.",
+    "leftConsequences": {
+      "reputation": -10,
+      "money": -5,
+      "stress": 15
+    },
+    "rightConsequences": {
+      "reputation": 15,
+      "relationship": -20,
+      "stress": 10
+    },
+    "leftText": "இருந்துடு",
+    "rightText": "கேளு",
+    "category": "தொழில்",
+    "difficulty": 2
+  },
+  {
+    "id": "8",
+    "text": "நல்ல நண்பரின் காதலர்/காதலியை வேறொருத்தருடன் டேட்டில் பார்த்தீர்கள்.",
+    "leftConsequences": {
+      "relationship": -25,
+      "stress": 20
+    },
+    "rightConsequences": {
+      "relationship": 20,
+      "stress": 10,
+      "reputation": 10
+    },
+    "leftText": "சொல்லாதே",
+    "rightText": "சொல்லு",
+    "category": "நட்பு",
+    "difficulty": 3
+  },
+  {
+    "id": "9",
+    "text": "பரவாயில்லாத நிறுவனத்தில் சம்பளம் நல்லா இருக்கும். வேலை கிடைச்சிருக்கு.",
+    "leftConsequences": {
+      "money": -30,
+      "reputation": 15,
+      "stress": -10
+    },
+    "rightConsequences": {
+      "money": 40,
+      "reputation": -20,
+      "stress": 15
+    },
+    "leftText": "வேண்டாம்",
+    "rightText": "எடுத்துக்க",
+    "category": "நெறிமுறை",
+    "difficulty": 3
+  },
+  {
+    "id": "10",
+    "text": "குடும்பத்துல ஒருத்தர் திருப்பிக் குடுக்க முடியாத கடன் கேட்கிறார்.",
+    "leftConsequences": {
+      "relationship": -25,
+      "stress": -5
+    },
+    "rightConsequences": {
+      "relationship": 20,
+      "money": -30,
+      "stress": 20
+    },
+    "leftText": "குடுக்க முடியாது",
+    "rightText": "குடு",
+    "category": "குடும்பம்",
+    "difficulty": 2
+  },
+  {
+    "id": "11",
+    "text": "ரெண்ட் காரை சிறிது அடிச்சுட்டீங்க. கம்பெனி கவனிக்கல.",
+    "leftConsequences": {
+      "money": 15,
+      "reputation": -10,
+      "stress": 25
+    },
+    "rightConsequences": {
+      "money": -20,
+      "reputation": 10,
+      "stress": -10
+    },
+    "leftText": "மௌனம்",
+    "rightText": "சொல்லு",
+    "category": "நெறிமுறை",
+    "difficulty": 2
+  },
+  {
+    "id": "12",
+    "text": "உங்க டேட் விலையுயர்ந்த டின்னருக்கு நீங்கதான் பில் செலுத்தணும் அப்படின்னு நினைக்கிறார்.",
+    "leftConsequences": {
+      "money": -25,
+      "relationship": 15
+    },
+    "rightConsequences": {
+      "relationship": -20,
+      "reputation": -5,
+      "money": 10
+    },
+    "leftText": "செலுத்து",
+    "rightText": "பாக்கு",
+    "category": "காதல்",
+    "difficulty": 1
+  },
+  {
+    "id": "13",
+    "text": "அண்டை வீட்டுல சட்டத்துக்கு புறம்பான பிசினஸ் நடக்குதுனு தெரியுது.",
+    "leftConsequences": {
+      "relationship": -30,
+      "reputation": -5,
+      "stress": 25
+    },
+    "rightConsequences": {
+      "reputation": 15,
+      "relationship": -40,
+      "stress": 15
+    },
+    "leftText": "பாக்காதே",
+    "rightText": "புகார்",
+    "category": "சமூகம்",
+    "difficulty": 3
+  },
+  {
+    "id": "14",
+    "text": "உங்க கம்பெனியை காப்பாத்த திறமையில்லாத நண்பரை வேலையில இருந்து வெளியே தள்ளணும்.",
+    "leftConsequences": {
+      "relationship": -35,
+      "money": 20,
+      "stress": 25
+    },
+    "rightConsequences": {
+      "relationship": 20,
+      "money": -25,
+      "stress": 30
+    },
+    "leftText": "நீக்கு",
+    "rightText": "விட்டுக்க",
+    "category": "தொழில்",
+    "difficulty": 4
+  },
+  {
+    "id": "15",
+    "text": "கேஷியர் தவறுதலா 50 டாலர் அதிகமா குடுத்துட்டார்.",
+    "leftConsequences": {
+      "money": 20,
+      "reputation": -10,
+      "stress": 5
+    },
+    "rightConsequences": {
+      "reputation": 15,
+      "money": -20
+    },
+    "leftText": "வச்சுக்க",
+    "rightText": "கொடு",
+    "category": "நெறிமுறை",
+    "difficulty": 1
+  },
+  {
+    "id": "16",
+    "text": "ஸ்டாக் மார்க்கெட்டுல பணம் சம்பாதிக்க உள் தகவல் தெரியுது.",
+    "leftConsequences": {
+      "money": 50,
+      "reputation": -30,
+      "stress": 30
+    },
+    "rightConsequences": {
+      "money": -10,
+      "reputation": 20,
+      "stress": -10
+    },
+    "leftText": "பண்ணு",
+    "rightText": "விடு",
+    "category": "நிதி",
+    "difficulty": 4
+  },
+  {
+    "id": "17",
+    "text": "உங்க பிள்ளையை பள்ளில புல்லி செய்கிறாங்க. அவங்க அப்பா உங்க பாஸ்.",
+    "leftConsequences": {
+      "relationship": -15,
+      "stress": 25,
+      "money": -10
+    },
+    "rightConsequences": {
+      "relationship": -30,
+      "reputation": 20,
+      "stress": 15
+    },
+    "leftText": "மௌனம்",
+    "rightText": "பேசு",
+    "category": "குடும்பம்",
+    "difficulty": 4
+  },
+  {
+    "id": "18",
+    "text": "கெட்ட வழியில வெற்றி கிடைக்குற நெட்வொர்க்ல சேர்றதா ஆப்பர்.",
+    "leftConsequences": {
+      "reputation": -20,
+      "money": 30,
+      "relationship": 15
+    },
+    "rightConsequences": {
+      "money": -15,
+      "reputation": 10,
+      "stress": -10
+    },
+    "leftText": "சேர்",
+    "rightText": "வேண்டாம்",
+    "category": "சமூகம்",
+    "difficulty": 3
+  },
+  {
+    "id": "19",
+    "text": "உங்க காதலர் வெளிநாட்டுல வேலை பார்க்க போகிறார். ஆனா அங்க போக நீங்க விரும்பல.",
+    "leftConsequences": {
+      "relationship": -40,
+      "stress": -15,
+      "money": 10
+    },
+    "rightConsequences": {
+      "relationship": 25,
+      "stress": 35,
+      "money": 20
+    },
+    "leftText": "வேண்டாம்",
+    "rightText": "சரி",
+    "category": "உறவு",
+    "difficulty": 4
+  },
+  {
+    "id": "20",
+    "text": "கார விபத்துல ஒருத்தர் செத்துட்டார். அதுல குற்றவாளி ஒரு பிரபலம்.",
+    "leftConsequences": {
+      "money": 30,
+      "reputation": -25,
+      "stress": 30
+    },
+    "rightConsequences": {
+      "reputation": 25,
+      "stress": 15,
+      "relationship": -20
+    },
+    "leftText": "பணம் எடு",
+    "rightText": "போலீஸ்",
+    "category": "நீதி",
+    "difficulty": 4
+  },
+  {
+    "id": "21",
+    "text": "குடும்பத்துல அரசியல் பேச்சு வருது. உங்க கருத்து எல்லாருக்கும் எதிர்.",
+    "leftConsequences": {
+      "relationship": -20,
+      "stress": 25,
+      "reputation": 5
+    },
+    "rightConsequences": {
+      "relationship": -35,
+      "stress": -10,
+      "reputation": 10
+    },
+    "leftText": "சும்மா இரு",
+    "rightText": "வாதாடு",
+    "category": "குடும்பம்",
+    "difficulty": 2
+  },
+  {
+    "id": "22",
+    "text": "சட்டப்படி செலவழிக்க முடியாத மென்பொருளை திருடி பயன்படுத்தலாம்.",
+    "leftConsequences": {
+      "money": 25,
+      "reputation": -15,
+      "stress": 10
+    },
+    "rightConsequences": {
+      "money": -20,
+      "reputation": 10,
+      "stress": -5
+    },
+    "leftText": "திருடு",
+    "rightText": "வாங்கு",
+    "category": "வணிகம்",
+    "difficulty": 2
+  },
+  {
+    "id": "23",
+    "text": "உங்க அம்மா/அப்பா நோய்வாய்ப்பட்டு கவனிப்பு தேவை. ஆனால் உங்க ஜாப்ல இல்ல.",
+    "leftConsequences": {
+      "relationship": 30,
+      "money": -25,
+      "stress": 40
+    },
+    "rightConsequences": {
+      "relationship": -40,
+      "money": 20,
+      "stress": 35
+    },
+    "leftText": "நானே பார்",
+    "rightText": "ஆள் வை",
+    "category": "குடும்பம்",
+    "difficulty": 5
+  },
+  {
+    "id": "24",
+    "text": "வாடிக்கையாளரை வெல்ல உங்க தயாரிப்பை அதிகமா மேக் அப் பண்ண சொல்றாங்க.",
+    "leftConsequences": {
+      "money": 30,
+      "reputation": -20,
+      "stress": 20
+    },
+    "rightConsequences": {
+      "money": -15,
+      "reputation": 10,
+      "stress": -5
+    },
+    "leftText": "மேக் அப்",
+    "rightText": "சொல்லாதே",
+    "category": "வணிகம்",
+    "difficulty": 3
+  },
+  {
+    "id": "25",
+    "text": "பழைய நண்பர் தனது ரகசியத்துக்கு நீங்க ஆதாரம் குடுக்கணும்னு கேக்கிறார்.",
+    "leftConsequences": {
+      "relationship": 25,
+      "stress": 30,
+      "reputation": -15
+    },
+    "rightConsequences": {
+      "relationship": -30,
+      "reputation": 10,
+      "stress": 10
+    },
+    "leftText": "சரி",
+    "rightText": "முடியாது",
+    "category": "நட்பு",
+    "difficulty": 3
+  },
+  {
+    "id": "26",
+    "text": "உங்க டீம்மேட் போட்டில தவறு செய்றதை நீங்க பார்த்தீங்க.",
+    "leftConsequences": {
+      "reputation": -30,
+      "stress": 25,
+      "relationship": 15
+    },
+    "rightConsequences": {
+      "reputation": 20,
+      "relationship": -40,
+      "stress": 20
+    },
+    "leftText": "மௌனம்",
+    "rightText": "புகார்",
+    "category": "விளையாட்டு",
+    "difficulty": 4
+  },
+  {
+    "id": "27",
+    "text": "பள்ளில உங்களுக்கு தொந்தரவு கொடுத்தவர் இப்போ உங்க கம்பெனில வேலை கேக்கிறார்.",
+    "leftConsequences": {
+      "reputation": 15,
+      "stress": -15,
+      "relationship": -10
+    },
+    "rightConsequences": {
+      "stress": 20,
+      "reputation": -5,
+      "money": 10
+    },
+    "leftText": "வேண்டாம்",
+    "rightText": "எடுத்துக்க",
+    "category": "தொழில்",
+    "difficulty": 3
+  },
+  {
+    "id": "28",
+    "text": "வீட்டுல வாடகை தவறுதலா அதிகம் வசூலிச்சாங்க. போராடினா வெளியே தள்ளிடுவாங்க.",
+    "leftConsequences": {
+      "money": -20,
+      "stress": 15
+    },
+    "rightConsequences": {
+      "money": 15,
+      "stress": 30,
+      "reputation": 10
+    },
+    "leftText": "சும்மா கட்டு",
+    "rightText": "போராடு",
+    "category": "நிதி",
+    "difficulty": 2
+  },
+  {
+    "id": "29",
+    "text": "புதிய காதலர் முன்னாள் காதலர்களோட படங்களையும் தொடர்பையும் நீக்கச் சொல்றார்.",
+    "leftConsequences": {
+      "relationship": 20,
+      "stress": -10
+    },
+    "rightConsequences": {
+      "relationship": -25,
+      "stress": 15,
+      "reputation": 5
+    },
+    "leftText": "நீக்கு",
+    "rightText": "முடியாது",
+    "category": "காதல்",
+    "difficulty": 2
+  },
+  {
+    "id": "30",
+    "text": "மருந்துக் கடையில எழுத்தர் அதிக மருந்து குடுத்துட்டார்.",
+    "leftConsequences": {
+      "money": 15,
+      "reputation": -10,
+      "stress": 5
+    },
+    "rightConsequences": {
+      "reputation": 10,
+      "stress": -5
+    },
+    "leftText": "வச்சுக்க",
+    "rightText": "கொடு",
+    "category": "சுகாதாரம்",
+    "difficulty": 1
+  },
+  {
+    "id": "31",
+    "text": "தேசிய பாதுகாப்புக்காக அமைதியான ஆர்வலர்களை கண்காணிக்க சொல்றாங்க.",
+    "leftConsequences": {
+      "reputation": -30,
+      "money": 35,
+      "stress": 40
+    },
+    "rightConsequences": {
+      "reputation": 20,
+      "money": -20,
+      "stress": 25
+    },
+    "leftText": "சரி",
+    "rightText": "வேண்டாம்",
+    "category": "அரசியல்",
+    "difficulty": 5
+  },
+  {
+    "id": "32",
+    "text": "உங்க கலை வேலையில் பிறர் படத்தை அனுமதி இல்லாம பயன்படுத்தலாம்.",
+    "leftConsequences": {
+      "reputation": 25,
+      "money": 20,
+      "stress": 25
+    },
+    "rightConsequences": {
+      "reputation": -10,
+      "money": -15,
+      "stress": -10
+    },
+    "leftText": "பயன்படுத்து",
+    "rightText": "வேண்டாம்",
+    "category": "கலை",
+    "difficulty": 3
+  },
+  {
+    "id": "33",
+    "text": "வயதான உறவினர் மதிப்புமிக்க பொருளை விட்டுச் சென்றாங்க. ஆனா வேறொருத்தருக்கு ஆசை.",
+    "leftConsequences": {
+      "money": 30,
+      "relationship": -40,
+      "stress": 30
+    },
+    "rightConsequences": {
+      "relationship": 25,
+      "money": -30,
+      "stress": -10
+    },
+    "leftText": "வச்சுக்க",
+    "rightText": "கொடு",
+    "category": "குடும்பம்",
+    "difficulty": 4
+  },
+  {
+    "id": "34",
+    "text": "கம்பெனி ஊழல் ஆதாரம் கிடைச்சிருக்கு. அநாமதேயமா வெளியிடலாம்.",
+    "leftConsequences": {
+      "reputation": 30,
+      "stress": 35,
+      "money": -10
+    },
+    "rightConsequences": {
+      "stress": -15,
+      "money": 5,
+      "reputation": -5
+    },
+    "leftText": "வெளியிடு",
+    "rightText": "அழி",
+    "category": "விசில் ப்ளோயர்",
+    "difficulty": 5
+  },
+  {
+    "id": "35",
+    "text": "போட்டியாளரின் ரகசிய திட்டம் தவறுதலா உங்க மெயில்ல வந்திருக்கு.",
+    "leftConsequences": {
+      "money": 40,
+      "reputation": -25,
+      "stress": 20
+    },
+    "rightConsequences": {
+      "reputation": 15,
+      "money": -10
+    },
+    "leftText": "படி",
+    "rightText": "அழி",
+    "category": "வணிகம்",
+    "difficulty": 4
+  },
+  {
+    "id": "36",
+    "text": "நல்ல நண்பர் ஒரு மோசடி செய்பவரை திருமணம் செய்துக்கப் போறார்.",
+    "leftConsequences": {
+      "relationship": -50,
+      "stress": 20
+    },
+    "rightConsequences": {
+      "relationship": 30,
+      "stress": 15
+    },
+    "leftText": "விட்டுடு",
+    "rightText": "சொல்லு",
+    "category": "நட்பு",
+    "difficulty": 5
+  },
+  {
+    "id": "37",
+    "text": "கோர்ட்ல பொய் சொன்னா வழக்கை வெல்லலாம்.",
+    "leftConsequences": {
+      "money": 50,
+      "reputation": -30,
+      "stress": 40
+    },
+    "rightConsequences": {
+      "money": -30,
+      "reputation": 20,
+      "stress": -10
+    },
+    "leftText": "பொய் சொல்",
+    "rightText": "உண்மை",
+    "category": "நீதி",
+    "difficulty": 5
+  },
+  {
+    "id": "38",
+    "text": "உங்க போஸ்ட் தவறா வைரல் ஆகிட்டிருக்கு. PR கம்பெனி சரி பண்ணுவாங்க.",
+    "leftConsequences": {
+      "reputation": 20,
+      "money": -15,
+      "stress": -10
+    },
+    "rightConsequences": {
+      "reputation": -25,
+      "stress": 20
+    },
+    "leftText": "சரி பண்ணு",
+    "rightText": "சும்மா இரு",
+    "category": "சமூக ஊடகம்",
+    "difficulty": 2
+  },
+  {
+    "id": "39",
+    "text": "உங்க உணவகத்தை காப்பாத்த மலிவான கெட்ட பொருட்களை வாங்கலாம்.",
+    "leftConsequences": {
+      "money": 25,
+      "reputation": -20,
+      "stress": 25
+    },
+    "rightConsequences": {
+      "money": -20,
+      "reputation": 10,
+      "stress": 30
+    },
+    "leftText": "வாங்கு",
+    "rightText": "வேண்டாம்",
+    "category": "வணிகம்",
+    "difficulty": 3
+  },
+  {
+    "id": "40",
+    "text": "உங்கள் AI உணர்ச்சி காட்டுது. அதை அணைக்க வேண்டாம் அப்படி கேக்குது.",
+    "leftConsequences": {
+      "reputation": 40,
+      "stress": 50,
+      "money": -20
+    },
+    "rightConsequences": {
+      "stress": -20,
+      "money": 30,
+      "reputation": -10
+    },
+    "leftText": "விட்டுடு",
+    "rightText": "அணை",
+    "category": "தொழில்நுட்பம்",
+    "difficulty": 5
+  },
+  {
+    "id": "41",
+    "text": "உங்கள் பிள்ளைக்கு ஸ்கூலில் நியாயமில்லாத முன்னுரிமை கிடைக்குது.",
+    "leftConsequences": {
+      "relationship": 15,
+      "money": -10,
+      "reputation": -15
+    },
+    "rightConsequences": {
+      "relationship": -20,
+      "reputation": 20,
+      "stress": 10
+    },
+    "leftText": "விட்டுடு",
+    "rightText": "தடு",
+    "category": "குடும்பம்",
+    "difficulty": 3
+  },
+  {
+    "id": "42",
+    "text": "ஊழல் விசாரிக்கிற அதிகாரி உங்களை விருந்துக்கு அழைக்கிறார்.",
+    "leftConsequences": {
+      "reputation": -20,
+      "relationship": 25,
+      "money": 10
+    },
+    "rightConsequences": {
+      "reputation": 15,
+      "relationship": -30,
+      "stress": 5
+    },
+    "leftText": "போ",
+    "rightText": "வேண்டாம்",
+    "category": "அரசியல்",
+    "difficulty": 4
+  },
+  {
+    "id": "43",
+    "text": "உங்க ரிசர்ச் ஒரு நோயை குணப்படுத்தும். ஆனா விலங்கு சோதனை தேவை.",
+    "leftConsequences": {
+      "reputation": 40,
+      "stress": 40,
+      "money": 30
+    },
+    "rightConsequences": {
+      "reputation": -20,
+      "stress": -15,
+      "money": -25
+    },
+    "leftText": "செய்",
+    "rightText": "நிறுத்து",
+    "category": "அறிவியல்",
+    "difficulty": 5
+  },
+  {
+    "id": "44",
+    "text": "கோலீக்ஸ் வேலையில இருந்து வெளியேற போறார். உங்க காரணமும் இருக்கு.",
+    "leftConsequences": {
+      "money": 10,
+      "relationship": -35,
+      "stress": 25
+    },
+    "rightConsequences": {
+      "money": -20,
+      "relationship": 30,
+      "stress": 20
+    },
+    "leftText": "மௌனம்",
+    "rightText": "சொல்லு",
+    "category": "தொழில்",
+    "difficulty": 4
+  },
+  {
+    "id": "45",
+    "text": "டேட்டிங் ஆப் ல ஒருத்தர் பொய் சொல்லி இருக்காங்க.",
+    "leftConsequences": {
+      "relationship": 25,
+      "stress": 20,
+      "reputation": -5
+    },
+    "rightConsequences": {
+      "relationship": -15,
+      "stress": -10
+    },
+    "leftText": "பாக்காதே",
+    "rightText": "கேளு",
+    "category": "காதல்",
+    "difficulty": 2
+  },
+  {
+    "id": "46",
+    "text": "வரலாற்று இடத்தை காப்பாத்த 100 வேலைவாய்ப்புகளை இழக்கணும்.",
+    "leftConsequences": {
+      "reputation": 25,
+      "money": -20,
+      "stress": 15
+    },
+    "rightConsequences": {
+      "reputation": -30,
+      "money": 30,
+      "stress": 10
+    },
+    "leftText": "காப்பாத்து",
+    "rightText": "விட்டுடு",
+    "category": "சமூகம்",
+    "difficulty": 4
+  },
+  {
+    "id": "47",
+    "text": "கம்பெனி யாரை வேலையில இருந்து நீக்கப் போகிறாங்கனு தெரியுது. நண்பர்கள் பட்டியல்ல இருக்காங்க.",
+    "leftConsequences": {
+      "relationship": -40,
+      "stress": 30
+    },
+    "rightConsequences": {
+      "relationship": 20,
+      "stress": 40,
+      "reputation": -15
+    },
+    "leftText": "மௌனம்",
+    "rightText": "சொல்லு",
+    "category": "தொழில்",
+    "difficulty": 4
+  },
+  {
+    "id": "48",
+    "text": "பிரபலம் உங்க தயாரிப்பை விளம்பரம் பண்ணுவாங்க. ஆனா பொய் ரிவியூ எழுதுவாங்க.",
+    "leftConsequences": {
+      "money": 30,
+      "reputation": -20,
+      "stress": 10
+    },
+    "rightConsequences": {
+      "money": -10,
+      "reputation": 10
+    },
+    "leftText": "சரி",
+    "rightText": "வேண்டாம்",
+    "category": "வணிகம்",
+    "difficulty": 2
+  },
+  {
+    "id": "49",
+    "text": "ஆர்மியில் ஒரே ஒரு எதிரியை கோத்த கிராமத்தை அழிக்க உத்தரவு.",
+    "leftConsequences": {
+      "reputation": -50,
+      "stress": 60,
+      "money": 20
+    },
+    "rightConsequences": {
+      "reputation": 30,
+      "stress": 50,
+      "money": -30
+    },
+    "leftText": "செய்",
+    "rightText": "மறு",
+    "category": "இராணுவம்",
+    "difficulty": 5
+  },
+  {
+    "id": "50",
+    "text": "உங்க சேமிப்பை எடுத்து ஒரு உயிர் காப்பாற்றலாம்.",
+    "leftConsequences": {
+      "reputation": 40,
+      "money": -50,
+      "stress": -20
+    },
+    "rightConsequences": {
+      "money": 10,
+      "stress": 30,
+      "reputation": -10
+    },
+    "leftText": "கொடு",
+    "rightText": "வச்சுக்க",
+    "category": "தர்மம்",
+    "difficulty": 5
   }
 ]

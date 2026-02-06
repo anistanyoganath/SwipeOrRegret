@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:swipeorregret/app/app_colors.dart';
 import 'package:swipeorregret/app/app_routes.dart';
+import 'package:swipeorregret/core/utils/ads/banner_ad.dart';
 import 'package:swipeorregret/core/widgets/primary_button.dart';
 import 'package:swipeorregret/features/game_over/game_over_controller.dart';
 
@@ -19,16 +20,29 @@ class GameOverScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
+
     void showReviveSuccessDialog(BuildContext context) {
       showDialog(
         context: context,
         barrierDismissible: false,
         builder: (context) => AlertDialog(
-          title: const Text('Revived!'),
-          content: const Text(
+          title: Text(
+            'Revived!',
+            style: textTheme.headlineSmall?.copyWith(
+              color: colorScheme.onSurface,
+            ),
+          ),
+          content: Text(
             'You have been revived with partial stats restored.\n'
             'Continue your journey...',
+            style: textTheme.bodyMedium?.copyWith(
+              color: colorScheme.onSurface.withOpacity(0.8),
+            ),
           ),
+          backgroundColor: colorScheme.surface,
           actions: [
             TextButton(
               onPressed: () {
@@ -39,7 +53,13 @@ class GameOverScreen extends StatelessWidget {
                   (route) => false,
                 );
               },
-              child: const Text('CONTINUE'),
+              child: Text(
+                'CONTINUE',
+                style: textTheme.labelLarge?.copyWith(
+                  color: colorScheme.primary,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
             ),
           ],
         ),
@@ -53,323 +73,327 @@ class GameOverScreen extends StatelessWidget {
         finalStats: finalStats,
       ),
       child: Scaffold(
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: colorScheme.surface,
         body: SafeArea(
           child: Column(
             children: [
-              // Top fixed content (Header and Icon)
+              // Fixed header
               Padding(
                 padding: const EdgeInsets.all(24),
-                child: Column(
+                child: Row(
                   children: [
-                    Row(
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            Navigator.pushNamedAndRemoveUntil(
-                              context,
-                              AppRoutes.home,
-                              (route) => false,
-                            );
-                          },
-                          icon: const Icon(Icons.home, color: Colors.white),
-                        ),
-                        const Spacer(),
-                        const Text(
-                          'GAME OVER',
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w900,
-                            color: Colors.white,
-                          ),
-                        ),
-                        const Spacer(),
-                        const SizedBox(width: 48),
-                      ],
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          AppRoutes.home,
+                          (route) => false,
+                        );
+                      },
+                      icon: Icon(Icons.home, color: colorScheme.onSurface),
                     ),
-                    const SizedBox(height: 20),
-                    Container(
-                      width: 120,
-                      height: 120,
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.1),
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: Colors.white.withOpacity(0.3),
-                          width: 3,
-                        ),
-                      ),
-                      child: const Icon(
-                        Icons.sentiment_dissatisfied,
-                        size: 60,
-                        color: Colors.white,
+                    const Spacer(),
+                    Text(
+                      'GAME OVER',
+                      style: textTheme.headlineMedium?.copyWith(
+                        fontWeight: FontWeight.w900,
+                        color: colorScheme.onSurface,
                       ),
                     ),
+                    const Spacer(),
+                    const SizedBox(width: 48), // For symmetry
                   ],
                 ),
               ),
 
-              // Scrollable middle content
+              // Scrollable content with buttons at the end
               Expanded(
-                child: SingleChildScrollView(
+                child: ListView(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 32),
-
-                      // Game Over Reason
-                      Consumer<GameOverController>(
-                        builder: (context, controller, child) {
-                          return Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 24,
-                              vertical: 16,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(16),
-                              border: Border.all(
-                                color: Colors.white.withOpacity(0.3),
-                              ),
-                            ),
-                            child: Column(
-                              children: [
-                                const Text(
-                                  'You Regret Everything',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  controller.reason ??
-                                      'You ran out of resources!',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white.withOpacity(0.8),
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-
-                      const SizedBox(height: 40),
-
-                      // Final Score
-                      Container(
-                        padding: const EdgeInsets.all(24),
+                  children: [
+                    // Game over icon
+                    Center(
+                      child: Container(
+                        width: 120,
+                        height: 120,
+                        margin: const EdgeInsets.only(bottom: 32),
                         decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [Colors.purple, Colors.deepPurple],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
+                          color: colorScheme.primary.withOpacity(0.1),
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: colorScheme.primary.withOpacity(0.3),
+                            width: 3,
                           ),
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.3),
-                              blurRadius: 20,
-                              offset: const Offset(0, 10),
-                            ),
-                          ],
                         ),
-                        child: Column(
-                          children: [
-                            const Text(
-                              'FINAL SCORE',
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.white70,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              '$finalScore',
-                              style: const TextStyle(
-                                fontSize: 72,
-                                fontWeight: FontWeight.w900,
-                                color: Colors.white,
-                                height: 1,
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            Consumer<GameOverController>(
-                              builder: (context, controller, child) {
-                                return Text(
-                                  'Day ${controller.daysSurvived}',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white.withOpacity(0.8),
-                                  ),
-                                );
-                              },
-                            ),
-                          ],
+                        child: Icon(
+                          Icons.sentiment_dissatisfied,
+                          size: 60,
+                          color: colorScheme.primary,
                         ),
                       ),
+                    ),
 
-                      const SizedBox(height: 40),
-
-                      // Stats Grid
-                      Consumer<GameOverController>(
-                        builder: (context, controller, child) {
-                          return SizedBox(
-                            height: 180,
-                            child: GridView.count(
-                              physics: const NeverScrollableScrollPhysics(),
-                              crossAxisCount: 2,
-                              childAspectRatio: 2,
-                              crossAxisSpacing: 12,
-                              mainAxisSpacing: 12,
-                              children: [
-                                _StatItem(
-                                  label: 'Money',
-                                  value: controller.finalStats['money'] ?? 0,
-                                  color: AppColors.money,
-                                  icon: Icons.attach_money,
-                                ),
-                                _StatItem(
-                                  label: 'Relationship',
-                                  value:
-                                      controller.finalStats['relationship'] ??
-                                      0,
-                                  color: AppColors.relationship,
-                                  icon: Icons.favorite,
-                                ),
-                                _StatItem(
-                                  label: 'Stress',
-                                  value: controller.finalStats['stress'] ?? 0,
-                                  color: AppColors.stress,
-                                  icon: Icons.psychology,
-                                ),
-                                _StatItem(
-                                  label: 'Reputation',
-                                  value:
-                                      controller.finalStats['reputation'] ?? 0,
-                                  color: AppColors.reputation,
-                                  icon: Icons.star,
-                                ),
-                              ],
+                    // Game Over Reason
+                    Consumer<GameOverController>(
+                      builder: (context, controller, child) {
+                        return Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 24,
+                            vertical: 16,
+                          ),
+                          margin: const EdgeInsets.only(bottom: 32),
+                          decoration: BoxDecoration(
+                            color: colorScheme.surfaceVariant,
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(
+                              color: colorScheme.outline.withOpacity(0.3),
                             ),
-                          );
-                        },
-                      ),
-
-                      const SizedBox(height: 40),
-                    ],
-                  ),
-                ),
-              ),
-
-              // Bottom fixed buttons
-              Container(
-                padding: const EdgeInsets.all(24),
-                color: Colors.transparent,
-                child: Consumer<GameOverController>(
-                  builder: (context, controller, child) {
-                    return Column(
-                      children: [
-                        PrimaryButton(
-                          text: 'PLAY AGAIN',
-                          onPressed: () {
-                            controller.playAgain();
-                            Navigator.pushNamedAndRemoveUntil(
-                              context,
-                              AppRoutes.game,
-                              (route) => false,
-                            );
-                          },
-                          backgroundColor: Colors.white,
-                          textColor: Colors.deepPurple,
-                        ),
-
-                        const SizedBox(height: 16),
-
-                        Row(
-                          children: [
-                            Expanded(
-                              child: OutlinedButton.icon(
-                                onPressed: () {
-                                  controller.shareResult();
-                                },
-                                icon: const Icon(
-                                  Icons.share,
-                                  color: Colors.white,
-                                ),
-                                label: const Text(
-                                  'SHARE',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                style: OutlinedButton.styleFrom(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 16,
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  side: const BorderSide(color: Colors.white),
+                          ),
+                          child: Column(
+                            children: [
+                              Text(
+                                'You Regret Everything',
+                                style: textTheme.titleLarge?.copyWith(
+                                  fontWeight: FontWeight.w700,
+                                  color: colorScheme.onSurface,
                                 ),
                               ),
-                            ),
-
-                            const SizedBox(width: 12),
-
-                            Expanded(
-                              child: OutlinedButton.icon(
-                                onPressed: () {
-                                  controller.watchAdForRevive(context, () {
-                                    showReviveSuccessDialog(context);
-                                  });
-                                },
-                                icon: const Icon(
-                                  Icons.replay,
-                                  color: Colors.white,
+                              const SizedBox(height: 8),
+                              Text(
+                                controller.reason ??
+                                    'You ran out of resources!',
+                                style: textTheme.bodyLarge?.copyWith(
+                                  color: colorScheme.onSurface.withOpacity(0.8),
                                 ),
-                                label: const Text(
-                                  'REVIVE',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                style: OutlinedButton.styleFrom(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 16,
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  side: const BorderSide(color: Colors.white),
-                                ),
+                                textAlign: TextAlign.center,
                               ),
-                            ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+
+                    // Final Score
+                    Container(
+                      padding: const EdgeInsets.all(24),
+                      margin: const EdgeInsets.only(bottom: 32),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            colorScheme.primary,
+                            colorScheme.primary.withOpacity(0.8),
                           ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
                         ),
-
-                        const SizedBox(height: 16),
-
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pushNamedAndRemoveUntil(
-                              context,
-                              AppRoutes.home,
-                              (route) => false,
-                            );
-                          },
-                          child: const Text(
-                            'BACK TO HOME',
-                            style: TextStyle(
-                              color: Colors.white70,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: colorScheme.shadow.withOpacity(0.3),
+                            blurRadius: 20,
+                            offset: const Offset(0, 10),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        children: [
+                          Text(
+                            'FINAL SCORE',
+                            style: textTheme.titleMedium?.copyWith(
+                              color: colorScheme.onPrimary.withOpacity(0.9),
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                        ),
-                      ],
-                    );
-                  },
+                          const SizedBox(height: 8),
+                          Text(
+                            '$finalScore',
+                            style: textTheme.displayLarge?.copyWith(
+                              fontWeight: FontWeight.w900,
+                              color: colorScheme.onPrimary,
+                              height: 1,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Consumer<GameOverController>(
+                            builder: (context, controller, child) {
+                              return Text(
+                                'Day ${controller.daysSurvived}',
+                                style: textTheme.bodyMedium?.copyWith(
+                                  color: colorScheme.onPrimary.withOpacity(0.8),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    // Stats Grid
+                    Consumer<GameOverController>(
+                      builder: (context, controller, child) {
+                        return Container(
+                          height: 180,
+                          margin: const EdgeInsets.only(bottom: 32),
+                          child: GridView.count(
+                            physics: const NeverScrollableScrollPhysics(),
+                            crossAxisCount: 2,
+                            childAspectRatio: 2,
+                            crossAxisSpacing: 12,
+                            mainAxisSpacing: 12,
+                            children: [
+                              _StatItem(
+                                label: 'Money',
+                                value: controller.finalStats['money'] ?? 0,
+                                color: AppColors.money,
+                                icon: Icons.attach_money,
+                              ),
+                              _StatItem(
+                                label: 'Relationship',
+                                value:
+                                    controller.finalStats['relationship'] ?? 0,
+                                color: AppColors.relationship,
+                                icon: Icons.favorite,
+                              ),
+                              _StatItem(
+                                label: 'Stress',
+                                value: controller.finalStats['stress'] ?? 0,
+                                color: AppColors.stress,
+                                icon: Icons.psychology,
+                              ),
+                              _StatItem(
+                                label: 'Reputation',
+                                value: controller.finalStats['reputation'] ?? 0,
+                                color: AppColors.reputation,
+                                icon: Icons.star,
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+
+                    // Action Buttons Section
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 32),
+                      child: Consumer<GameOverController>(
+                        builder: (context, controller, child) {
+                          return Column(
+                            children: [
+                              PrimaryButton(
+                                text: 'PLAY AGAIN',
+                                onPressed: () {
+                                  controller.playAgain();
+                                  Navigator.pushNamedAndRemoveUntil(
+                                    context,
+                                    AppRoutes.game,
+                                    (route) => false,
+                                  );
+                                },
+                                backgroundColor: colorScheme.primary,
+                                textColor: colorScheme.onPrimary,
+                              ),
+                              const SizedBox(height: 16),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: OutlinedButton.icon(
+                                      onPressed: () {
+                                        controller.shareResult();
+                                      },
+                                      icon: Icon(
+                                        Icons.share,
+                                        color: colorScheme.primary,
+                                      ),
+                                      label: Text(
+                                        'SHARE',
+                                        style: textTheme.labelLarge?.copyWith(
+                                          color: colorScheme.primary,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                      style: OutlinedButton.styleFrom(
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 16,
+                                        ),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                            12,
+                                          ),
+                                        ),
+                                        side: BorderSide(
+                                          color: colorScheme.primary,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 12),
+                                  Expanded(
+                                    child: OutlinedButton.icon(
+                                      onPressed: () {
+                                        controller.watchAdForRevive(
+                                          context,
+                                          () {
+                                            showReviveSuccessDialog(context);
+                                          },
+                                        );
+                                      },
+                                      icon: Icon(
+                                        Icons.replay,
+                                        color: colorScheme.primary,
+                                      ),
+                                      label: Text(
+                                        'REVIVE',
+                                        style: textTheme.labelLarge?.copyWith(
+                                          color: colorScheme.primary,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                      style: OutlinedButton.styleFrom(
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 16,
+                                        ),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                            12,
+                                          ),
+                                        ),
+                                        side: BorderSide(
+                                          color: colorScheme.primary,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 16),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pushNamedAndRemoveUntil(
+                                    context,
+                                    AppRoutes.home,
+                                    (route) => false,
+                                  );
+                                },
+                                child: Text(
+                                  'BACK TO HOME',
+                                  style: textTheme.labelLarge?.copyWith(
+                                    color: colorScheme.onSurface.withOpacity(
+                                      0.7,
+                                    ),
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+
+                    // Add some extra padding at the bottom for visual comfort
+                    const SizedBox(height: 20),
+                    BannerAdvert(),
+                  ],
                 ),
               ),
             ],
@@ -395,12 +419,15 @@ class _StatItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.05),
+        color: colorScheme.surfaceVariant,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.white.withOpacity(0.1)),
+        border: Border.all(color: colorScheme.outline.withOpacity(0.1)),
       ),
       child: Row(
         children: [
@@ -413,16 +440,14 @@ class _StatItem extends StatelessWidget {
               children: [
                 Text(
                   label,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.white.withOpacity(0.6),
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: colorScheme.onSurfaceVariant,
                   ),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   '$value',
-                  style: TextStyle(
-                    fontSize: 18,
+                  style: theme.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.w700,
                     color: color,
                   ),

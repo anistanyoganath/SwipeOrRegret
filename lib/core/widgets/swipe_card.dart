@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:swipeorregret/app/app_theme.dart';
 
 class SwipeCard extends StatefulWidget {
   final String text;
@@ -25,6 +26,10 @@ class SwipeCard extends StatefulWidget {
 class _SwipeCardState extends State<SwipeCard> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final locale = Localizations.localeOf(context);
+
     return GestureDetector(
       onHorizontalDragEnd: (details) {
         if (details.primaryVelocity! > 0) {
@@ -36,11 +41,11 @@ class _SwipeCardState extends State<SwipeCard> {
       child: Container(
         margin: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: colorScheme.surface,
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
+              color: colorScheme.shadow.withOpacity(0.1),
               blurRadius: 20,
               offset: const Offset(0, 10),
             ),
@@ -50,9 +55,9 @@ class _SwipeCardState extends State<SwipeCard> {
           children: [
             // Timer indicator
             LinearProgressIndicator(
-              value: widget.timeLeft / 3,
-              backgroundColor: Colors.grey[200],
-              color: Colors.deepPurple,
+              value: widget.timeLeft / 30,
+              backgroundColor: colorScheme.surfaceVariant,
+              color: colorScheme.primary,
               minHeight: 4,
             ),
 
@@ -62,9 +67,11 @@ class _SwipeCardState extends State<SwipeCard> {
                 child: Center(
                   child: Text(
                     widget.text,
-                    style: const TextStyle(
+                    style: AppTheme.getTextStyle(
+                      locale: locale,
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
+                      color: colorScheme.onSurface,
                       height: 1.4,
                     ),
                     textAlign: TextAlign.center,
@@ -95,9 +102,11 @@ class _SwipeCardState extends State<SwipeCard> {
                         const SizedBox(width: 8),
                         Text(
                           widget.leftChoice,
-                          style: const TextStyle(
-                            color: Colors.red,
+                          style: AppTheme.getTextStyle(
+                            locale: locale,
+                            fontSize: 16,
                             fontWeight: FontWeight.w600,
+                            color: Colors.red,
                           ),
                         ),
                       ],
@@ -118,9 +127,11 @@ class _SwipeCardState extends State<SwipeCard> {
                       children: [
                         Text(
                           widget.rightChoice,
-                          style: const TextStyle(
-                            color: Colors.green,
+                          style: AppTheme.getTextStyle(
+                            locale: locale,
+                            fontSize: 16,
                             fontWeight: FontWeight.w600,
+                            color: Colors.green,
                           ),
                         ),
                         const SizedBox(width: 8),

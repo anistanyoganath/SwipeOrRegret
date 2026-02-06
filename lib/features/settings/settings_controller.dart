@@ -8,11 +8,13 @@ class SettingsController extends ChangeNotifier {
   bool _musicEnabled = true;
   bool _vibrationEnabled = true;
   bool _showTimer = true;
+  ThemeMode _themeMode = ThemeMode.system;
 
   bool get soundEnabled => _soundEnabled;
   bool get musicEnabled => _musicEnabled;
   bool get vibrationEnabled => _vibrationEnabled;
   bool get showTimer => _showTimer;
+  ThemeMode get themeMode => _themeMode;
 
   SettingsController() {
     _loadSettings();
@@ -33,7 +35,13 @@ class SettingsController extends ChangeNotifier {
     }
   }
 
-  Future<void> _saveSetting(String key, bool value) async {
+  void setThemeMode(ThemeMode themeMode) {
+    _themeMode = themeMode;
+    _saveSetting('theme_mode', themeMode.index);
+    notifyListeners();
+  }
+
+  Future<void> _saveSetting(String key, dynamic value) async {
     try {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setBool(key, value);
@@ -82,6 +90,8 @@ class SettingsController extends ChangeNotifier {
       await prefs.setInt('total_games', 0);
       await prefs.setInt('streak_days', 1);
       await prefs.setBool('has_saved_game', false);
+
+      await prefs.setInt('daily_streak', 0);
 
       // Reload settings
       await _loadSettings();
