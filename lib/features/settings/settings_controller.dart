@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:swipeorregret/features/home/streak_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingsController extends ChangeNotifier {
@@ -15,6 +16,7 @@ class SettingsController extends ChangeNotifier {
   bool get vibrationEnabled => _vibrationEnabled;
   bool get showTimer => _showTimer;
   ThemeMode get themeMode => _themeMode;
+  StreakController get streakController => StreakController.getInstance();
 
   SettingsController() {
     _loadSettings();
@@ -91,7 +93,7 @@ class SettingsController extends ChangeNotifier {
       await prefs.setInt('streak_days', 1);
       await prefs.setBool('has_saved_game', false);
 
-      await prefs.setInt('daily_streak', 0);
+      streakController.resetStreak();
 
       // Reload settings
       await _loadSettings();

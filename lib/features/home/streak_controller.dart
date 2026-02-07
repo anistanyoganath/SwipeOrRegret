@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StreakController with ChangeNotifier {
-  final SharedPreferences _prefs;
+  static StreakController? _instance;
+  late SharedPreferences _prefs;
 
   String get _streakKey => 'daily_streak';
   String get _lastPlayDateKey => 'last_play_date';
@@ -10,7 +11,17 @@ class StreakController with ChangeNotifier {
   int _streakDays = 0;
   DateTime? _lastPlayDate;
 
-  StreakController(this._prefs) {
+  // Private constructor
+  StreakController._();
+
+  // Factory constructor - always returns the same instance
+  factory StreakController.getInstance() {
+    return _instance ??= StreakController._();
+  }
+
+  // Initialize (call once at app startup)
+  Future<void> initialize() async {
+    _prefs = await SharedPreferences.getInstance();
     _loadStreak();
   }
 
@@ -24,12 +35,11 @@ class StreakController with ChangeNotifier {
         : null;
   }
 
-  void updateStreak() {
+  Future<void> updateStreak() async {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
 
     if (_lastPlayDate == null) {
-      // First time playing
       _streakDays = 1;
     } else {
       final lastPlayDay = DateTime(
@@ -41,26 +51,30 @@ class StreakController with ChangeNotifier {
       final difference = today.difference(lastPlayDay).inDays;
 
       if (difference == 0) {
-        // Already played today, no change
         return;
       } else if (difference == 1) {
-        // Consecutive day - increase streak
         _streakDays++;
       } else {
-        // Streak broken - reset to 1
         _streakDays = 1;
       }
     }
 
-    // Save streak and today's date
-    _prefs.setInt(_streakKey, _streakDays);
-    _prefs.setString(_lastPlayDateKey, today.toIso8601String());
+    await _prefs.setInt(_streakKey, _streakDays);
+    await _prefs.setString(_lastPlayDateKey, today.toIso8601String());
+    _lastPlayDate = today;
     notifyListeners();
   }
 
-  bool isStreakMaintainedToday() {
-    if (_lastPlayDate == null) return false;
+  Future<void> resetStreak() async {
+    _streakDays = 0;
+    _lastPlayDate = null;
+    await _prefs.remove(_streakKey);
+    await _prefs.remove(_lastPlayDateKey);
+    notifyListeners();
+  }
 
+  bool get hasPlayedToday {
+    if (_lastPlayDate == null) return false;
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
     final lastPlayDay = DateTime(
@@ -68,13 +82,6 @@ class StreakController with ChangeNotifier {
       _lastPlayDate!.month,
       _lastPlayDate!.day,
     );
-
     return today.isAtSameMomentAs(lastPlayDay);
-  }
-
-  void resetStreak() {
-    _streakDays = 0;
-    _prefs.setInt(_streakKey, _streakDays);
-    notifyListeners();
   }
 }

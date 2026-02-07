@@ -22,19 +22,15 @@ class GameController extends ChangeNotifier {
   bool get isGameOver => _gameState.isGameOver;
   String? get lastDecisionOutcome => _lastDecisionOutcome;
   String? get streakBonusMessage => _streakBonusMessage; // Add getter
+  StreakController get streakController => StreakController.getInstance();
 
   final ScenarioRepository _scenarioRepository = ScenarioRepository();
-  late StreakController streakController;
 
   Future<void> loadGame(String languageCode) async {
     _isLoading = true;
     notifyListeners();
 
     try {
-      // Initialize streak controller with SharedPreferences
-      final prefs = await SharedPreferences.getInstance();
-      streakController = StreakController(prefs);
-
       // Load scenarios
       _scenarios = await _scenarioRepository.getScenarios(
         languageCode: languageCode,

@@ -4,12 +4,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 class HomeController extends ChangeNotifier {
   int _highScore = 0;
   int _totalGames = 0;
-  int _streakDays = 1;
   bool _hasSavedGame = false;
 
   int get highScore => _highScore;
   int get totalGames => _totalGames;
-  int get streakDays => _streakDays;
   bool get hasSavedGame => _hasSavedGame;
   Function get loadStats => _loadStats;
 
@@ -23,7 +21,6 @@ class HomeController extends ChangeNotifier {
 
       _highScore = prefs.getInt('high_score') ?? 0;
       _totalGames = prefs.getInt('total_games') ?? 0;
-      _streakDays = prefs.getInt('streak_days') ?? 1;
       _hasSavedGame = prefs.getBool('has_saved_game') ?? false;
 
       notifyListeners();
@@ -45,13 +42,6 @@ class HomeController extends ChangeNotifier {
     _totalGames++;
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt('total_games', _totalGames);
-    notifyListeners();
-  }
-
-  Future<void> updateStreak(int days) async {
-    _streakDays = days;
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt('streak_days', _streakDays);
     notifyListeners();
   }
 

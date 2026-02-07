@@ -5,6 +5,7 @@ import 'package:swipeorregret/app/app_theme.dart';
 import 'package:swipeorregret/core/widgets/primary_button.dart';
 import 'package:swipeorregret/features/home/hero_illustration.dart';
 import 'package:swipeorregret/features/home/home_controller.dart';
+import 'package:swipeorregret/features/home/streak_controller.dart';
 import 'package:swipeorregret/l10n/app_localizations.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -53,84 +54,99 @@ class HomeScreen extends StatelessWidget {
                           ],
                         ),
 
-                        // Daily streak
-                        Column(
-                          children: [
-                            // Streak indicator
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                                vertical: 8,
-                              ),
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: _getStreakGradient(
-                                    controller.streakDays,
-                                    theme,
-                                  ),
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                ),
-                                borderRadius: BorderRadius.circular(20),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: theme.primaryColor.withOpacity(0.3),
-                                    blurRadius: 10,
-                                    offset: const Offset(0, 4),
-                                  ),
-                                ],
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Icon(
-                                    controller.streakDays >= 7
-                                        ? Icons.local_fire_department
-                                        : Icons.emoji_events,
-                                    color: Colors.white,
-                                    size: 20,
-                                  ),
-                                  const SizedBox(width: 6),
-                                  Text(
-                                    'Day ${controller.streakDays}',
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                  if (controller.streakDays > 0) ...[
-                                    const SizedBox(width: 8),
-                                    GestureDetector(
-                                      onTap: () => _showStreakInfo(
-                                        context,
-                                        controller.streakDays,
-                                      ),
-                                      child: const Icon(
-                                        Icons.info_outline,
-                                        color: Colors.white,
-                                        size: 16,
-                                      ),
-                                    ),
-                                  ],
-                                ],
-                              ),
-                            ),
+                        // Daily streak - using Consumer
+                        Consumer<StreakController>(
+                          builder: (context, streakController, child) {
+                            final nextMilestone = _getNextMilestone(
+                              streakController.streakDays,
+                            );
 
-                            // Streak benefits preview
-                            if (controller.streakDays > 0)
-                              Padding(
-                                padding: const EdgeInsets.only(top: 8),
-                                child: Text(
-                                  'Play ${_getNextMilestone(controller.streakDays)! - controller.streakDays} more days for bonus!',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: theme.colorScheme.onSurface
-                                        .withOpacity(0.7),
+                            return Column(
+                              children: [
+                                // Streak indicator
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 16,
+                                    vertical: 8,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: _getStreakGradient(
+                                        streakController.streakDays,
+                                        theme,
+                                      ),
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                    ),
+                                    borderRadius: BorderRadius.circular(20),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: theme.primaryColor.withOpacity(
+                                          0.3,
+                                        ),
+                                        blurRadius: 10,
+                                        offset: const Offset(0, 4),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Icon(
+                                        streakController.streakDays >= 7
+                                            ? Icons.local_fire_department
+                                            : streakController.streakDays > 0
+                                            ? Icons.emoji_events
+                                            : Icons.star_border,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                      const SizedBox(width: 6),
+                                      Text(
+                                        streakController.streakDays > 0
+                                            ? 'Day ${streakController.streakDays}'
+                                            : 'Start Streak',
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                      if (streakController.streakDays > 0) ...[
+                                        const SizedBox(width: 8),
+                                        GestureDetector(
+                                          onTap: () => _showStreakInfo(
+                                            context,
+                                            streakController.streakDays,
+                                          ),
+                                          child: const Icon(
+                                            Icons.info_outline,
+                                            color: Colors.white,
+                                            size: 16,
+                                          ),
+                                        ),
+                                      ],
+                                    ],
                                   ),
                                 ),
-                              ),
-                          ],
+
+                                // Streak benefits preview
+                                if (streakController.streakDays > 0 &&
+                                    nextMilestone != null)
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 8),
+                                    child: Text(
+                                      'Play ${nextMilestone - streakController.streakDays} more days for bonus!',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: theme.colorScheme.onSurface
+                                            .withOpacity(0.7),
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            );
+                          },
                         ),
                       ],
                     ),

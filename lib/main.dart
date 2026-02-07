@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:swipeorregret/app/app.dart';
 import 'package:swipeorregret/core/provider/local_provider.dart';
 import 'package:swipeorregret/core/provider/theme_provider.dart';
+import 'package:swipeorregret/features/home/streak_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,11 +23,16 @@ void main() async {
   final localeProvider = LocaleProvider();
   await localeProvider.loadLocale();
 
+  // Initialize the streak controller
+  final streakController = StreakController.getInstance();
+  await streakController.initialize();
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider.value(value: localeProvider),
+        ChangeNotifierProvider.value(value: streakController),
       ],
       child: const SwipeOrRegretApp(),
     ),
