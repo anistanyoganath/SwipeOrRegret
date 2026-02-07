@@ -42,7 +42,7 @@ class PrimaryButton extends StatelessWidget {
 
     switch (variant) {
       case ButtonVariant.secondary:
-        bgColor = backgroundColor ?? colorScheme.surfaceVariant;
+        bgColor = backgroundColor ?? colorScheme.surfaceContainerHighest;
         txtColor = textColor ?? colorScheme.onSurfaceVariant;
         break;
       case ButtonVariant.outlined:
@@ -50,7 +50,6 @@ class PrimaryButton extends StatelessWidget {
         txtColor = textColor ?? colorScheme.primary;
         break;
       case ButtonVariant.primary:
-      default:
         bgColor = backgroundColor ?? colorScheme.primary;
         txtColor = textColor ?? colorScheme.onPrimary;
     }
