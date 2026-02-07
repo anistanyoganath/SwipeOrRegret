@@ -4,7 +4,7 @@ class GameConstants {
   static const int initialStress = 50;
   static const int initialReputation = 50;
 
-  static const int decisionTime = 3; // seconds
+  static const int decisionTime = 5; // seconds
   static const int adsFrequency = 3; // show ad every 3 scenarios
   static const int maxStats = 100;
   static const int maxMoney = 100;

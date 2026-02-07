@@ -53,10 +53,6 @@ class GameOverController extends ChangeNotifier {
     notifyListeners();
 
     try {
-      // Simulate ad loading
-      await Future.delayed(const Duration(seconds: 2));
-
-      // Here you would show the rewarded ad
       await AdsManager().showRewardedAd(
         onRewarded: () async {
           // Apply revive logic

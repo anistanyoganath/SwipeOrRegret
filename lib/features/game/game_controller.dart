@@ -13,9 +13,10 @@ class GameController extends ChangeNotifier {
   int _currentScenarioIndex = 0;
   bool _isLoading = true;
   String? _lastDecisionOutcome;
-  String? _streakBonusMessage; // Add this for streak messages
+  String? _streakBonusMessage;
 
   GameState get gameState => _gameState;
+  List<Scenario> get scenarios => _scenarios;
   Scenario get currentScenario => _scenarios[_currentScenarioIndex];
   bool get isLoading => _isLoading;
   bool get isGameOver => _gameState.isGameOver;

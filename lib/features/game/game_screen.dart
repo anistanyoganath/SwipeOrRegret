@@ -6,12 +6,14 @@ import 'package:swipeorregret/app/app_routes.dart';
 import 'package:swipeorregret/app/app_theme.dart';
 import 'package:swipeorregret/app/game_constants.dart';
 import 'package:swipeorregret/core/provider/local_provider.dart';
-import 'package:swipeorregret/core/widgets/swipe_card.dart';
+import 'package:swipeorregret/core/widgets/scenario_card.dart';
+import 'package:swipeorregret/core/widgets/swipe_deck.dart';
 import 'package:swipeorregret/features/game/game_controller.dart';
 import 'package:swipeorregret/features/game/models/game_state.dart';
 import 'package:swipeorregret/core/services/audio_service.dart';
 import 'package:swipeorregret/core/services/vibration_service.dart';
 import 'package:swipeorregret/core/widgets/animated_stat_bar.dart';
+import 'package:swipeorregret/features/game/models/scenario.dart';
 import 'package:swipeorregret/l10n/app_localizations.dart';
 
 class GameScreen extends StatefulWidget {
@@ -24,6 +26,8 @@ class GameScreen extends StatefulWidget {
 class _GameScreenState extends State<GameScreen> {
   late GameController _controller;
   int _timeLeft = GameConstants.decisionTime;
+  static const int _maxTimerValue = GameConstants.decisionTime;
+
   Timer? _timer;
 
   @override
@@ -57,6 +61,12 @@ class _GameScreenState extends State<GameScreen> {
     });
   }
 
+  void _resetTimer() {
+    _timer?.cancel();
+    _timeLeft = 10;
+    _startTimer();
+  }
+
   void _pauseTimer() {
     _timer?.cancel();
   }
@@ -74,9 +84,6 @@ class _GameScreenState extends State<GameScreen> {
     AudioService().playSwipeSound();
     VibrationService().vibrateSwipe();
 
-    // Animate card
-    _animateCardSwipe(false);
-
     // Delay for animation then make decision
     Future.delayed(const Duration(milliseconds: 300), () {
       _controller.makeDecision(false);
@@ -91,9 +98,6 @@ class _GameScreenState extends State<GameScreen> {
     AudioService().playSwipeSound();
     VibrationService().vibrateSwipe();
 
-    // Animate card
-    _animateCardSwipe(true);
-
     // Delay for animation then make decision
     Future.delayed(const Duration(milliseconds: 300), () {
       _controller.makeDecision(true);
@@ -101,11 +105,6 @@ class _GameScreenState extends State<GameScreen> {
     });
   }
 
-  // Add card animation
-  void _animateCardSwipe(bool isRight) {
-    // You can implement card swipe animation here
-    // Using Transform.translate or other animation methods
-  }
   @override
   void dispose() {
     _timer?.cancel();
@@ -118,6 +117,17 @@ class _GameScreenState extends State<GameScreen> {
     if (gameState.stress >= 100) return 'Stress overwhelmed you!';
     if (gameState.reputation <= 0) return 'Your reputation was destroyed!';
     return 'You regret everything!';
+  }
+
+  double get _progressValue {
+    // Value should go from 1.0 (full) to 0.0 (empty)
+    return _timeLeft / _maxTimerValue;
+  }
+
+  Color get _progressColor {
+    if (_timeLeft > 3) return Colors.green;
+    if (_timeLeft > 1) return Colors.orange;
+    return Colors.red;
   }
 
   @override
@@ -304,15 +314,35 @@ class _GameScreenState extends State<GameScreen> {
 
                 const SizedBox(height: 16),
 
-                // Game Card
+                LinearProgressIndicator(
+                  value: _progressValue,
+                  minHeight: 6,
+                  backgroundColor: Theme.of(
+                    context,
+                  ).colorScheme.surfaceContainerHighest,
+                  valueColor: AlwaysStoppedAnimation<Color>(_progressColor),
+                ),
+
+                // Game Card - wrapped in a fixed size container
                 Expanded(
-                  child: SwipeCard(
-                    text: controller.currentScenario.text,
-                    leftChoice: controller.currentScenario.leftText,
-                    rightChoice: controller.currentScenario.rightText,
-                    onSwipeLeft: _onSwipeLeft,
-                    onSwipeRight: _onSwipeRight,
-                    timeLeft: _timeLeft,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: SwipeDeck<Scenario>(
+                      items: controller.scenarios,
+                      cardBuilder: (scenario) => ScenarioCard(
+                        text: scenario.text,
+                        leftChoice: scenario.leftText,
+                        rightChoice: scenario.rightText,
+                      ),
+                      onSwipe: (scenario, isRight) {
+                        _resetTimer();
+                        if (isRight) {
+                          _onSwipeRight();
+                        } else {
+                          _onSwipeLeft();
+                        }
+                      },
+                    ),
                   ),
                 ),
 

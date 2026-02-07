@@ -1,148 +1,115 @@
 import 'package:flutter/material.dart';
-import 'package:swipeorregret/app/app_theme.dart';
 
 class SwipeCard extends StatefulWidget {
-  final String text;
-  final String leftChoice;
-  final String rightChoice;
+  final Widget child;
   final VoidCallback onSwipeLeft;
   final VoidCallback onSwipeRight;
-  final int timeLeft;
 
   const SwipeCard({
     super.key,
-    required this.text,
-    required this.leftChoice,
-    required this.rightChoice,
+    required this.child,
     required this.onSwipeLeft,
     required this.onSwipeRight,
-    required this.timeLeft,
   });
 
   @override
   State<SwipeCard> createState() => _SwipeCardState();
 }
 
-class _SwipeCardState extends State<SwipeCard> {
+class _SwipeCardState extends State<SwipeCard>
+    with SingleTickerProviderStateMixin {
+  Offset position = Offset.zero;
+  double rotation = 0;
+  bool isAnimating = false;
+
+  static const double threshold = 120;
+
+  late AnimationController controller;
+  late Animation<Offset> animation;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 250),
+    );
+
+    controller.addListener(() {
+      if (mounted) {
+        setState(() => position = animation.value);
+      }
+    });
+
+    controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        if (mounted) {
+          setState(() => isAnimating = false);
+        }
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  void _animate(Offset target, VoidCallback onEnd) {
+    if (!mounted) return;
+
+    setState(() => isAnimating = true);
+
+    animation = Tween<Offset>(
+      begin: position,
+      end: target,
+    ).animate(CurvedAnimation(parent: controller, curve: Curves.easeOut));
+
+    controller
+      ..reset()
+      ..forward().then((_) {
+        if (mounted) {
+          onEnd();
+        }
+      });
+  }
+
+  void _onEnd() {
+    if (!mounted || isAnimating) return;
+
+    if (position.dx > threshold) {
+      _animate(const Offset(500, 0), widget.onSwipeRight);
+    } else if (position.dx < -threshold) {
+      _animate(const Offset(-500, 0), widget.onSwipeLeft);
+    } else {
+      _animate(Offset.zero, () {});
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-    final locale = Localizations.localeOf(context);
-
-    return GestureDetector(
-      onHorizontalDragEnd: (details) {
-        if (details.primaryVelocity! > 0) {
-          widget.onSwipeRight();
-        } else if (details.primaryVelocity! < 0) {
-          widget.onSwipeLeft();
-        }
-      },
-      child: Container(
-        margin: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: colorScheme.surface,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: colorScheme.shadow.withOpacity(0.1),
-              blurRadius: 20,
-              offset: const Offset(0, 10),
-            ),
-          ],
-        ),
-        child: Column(
-          children: [
-            // Timer indicator
-            LinearProgressIndicator(
-              value: widget.timeLeft / 30,
-              backgroundColor: colorScheme.surfaceVariant,
-              color: colorScheme.primary,
-              minHeight: 4,
-            ),
-
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(24),
-                child: Center(
-                  child: Text(
-                    widget.text,
-                    style: AppTheme.getTextStyle(
-                      locale: locale,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                      color: colorScheme.onSurface,
-                      height: 1.4,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
+    return Listener(
+      onPointerUp: (_) => _onEnd(),
+      child: GestureDetector(
+        onPanUpdate: (d) {
+          if (isAnimating) return;
+          setState(() {
+            position += d.delta;
+            rotation = position.dx / 300;
+          });
+        },
+        child: AnimatedBuilder(
+          animation: controller,
+          builder: (context, child) {
+            return Transform.translate(
+              offset: position,
+              child: Transform.rotate(
+                angle: rotation * 3.14 / 12,
+                child: widget.child,
               ),
-            ),
-
-            // Swipe instructions
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 10,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.red.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: Colors.red.withOpacity(0.3)),
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.arrow_back, color: Colors.red),
-                        const SizedBox(width: 8),
-                        Text(
-                          widget.leftChoice,
-                          style: AppTheme.getTextStyle(
-                            locale: locale,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.red,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 10,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.green.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: Colors.green.withOpacity(0.3)),
-                    ),
-                    child: Row(
-                      children: [
-                        Text(
-                          widget.rightChoice,
-                          style: AppTheme.getTextStyle(
-                            locale: locale,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.green,
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        const Icon(Icons.arrow_forward, color: Colors.green),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+            );
+          },
         ),
       ),
     );
