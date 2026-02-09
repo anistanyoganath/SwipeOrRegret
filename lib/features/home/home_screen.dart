@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:games_services/games_services.dart';
 import 'package:provider/provider.dart';
 import 'package:swipeorregret/app/app_routes.dart';
 import 'package:swipeorregret/app/app_theme.dart';
@@ -319,8 +320,8 @@ class HomeScreen extends StatelessWidget {
 
                         Expanded(
                           child: OutlinedButton.icon(
-                            onPressed: () {
-                              _showLeaderboard(context);
+                            onPressed: () async {
+                              await showLeaderboard();
                             },
                             icon: Icon(
                               Icons.leaderboard,
@@ -357,70 +358,10 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  void _showLeaderboard(BuildContext context) {
-    final theme = Theme.of(context);
-
-    showModalBottomSheet(
-      context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      backgroundColor: theme.cardColor,
-      builder: (context) {
-        return Container(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Center(
-                child: Container(
-                  width: 60,
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: theme.dividerColor,
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              Text(
-                'Global Leaderboard',
-                style: theme.textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              const SizedBox(height: 20),
-              // Leaderboard list
-              ListTile(
-                leading: CircleAvatar(
-                  backgroundColor: Colors.amber,
-                  child: Icon(
-                    Icons.emoji_events,
-                    color: theme.colorScheme.onPrimary,
-                  ),
-                ),
-                title: Text('You', style: theme.textTheme.bodyLarge),
-                subtitle: Text(
-                  'Score: 1250',
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    color: theme.colorScheme.onSurface.withOpacity(0.6),
-                  ),
-                ),
-                trailing: Chip(
-                  label: Text('#1'),
-                  backgroundColor: Colors.amber,
-                ),
-              ),
-              const SizedBox(height: 20),
-              PrimaryButton(
-                text: 'CLOSE',
-                onPressed: () => Navigator.pop(context),
-                backgroundColor: theme.primaryColor,
-              ),
-            ],
-          ),
-        );
-      },
+  Future<void> showLeaderboard() async {
+    await GamesServices.showLeaderboards(
+      iOSLeaderboardID: 'swipeorregret_leaderboard',
+      androidLeaderboardID: 'your_android_leaderboard_id',
     );
   }
 

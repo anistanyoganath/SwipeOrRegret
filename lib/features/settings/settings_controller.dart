@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:swipeorregret/core/services/audio_service.dart';
 import 'package:swipeorregret/features/home/streak_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -54,13 +55,13 @@ class SettingsController extends ChangeNotifier {
 
   Future<void> toggleSound(bool value) async {
     _soundEnabled = value;
-    await _saveSetting('sound_enabled', value);
+    AudioService().toggleSound(value);
     notifyListeners();
   }
 
   Future<void> toggleMusic(bool value) async {
     _musicEnabled = value;
-    await _saveSetting('music_enabled', value);
+    AudioService().toggleMusic(value);
     notifyListeners();
   }
 

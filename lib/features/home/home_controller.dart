@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:games_services/games_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeController extends ChangeNotifier {
@@ -18,6 +19,7 @@ class HomeController extends ChangeNotifier {
   Future<void> _loadStats() async {
     try {
       final prefs = await SharedPreferences.getInstance();
+      await gameServiceSignIn();
 
       _highScore = prefs.getInt('high_score') ?? 0;
       _totalGames = prefs.getInt('total_games') ?? 0;
@@ -26,6 +28,14 @@ class HomeController extends ChangeNotifier {
       notifyListeners();
     } catch (e) {
       // Handle error
+    }
+  }
+
+  Future<void> gameServiceSignIn() async {
+    try {
+      await GamesServices.signIn();
+    } catch (e) {
+      debugPrint('Sign-in failed: $e');
     }
   }
 
