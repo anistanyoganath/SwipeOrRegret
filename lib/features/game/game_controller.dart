@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:games_services/games_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:swipeorregret/app/game_constants.dart';
 import 'package:swipeorregret/core/utils/streak_benifits.dart';
@@ -181,6 +182,14 @@ class GameController extends ChangeNotifier {
       // Mark that we have a saved game
       await prefs.setBool('has_saved_game', true);
       await prefs.setBool('is_game_over', false);
+
+      Leaderboards.submitScore(
+        score: Score(
+          iOSLeaderboardID: GameConstants.iOSLeaderboardID,
+          androidLeaderboardID: GameConstants.androidLeaderboardID,
+          value: _gameState.score,
+        ),
+      );
     } catch (e) {
       print('Error saving game state: $e');
     }

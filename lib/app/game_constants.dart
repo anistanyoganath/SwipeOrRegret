@@ -13,4 +13,7 @@ class GameConstants {
   static const int minStats = 0;
 
   static const int streakReward = 5; // stat bonus for daily streak
+
+  static const String iOSLeaderboardID = 'swipeorregret_leaderboard';
+  static const String androidLeaderboardID = 'CgkItqe00PoREAIQAQ';
 }

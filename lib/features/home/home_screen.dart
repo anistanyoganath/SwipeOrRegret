@@ -3,6 +3,7 @@ import 'package:games_services/games_services.dart';
 import 'package:provider/provider.dart';
 import 'package:swipeorregret/app/app_routes.dart';
 import 'package:swipeorregret/app/app_theme.dart';
+import 'package:swipeorregret/app/game_constants.dart';
 import 'package:swipeorregret/core/widgets/primary_button.dart';
 import 'package:swipeorregret/features/home/hero_illustration.dart';
 import 'package:swipeorregret/features/home/home_controller.dart';
@@ -360,8 +361,8 @@ class HomeScreen extends StatelessWidget {
 
   Future<void> showLeaderboard() async {
     await GamesServices.showLeaderboards(
-      iOSLeaderboardID: 'swipeorregret_leaderboard',
-      androidLeaderboardID: 'your_android_leaderboard_id',
+      iOSLeaderboardID: GameConstants.iOSLeaderboardID,
+      androidLeaderboardID: GameConstants.androidLeaderboardID,
     );
   }
 
