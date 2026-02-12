@@ -106,8 +106,12 @@ class HomeScreen extends StatelessWidget {
                                       const SizedBox(width: 6),
                                       Text(
                                         streakController.streakDays > 0
-                                            ? 'Day ${streakController.streakDays}'
-                                            : 'Start Streak',
+                                            ? (localizations?.dayCount(
+                                                    streakController.streakDays,
+                                                  ) ??
+                                                  'Day ${streakController.streakDays}')
+                                            : localizations?.startStreak ??
+                                                  'Start Streak',
                                         style: const TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.w600,
@@ -138,7 +142,12 @@ class HomeScreen extends StatelessWidget {
                                   Padding(
                                     padding: const EdgeInsets.only(top: 8),
                                     child: Text(
-                                      'Play ${nextMilestone - streakController.streakDays} more days for bonus!',
+                                      localizations?.playMoreDays(
+                                            nextMilestone -
+                                                streakController.streakDays,
+                                            nextMilestone,
+                                          ) ??
+                                          'Play ${nextMilestone - streakController.streakDays} more days for bonus!',
                                       style: TextStyle(
                                         fontSize: 12,
                                         color: theme.colorScheme.onSurface
@@ -180,8 +189,7 @@ class HomeScreen extends StatelessWidget {
                         onPressed: () {
                           Navigator.pushNamed(context, AppRoutes.game);
                         },
-                        variant:
-                            ButtonVariant.outlined, // This gives it a border
+                        variant: ButtonVariant.outlined,
                       ),
 
                     if (controller.hasSavedGame) const SizedBox(height: 16),
@@ -291,7 +299,7 @@ class HomeScreen extends StatelessWidget {
                                 context,
                                 AppRoutes.settings,
                               );
-                              controller.loadStats(); // Refresh stats on return
+                              controller.loadStats();
                             },
                             icon: Icon(
                               Icons.settings,
@@ -329,7 +337,7 @@ class HomeScreen extends StatelessWidget {
                               color: theme.colorScheme.primary,
                             ),
                             label: Text(
-                              'Rank',
+                              localizations?.rank ?? 'Rank',
                               style: TextStyle(
                                 color: theme.colorScheme.primary,
                                 fontWeight: FontWeight.w600,
@@ -390,24 +398,28 @@ class HomeScreen extends StatelessWidget {
   void _showStreakInfo(BuildContext context, int currentStreak) {
     final theme = Theme.of(context);
     final isDarkMode = theme.brightness == Brightness.dark;
-    final locale = Localizations.localeOf(context);
+    final localizations = AppLocalizations.of(context);
 
     final rewards = {
-      3: '+10 starting money 💰',
-      7: '+20 starting money 💰 & -5 stress 🧠',
-      14: '+30 starting money 💰 & +5 reputation ⭐',
-      30: '+50 starting money 💰 & +10 reputation ⭐ & -10 stress 🧠',
+      3: localizations?.reward3Days ?? '+10 starting money 💰',
+      7: localizations?.reward7Days ?? '+20 starting money 💰 & -5 stress 🧠',
+      14:
+          localizations?.reward14Days ??
+          '+30 starting money 💰 & +5 reputation ⭐',
+      30:
+          localizations?.reward30Days ??
+          '+50 starting money 💰 & +10 reputation ⭐ & -10 stress 🧠',
     };
 
     // Find achieved and upcoming rewards
-    final achievedRewards = <String>[];
-    final upcomingRewards = <String>[];
+    final achievedRewards = <MapEntry<int, String>>[];
+    final upcomingRewards = <MapEntry<int, String>>[];
 
     rewards.forEach((days, reward) {
       if (currentStreak >= days) {
-        achievedRewards.add('$days days: $reward ✅');
+        achievedRewards.add(MapEntry(days, reward));
       } else {
-        upcomingRewards.add('$days days: $reward');
+        upcomingRewards.add(MapEntry(days, reward));
       }
     });
 
@@ -441,9 +453,9 @@ class HomeScreen extends StatelessWidget {
 
                 // Title
                 Text(
-                  'Daily Streak Rewards',
+                  localizations?.dailyStreakRewards ?? 'Daily Streak Rewards',
                   style: AppTheme.getTextStyle(
-                    locale: locale,
+                    locale: localizations!.locale,
                     fontSize: 24,
                     fontWeight: FontWeight.w900,
                     color: theme.colorScheme.primary,
@@ -477,19 +489,16 @@ class HomeScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Current Streak: $currentStreak days',
+                              localizations.currentStreak(currentStreak),
                               style: AppTheme.getTextStyle(
-                                locale: locale,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w700,
-                                color: Colors.white,
+                                locale: localizations.locale,
                               ),
                             ),
                             if (currentStreak > 0)
                               Text(
-                                'Play daily to maintain your streak!',
+                                localizations.playDailyMaintain,
                                 style: AppTheme.getTextStyle(
-                                  locale: locale,
+                                  locale: localizations.locale,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
                                   color: Colors.white.withOpacity(0.9),
@@ -505,9 +514,9 @@ class HomeScreen extends StatelessWidget {
 
                 // How streaks work
                 Text(
-                  'How Streaks Work',
+                  localizations.howStreaksWork,
                   style: AppTheme.getTextStyle(
-                    locale: locale,
+                    locale: localizations.locale,
                     fontSize: 18,
                     fontWeight: FontWeight.w700,
                     color: theme.colorScheme.onSurface,
@@ -515,11 +524,9 @@ class HomeScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  '• Play at least once every 24 hours to maintain your streak\n'
-                  '• If you miss a day, your streak resets to 1\n'
-                  '• Higher streaks give you better starting bonuses',
+                  localizations.streakRules,
                   style: AppTheme.getTextStyle(
-                    locale: locale,
+                    locale: localizations.locale,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     color: theme.colorScheme.onSurface.withOpacity(0.6),
@@ -530,9 +537,9 @@ class HomeScreen extends StatelessWidget {
                 // Achieved rewards
                 if (achievedRewards.isNotEmpty) ...[
                   Text(
-                    'Achieved Rewards',
+                    localizations.achievedRewards,
                     style: AppTheme.getTextStyle(
-                      locale: locale,
+                      locale: localizations.locale,
                       fontSize: 18,
                       fontWeight: FontWeight.w700,
                       color: Colors.green,
@@ -540,7 +547,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
                   ...achievedRewards.map(
-                    (reward) => Padding(
+                    (entry) => Padding(
                       padding: const EdgeInsets.only(bottom: 8),
                       child: Row(
                         children: [
@@ -552,9 +559,9 @@ class HomeScreen extends StatelessWidget {
                           const SizedBox(width: 8),
                           Expanded(
                             child: Text(
-                              reward,
+                              '${entry.key} ${localizations?.days}: ${entry.value} ✅',
                               style: AppTheme.getTextStyle(
-                                locale: locale,
+                                locale: localizations!.locale,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                                 color: theme.colorScheme.onSurface,
@@ -571,9 +578,9 @@ class HomeScreen extends StatelessWidget {
                 // Upcoming rewards
                 if (upcomingRewards.isNotEmpty) ...[
                   Text(
-                    'Upcoming Rewards',
+                    localizations.upcomingRewards,
                     style: AppTheme.getTextStyle(
-                      locale: locale,
+                      locale: localizations.locale,
                       fontSize: 18,
                       fontWeight: FontWeight.w700,
                       color: theme.colorScheme.primary,
@@ -581,7 +588,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
                   ...upcomingRewards.map(
-                    (reward) => Padding(
+                    (entry) => Padding(
                       padding: const EdgeInsets.only(bottom: 8),
                       child: Row(
                         children: [
@@ -593,20 +600,16 @@ class HomeScreen extends StatelessWidget {
                           const SizedBox(width: 8),
                           Expanded(
                             child: Text(
-                              reward,
+                              '${entry.key} ${localizations?.days}: ${entry.value}',
                               style: AppTheme.getTextStyle(
-                                locale: locale,
+                                locale: localizations!.locale,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                                 color: theme.colorScheme.onSurface,
                               ),
                             ),
                           ),
-                          if (rewards.keys.firstWhere(
-                                    (key) => reward.contains('$key days'),
-                                  ) -
-                                  currentStreak >
-                              0)
+                          if (entry.key - currentStreak > 0)
                             Container(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 8,
@@ -619,9 +622,12 @@ class HomeScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: Text(
-                                '${rewards.keys.firstWhere((key) => reward.contains('$key days')) - currentStreak} days left',
+                                localizations?.daysLeft(
+                                      entry.key - currentStreak,
+                                    ) ??
+                                    '${entry.key - currentStreak} days left',
                                 style: AppTheme.getTextStyle(
-                                  locale: locale,
+                                  locale: localizations.locale,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600,
                                   color: theme.colorScheme.primary,
@@ -651,9 +657,9 @@ class HomeScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '💡 Pro Tip',
+                        localizations.proTip,
                         style: AppTheme.getTextStyle(
-                          locale: locale,
+                          locale: localizations.locale,
                           fontSize: 14,
                           fontWeight: FontWeight.w700,
                           color: theme.colorScheme.primary,
@@ -661,10 +667,9 @@ class HomeScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Bonuses are applied automatically when you start a new game. '
-                        'The higher your streak, the better your starting position!',
+                        localizations.streakBonusInfo,
                         style: AppTheme.getTextStyle(
-                          locale: locale,
+                          locale: localizations.locale,
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
                           color: theme.colorScheme.onSurface.withOpacity(0.6),
@@ -677,7 +682,7 @@ class HomeScreen extends StatelessWidget {
 
                 // Close button
                 PrimaryButton(
-                  text: 'GOT IT',
+                  text: localizations?.gotIt ?? 'GOT IT',
                   onPressed: () => Navigator.pop(context),
                   backgroundColor: theme.colorScheme.primary,
                   textColor: theme.colorScheme.onPrimary,

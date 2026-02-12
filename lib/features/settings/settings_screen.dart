@@ -45,7 +45,7 @@ class SettingsScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Appearance',
+                            localizations?.appearance ?? 'Appearance',
                             style: theme.textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.w600,
                             ),
@@ -57,7 +57,7 @@ class SettingsScreen extends StatelessWidget {
                             builder: (context, themeProvider, child) {
                               return SwitchListTile(
                                 title: Text(
-                                  'Dark Mode',
+                                  localizations?.darkMode ?? 'Dark Mode',
                                   style: theme.textTheme.bodyLarge,
                                 ),
                                 value: themeProvider.isDarkMode,
@@ -85,7 +85,7 @@ class SettingsScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Audio',
+                            localizations?.audio ?? 'Audio',
                             style: theme.textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.w600,
                             ),
@@ -93,7 +93,7 @@ class SettingsScreen extends StatelessWidget {
                           const SizedBox(height: 16),
                           SwitchListTile(
                             title: Text(
-                              'Sound Effects',
+                              localizations?.soundEffects ?? 'Sound Effects',
                               style: theme.textTheme.bodyLarge,
                             ),
                             value: controller.soundEnabled,
@@ -101,7 +101,8 @@ class SettingsScreen extends StatelessWidget {
                           ),
                           SwitchListTile(
                             title: Text(
-                              'Background Music',
+                              localizations?.backgroundMusic ??
+                                  'Background Music',
                               style: theme.textTheme.bodyLarge,
                             ),
                             value: controller.musicEnabled,
@@ -123,7 +124,7 @@ class SettingsScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Game Settings',
+                            localizations?.gameSettings ?? 'Game Settings',
                             style: theme.textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.w600,
                             ),
@@ -131,7 +132,7 @@ class SettingsScreen extends StatelessWidget {
                           const SizedBox(height: 16),
                           SwitchListTile(
                             title: Text(
-                              'Vibration',
+                              localizations?.vibration ?? 'Vibration',
                               style: theme.textTheme.bodyLarge,
                             ),
                             value: controller.vibrationEnabled,
@@ -139,7 +140,7 @@ class SettingsScreen extends StatelessWidget {
                           ),
                           SwitchListTile(
                             title: Text(
-                              'Show Timer',
+                              localizations?.showTimer ?? 'Show Timer',
                               style: theme.textTheme.bodyLarge,
                             ),
                             value: controller.showTimer,
@@ -161,7 +162,7 @@ class SettingsScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Data',
+                            localizations?.data ?? 'Data',
                             style: theme.textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.w600,
                             ),
@@ -173,11 +174,12 @@ class SettingsScreen extends StatelessWidget {
                               color: theme.iconTheme.color,
                             ),
                             title: Text(
-                              'Reset Game Data',
+                              localizations?.resetGameData ?? 'Reset Game Data',
                               style: theme.textTheme.bodyLarge,
                             ),
                             subtitle: Text(
-                              'Clear all progress and start fresh',
+                              localizations?.clearAllProgress ??
+                                  'Clear all progress and start fresh',
                               style: theme.textTheme.bodySmall,
                             ),
                             onTap: () => _showResetDialog(context, controller),
@@ -188,11 +190,13 @@ class SettingsScreen extends StatelessWidget {
                               color: theme.iconTheme.color,
                             ),
                             title: Text(
-                              'Load More Scenarios',
+                              localizations?.loadMoreScenarios ??
+                                  'Load More Scenarios',
                               style: theme.textTheme.bodyLarge,
                             ),
                             subtitle: Text(
-                              'Download additional content',
+                              localizations?.downloadContent ??
+                                  'Download additional content',
                               style: theme.textTheme.bodySmall,
                             ),
                             onTap: controller.loadMoreScenarios,
@@ -213,7 +217,7 @@ class SettingsScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'About',
+                            localizations?.about ?? 'About',
                             style: theme.textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.w600,
                             ),
@@ -225,11 +229,11 @@ class SettingsScreen extends StatelessWidget {
                               color: theme.iconTheme.color,
                             ),
                             title: Text(
-                              'Version',
+                              localizations?.version ?? 'Version',
                               style: theme.textTheme.bodyLarge,
                             ),
                             subtitle: Text(
-                              '1.0.0',
+                              localizations?.appVersion ?? '1.0.0',
                               style: theme.textTheme.bodySmall,
                             ),
                           ),
@@ -239,7 +243,7 @@ class SettingsScreen extends StatelessWidget {
                               color: theme.iconTheme.color,
                             ),
                             title: Text(
-                              'Rate App',
+                              localizations?.rateApp ?? 'Rate App',
                               style: theme.textTheme.bodyLarge,
                             ),
                             onTap: controller.rateApp,
@@ -250,7 +254,7 @@ class SettingsScreen extends StatelessWidget {
                               color: theme.iconTheme.color,
                             ),
                             title: Text(
-                              'Share App',
+                              localizations?.shareApp ?? 'Share App',
                               style: theme.textTheme.bodyLarge,
                             ),
                             onTap: controller.shareApp,
@@ -261,7 +265,7 @@ class SettingsScreen extends StatelessWidget {
                               color: theme.iconTheme.color,
                             ),
                             title: Text(
-                              'Privacy Policy',
+                              localizations?.privacyPolicy ?? 'Privacy Policy',
                               style: theme.textTheme.bodyLarge,
                             ),
                             onTap: () => controller.openPrivacyPolicy(),
@@ -382,22 +386,29 @@ class SettingsScreen extends StatelessWidget {
 
   void _showResetDialog(BuildContext context, SettingsController controller) {
     final theme = Theme.of(context);
+    final localizations = AppLocalizations.of(context);
 
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
           backgroundColor: theme.cardColor,
-          title: Text('Reset Progress', style: theme.textTheme.titleLarge),
+          title: Text(
+            localizations?.resetProgress ?? 'Reset Progress',
+            style: theme.textTheme.titleLarge,
+          ),
           content: Text(
-            'Are you sure you want to reset all game progress? '
-            'This action cannot be undone.',
+            localizations?.confirmReset ??
+                'Are you sure you want to reset all game progress? This action cannot be undone.',
             style: theme.textTheme.bodyMedium,
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text('CANCEL', style: theme.textTheme.bodyLarge),
+              child: Text(
+                localizations?.cancel ?? 'CANCEL',
+                style: theme.textTheme.bodyLarge,
+              ),
             ),
             TextButton(
               onPressed: () {
@@ -406,7 +417,8 @@ class SettingsScreen extends StatelessWidget {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(
-                      'Progress reset successfully',
+                      localizations?.progressResetSuccess ??
+                          'Progress reset successfully',
                       style: theme.textTheme.bodyMedium,
                     ),
                     backgroundColor: theme.colorScheme.errorContainer,
@@ -415,7 +427,7 @@ class SettingsScreen extends StatelessWidget {
                 );
               },
               child: Text(
-                'RESET',
+                localizations?.reset ?? 'RESET',
                 style: theme.textTheme.bodyLarge?.copyWith(
                   color: theme.colorScheme.error,
                 ),

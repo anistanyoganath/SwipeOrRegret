@@ -5,6 +5,7 @@ import 'package:swipeorregret/app/app_routes.dart';
 import 'package:swipeorregret/core/utils/ads/banner_ad.dart';
 import 'package:swipeorregret/core/widgets/primary_button.dart';
 import 'package:swipeorregret/features/game_over/game_over_controller.dart';
+import 'package:swipeorregret/l10n/app_localizations.dart';
 
 class GameOverScreen extends StatelessWidget {
   final int finalScore;
@@ -23,6 +24,7 @@ class GameOverScreen extends StatelessWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
+    final localizations = AppLocalizations.of(context);
 
     void showReviveSuccessDialog(BuildContext context) {
       showDialog(
@@ -30,14 +32,14 @@ class GameOverScreen extends StatelessWidget {
         barrierDismissible: false,
         builder: (context) => AlertDialog(
           title: Text(
-            'Revived!',
+            localizations?.revived ?? 'Revived!',
             style: textTheme.headlineSmall?.copyWith(
               color: colorScheme.onSurface,
             ),
           ),
           content: Text(
-            'You have been revived with partial stats restored.\n'
-            'Continue your journey...',
+            localizations?.reviveMessage ??
+                'You have been revived with partial stats restored.\nContinue your journey...',
             style: textTheme.bodyMedium?.copyWith(
               color: colorScheme.onSurface.withOpacity(0.8),
             ),
@@ -54,7 +56,7 @@ class GameOverScreen extends StatelessWidget {
                 );
               },
               child: Text(
-                'CONTINUE',
+                localizations?.continueButton ?? 'CONTINUE',
                 style: textTheme.labelLarge?.copyWith(
                   color: colorScheme.primary,
                   fontWeight: FontWeight.w600,
@@ -94,7 +96,7 @@ class GameOverScreen extends StatelessWidget {
                     ),
                     const Spacer(),
                     Text(
-                      'GAME OVER',
+                      localizations?.gameOver ?? 'GAME OVER',
                       style: textTheme.headlineMedium?.copyWith(
                         fontWeight: FontWeight.w900,
                         color: colorScheme.onSurface,
@@ -152,16 +154,19 @@ class GameOverScreen extends StatelessWidget {
                           child: Column(
                             children: [
                               Text(
-                                'You Regret Everything',
+                                localizations?.youRegretEverything ??
+                                    'You Regret Everything',
                                 style: textTheme.titleLarge?.copyWith(
                                   fontWeight: FontWeight.w700,
                                   color: colorScheme.onSurface,
                                 ),
+                                textAlign: TextAlign.center,
                               ),
                               const SizedBox(height: 8),
                               Text(
                                 controller.reason ??
-                                    'You ran out of resources!',
+                                    (localizations?.ranOutOfResources ??
+                                        'You ran out of resources!'),
                                 style: textTheme.bodyLarge?.copyWith(
                                   color: colorScheme.onSurface.withOpacity(0.8),
                                 ),
@@ -198,7 +203,7 @@ class GameOverScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           Text(
-                            'FINAL SCORE',
+                            localizations?.finalScore ?? 'FINAL SCORE',
                             style: textTheme.titleMedium?.copyWith(
                               color: colorScheme.onPrimary.withOpacity(0.9),
                               fontWeight: FontWeight.w600,
@@ -217,7 +222,10 @@ class GameOverScreen extends StatelessWidget {
                           Consumer<GameOverController>(
                             builder: (context, controller, child) {
                               return Text(
-                                'Day ${controller.daysSurvived}',
+                                localizations?.daySurvived(
+                                      controller.daysSurvived,
+                                    ) ??
+                                    'Day ${controller.daysSurvived}',
                                 style: textTheme.bodyMedium?.copyWith(
                                   color: colorScheme.onPrimary.withOpacity(0.8),
                                 ),
@@ -242,26 +250,30 @@ class GameOverScreen extends StatelessWidget {
                             mainAxisSpacing: 12,
                             children: [
                               _StatItem(
-                                label: 'Money',
+                                label: localizations?.moneyStat ?? 'Money',
                                 value: controller.finalStats['money'] ?? 0,
                                 color: AppColors.money,
                                 icon: Icons.attach_money,
                               ),
                               _StatItem(
-                                label: 'Relationship',
+                                label:
+                                    localizations?.relationshipStat ??
+                                    'Relationship',
                                 value:
                                     controller.finalStats['relationship'] ?? 0,
                                 color: AppColors.relationship,
                                 icon: Icons.favorite,
                               ),
                               _StatItem(
-                                label: 'Stress',
+                                label: localizations?.stressStat ?? 'Stress',
                                 value: controller.finalStats['stress'] ?? 0,
                                 color: AppColors.stress,
                                 icon: Icons.psychology,
                               ),
                               _StatItem(
-                                label: 'Reputation',
+                                label:
+                                    localizations?.reputationStat ??
+                                    'Reputation',
                                 value: controller.finalStats['reputation'] ?? 0,
                                 color: AppColors.reputation,
                                 icon: Icons.star,
@@ -279,8 +291,11 @@ class GameOverScreen extends StatelessWidget {
                         builder: (context, controller, child) {
                           return Column(
                             children: [
+                              // Play Again Button
                               PrimaryButton(
-                                text: 'PLAY AGAIN',
+                                text:
+                                    localizations?.playAgainButton ??
+                                    'PLAY AGAIN',
                                 onPressed: () {
                                   controller.playAgain();
                                   Navigator.pushNamedAndRemoveUntil(
@@ -293,6 +308,8 @@ class GameOverScreen extends StatelessWidget {
                                 textColor: colorScheme.onPrimary,
                               ),
                               const SizedBox(height: 16),
+
+                              // Share and Revive Row
                               Row(
                                 children: [
                                   Expanded(
@@ -305,7 +322,7 @@ class GameOverScreen extends StatelessWidget {
                                         color: colorScheme.primary,
                                       ),
                                       label: Text(
-                                        'SHARE',
+                                        localizations?.shareButton ?? 'SHARE',
                                         style: textTheme.labelLarge?.copyWith(
                                           color: colorScheme.primary,
                                           fontWeight: FontWeight.w600,
@@ -342,7 +359,7 @@ class GameOverScreen extends StatelessWidget {
                                         color: colorScheme.primary,
                                       ),
                                       label: Text(
-                                        'REVIVE',
+                                        localizations?.reviveButton ?? 'REVIVE',
                                         style: textTheme.labelLarge?.copyWith(
                                           color: colorScheme.primary,
                                           fontWeight: FontWeight.w600,
@@ -366,6 +383,8 @@ class GameOverScreen extends StatelessWidget {
                                 ],
                               ),
                               const SizedBox(height: 16),
+
+                              // Back to Home Button
                               TextButton(
                                 onPressed: () {
                                   Navigator.pushNamedAndRemoveUntil(
@@ -375,7 +394,8 @@ class GameOverScreen extends StatelessWidget {
                                   );
                                 },
                                 child: Text(
-                                  'BACK TO HOME',
+                                  localizations?.backToHomeButton ??
+                                      'BACK TO HOME',
                                   style: textTheme.labelLarge?.copyWith(
                                     color: colorScheme.onSurface.withOpacity(
                                       0.7,
