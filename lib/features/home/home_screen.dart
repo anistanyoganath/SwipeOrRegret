@@ -10,8 +10,37 @@ import 'package:swipeorregret/features/home/home_controller.dart';
 import 'package:swipeorregret/features/home/streak_controller.dart';
 import 'package:swipeorregret/l10n/app_localizations.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed && mounted) {
+      // Refresh stats when the app is resumed (user returns from game over screen)
+      Future.delayed(const Duration(milliseconds: 100), () {
+        if (mounted) {
+          context.read<HomeController>().refreshStats();
+        }
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

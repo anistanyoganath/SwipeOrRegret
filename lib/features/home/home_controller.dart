@@ -31,6 +31,10 @@ class HomeController extends ChangeNotifier {
     }
   }
 
+  Future<void> refreshStats() async {
+    await _loadStats();
+  }
+
   Future<void> gameServiceSignIn() async {
     try {
       await GamesServices.signIn();

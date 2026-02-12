@@ -46,22 +46,26 @@ class GameOverScreen extends StatelessWidget {
           ),
           backgroundColor: colorScheme.surface,
           actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-                Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  AppRoutes.game,
-                  (route) => false,
+            Consumer<GameOverController>(
+              builder: (context, controller, _) {
+                return TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      AppRoutes.game,
+                      (route) => false,
+                    );
+                  },
+                  child: Text(
+                    localizations?.continueButton ?? 'CONTINUE',
+                    style: textTheme.labelLarge?.copyWith(
+                      color: colorScheme.primary,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                 );
               },
-              child: Text(
-                localizations?.continueButton ?? 'CONTINUE',
-                style: textTheme.labelLarge?.copyWith(
-                  color: colorScheme.primary,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
             ),
           ],
         ),
@@ -84,15 +88,20 @@ class GameOverScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(24),
                 child: Row(
                   children: [
-                    IconButton(
-                      onPressed: () {
-                        Navigator.pushNamedAndRemoveUntil(
-                          context,
-                          AppRoutes.home,
-                          (route) => false,
+                    Consumer<GameOverController>(
+                      builder: (context, controller, _) {
+                        return IconButton(
+                          onPressed: () {
+                            controller.playAgain();
+                            Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              AppRoutes.home,
+                              (route) => false,
+                            );
+                          },
+                          icon: Icon(Icons.home, color: colorScheme.onSurface),
                         );
                       },
-                      icon: Icon(Icons.home, color: colorScheme.onSurface),
                     ),
                     const Spacer(),
                     Text(
@@ -387,6 +396,7 @@ class GameOverScreen extends StatelessWidget {
                               // Back to Home Button
                               TextButton(
                                 onPressed: () {
+                                  controller.playAgain();
                                   Navigator.pushNamedAndRemoveUntil(
                                     context,
                                     AppRoutes.home,
