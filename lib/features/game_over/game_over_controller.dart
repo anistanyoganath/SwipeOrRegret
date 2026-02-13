@@ -24,6 +24,7 @@ class GameOverController extends ChangeNotifier {
     _saveHighScore();
     _incrementGamesPlayed();
     _saveGameStateForRevival();
+    _showInterstitialAdIfNeeded();
     AudioService().playGameOverSound();
   }
 
@@ -178,6 +179,20 @@ class GameOverController extends ChangeNotifier {
       await prefs.setInt('total_games', totalGames);
     } catch (e) {
       // Handle error
+    }
+  }
+
+  Future<void> _showInterstitialAdIfNeeded() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final totalGames = prefs.getInt('total_games') ?? 0;
+
+      // Show interstitial ad every 3 game overs
+      if (totalGames > 0 && totalGames % 3 == 0) {
+        await AdsManager().showInterstitialAd();
+      }
+    } catch (e) {
+      // Handle error silently
     }
   }
 

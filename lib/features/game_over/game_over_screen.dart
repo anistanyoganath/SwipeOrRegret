@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:swipeorregret/app/app_colors.dart';
 import 'package:swipeorregret/app/app_routes.dart';
+import 'package:swipeorregret/core/utils/ads/ads_manager.dart';
 import 'package:swipeorregret/core/utils/ads/banner_ad.dart';
 import 'package:swipeorregret/core/widgets/primary_button.dart';
 import 'package:swipeorregret/features/game_over/game_over_controller.dart';
