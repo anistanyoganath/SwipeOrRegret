@@ -3,7 +3,7 @@ import 'swipe_card.dart';
 
 class SwipeDeck<T> extends StatefulWidget {
   final List<T> items;
-  final Widget Function(T item) cardBuilder;
+  final Widget Function(T item, VoidCallback swipeLeft, VoidCallback swipeRight) cardBuilder;
   final Function(T item, bool isRight) onSwipe;
 
   const SwipeDeck({
@@ -20,22 +20,32 @@ class SwipeDeck<T> extends StatefulWidget {
 class _SwipeDeckState<T> extends State<SwipeDeck<T>> {
   int currentIndex = 0;
   bool locked = false;
+  GlobalKey<SwipeCardState> _activeCardKey = GlobalKey<SwipeCardState>();
 
   void _handleSwipe(bool isRight) {
-    if (locked || currentIndex >= widget.items.length) return;
-    locked = true;
+    if (currentIndex >= widget.items.length) return;
 
     final currentItem = widget.items[currentIndex];
     widget.onSwipe(currentItem, isRight);
 
-    // Update state after animation
-    Future.delayed(const Duration(milliseconds: 250), () {
-      if (!mounted) return;
-      setState(() {
-        currentIndex++;
-        locked = false;
-      });
+    if (!mounted) return;
+    setState(() {
+      currentIndex++;
+      _activeCardKey = GlobalKey<SwipeCardState>();
+      locked = false;
     });
+  }
+
+  void _swipeLeftProgrammatically() {
+    if (locked) return;
+    locked = true;
+    _activeCardKey.currentState?.swipeLeft();
+  }
+
+  void _swipeRightProgrammatically() {
+    if (locked) return;
+    locked = true;
+    _activeCardKey.currentState?.swipeRight();
   }
 
   @override
@@ -61,7 +71,11 @@ class _SwipeDeckState<T> extends State<SwipeDeck<T>> {
                   child: Opacity(
                     opacity: 0.95,
                     child: IgnorePointer(
-                      child: widget.cardBuilder(widget.items[currentIndex + i]),
+                      child: widget.cardBuilder(
+                        widget.items[currentIndex + i],
+                        () {},
+                        () {},
+                      ),
                     ),
                   ),
                 ),
@@ -82,8 +96,12 @@ class _SwipeDeckState<T> extends State<SwipeDeck<T>> {
           child: Align(
             alignment: Alignment.center,
             child: SwipeCard(
-              key: ValueKey(currentIndex), // Important: key changes with index
-              child: widget.cardBuilder(widget.items[currentIndex]),
+              key: _activeCardKey,
+              child: widget.cardBuilder(
+                widget.items[currentIndex],
+                _swipeLeftProgrammatically,
+                _swipeRightProgrammatically,
+              ),
               onSwipeLeft: () => _handleSwipe(false),
               onSwipeRight: () => _handleSwipe(true),
             ),
@@ -108,6 +126,7 @@ class _SwipeDeckState<T> extends State<SwipeDeck<T>> {
               setState(() {
                 currentIndex = 0;
                 locked = false;
+                _activeCardKey = GlobalKey<SwipeCardState>();
               });
             },
             child: const Text("Play Again"),
