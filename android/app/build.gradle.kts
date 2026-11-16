@@ -37,7 +37,7 @@ android {
             keyAlias = keystoreProperties["keyAlias"] as String?
             keyPassword = keystoreProperties["keyPassword"] as String?
             storeFile = keystoreProperties["storeFile"]?.let {
-                file(it)
+                rootProject.file(it)
             }
             storePassword = keystoreProperties["storePassword"] as String?
         }
@@ -46,6 +46,10 @@ android {
     buildTypes {
         release {           
             signingConfig = signingConfigs.getByName("release")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
 }
@@ -58,4 +62,8 @@ kotlin {
 
 flutter {
     source = "../.."
+}
+
+dependencies {
+    implementation("androidx.work:work-runtime-ktx:2.9.1")
 }
