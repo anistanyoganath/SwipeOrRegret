@@ -13,10 +13,10 @@ class SwipeCard extends StatefulWidget {
   });
 
   @override
-  State<SwipeCard> createState() => _SwipeCardState();
+  State<SwipeCard> createState() => SwipeCardState();
 }
 
-class _SwipeCardState extends State<SwipeCard>
+class SwipeCardState extends State<SwipeCard>
     with SingleTickerProviderStateMixin {
   Offset position = Offset.zero;
   double rotation = 0;
@@ -26,6 +26,7 @@ class _SwipeCardState extends State<SwipeCard>
 
   late AnimationController controller;
   late Animation<Offset> animation;
+  late Animation<double> rotationAnimation;
 
   @override
   void initState() {
@@ -37,7 +38,10 @@ class _SwipeCardState extends State<SwipeCard>
 
     controller.addListener(() {
       if (mounted) {
-        setState(() => position = animation.value);
+        setState(() {
+          position = animation.value;
+          rotation = rotationAnimation.value;
+        });
       }
     });
 
@@ -48,6 +52,9 @@ class _SwipeCardState extends State<SwipeCard>
         }
       }
     });
+
+    animation = Tween<Offset>(begin: Offset.zero, end: Offset.zero).animate(controller);
+    rotationAnimation = Tween<double>(begin: 0, end: 0).animate(controller);
   }
 
   @override
@@ -56,14 +63,19 @@ class _SwipeCardState extends State<SwipeCard>
     super.dispose();
   }
 
-  void _animate(Offset target, VoidCallback onEnd) {
+  void _animate(Offset targetPosition, double targetRotation, VoidCallback onEnd) {
     if (!mounted) return;
 
     setState(() => isAnimating = true);
 
     animation = Tween<Offset>(
       begin: position,
-      end: target,
+      end: targetPosition,
+    ).animate(CurvedAnimation(parent: controller, curve: Curves.easeOut));
+
+    rotationAnimation = Tween<double>(
+      begin: rotation,
+      end: targetRotation,
     ).animate(CurvedAnimation(parent: controller, curve: Curves.easeOut));
 
     controller
@@ -75,42 +87,51 @@ class _SwipeCardState extends State<SwipeCard>
       });
   }
 
+  void swipeLeft() {
+    if (isAnimating) return;
+    _animate(const Offset(-500, 0), -0.4, widget.onSwipeLeft);
+  }
+
+  void swipeRight() {
+    if (isAnimating) return;
+    _animate(const Offset(500, 0), 0.4, widget.onSwipeRight);
+  }
+
   void _onEnd() {
     if (!mounted || isAnimating) return;
 
     if (position.dx > threshold) {
-      _animate(const Offset(500, 0), widget.onSwipeRight);
+      _animate(const Offset(500, 0), 0.4, widget.onSwipeRight);
     } else if (position.dx < -threshold) {
-      _animate(const Offset(-500, 0), widget.onSwipeLeft);
-    } else {
-      _animate(Offset.zero, () {});
+      _animate(const Offset(-500, 0), -0.4, widget.onSwipeLeft);
+    } else if (position != Offset.zero) {
+      _animate(Offset.zero, 0, () {});
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Listener(
-      onPointerUp: (_) => _onEnd(),
-      child: GestureDetector(
-        onPanUpdate: (d) {
-          if (isAnimating) return;
-          setState(() {
-            position += d.delta;
-            rotation = position.dx / 300;
-          });
+    return GestureDetector(
+      onPanUpdate: (d) {
+        if (isAnimating) return;
+        setState(() {
+          position += d.delta;
+          rotation = position.dx / 300;
+        });
+      },
+      onPanEnd: (_) => _onEnd(),
+      onPanCancel: () => _onEnd(),
+      child: AnimatedBuilder(
+        animation: controller,
+        builder: (context, child) {
+          return Transform.translate(
+            offset: position,
+            child: Transform.rotate(
+              angle: rotation * 3.14 / 12,
+              child: widget.child,
+            ),
+          );
         },
-        child: AnimatedBuilder(
-          animation: controller,
-          builder: (context, child) {
-            return Transform.translate(
-              offset: position,
-              child: Transform.rotate(
-                angle: rotation * 3.14 / 12,
-                child: widget.child,
-              ),
-            );
-          },
-        ),
       ),
     );
   }

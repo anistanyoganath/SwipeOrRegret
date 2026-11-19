@@ -84,11 +84,8 @@ class _GameScreenState extends State<GameScreen> {
     AudioService().playSwipeSound();
     VibrationService().vibrateSwipe();
 
-    // Delay for animation then make decision
-    Future.delayed(const Duration(milliseconds: 300), () {
-      _controller.makeDecision(false);
-      _startTimer();
-    });
+    _controller.makeDecision(false);
+    _startTimer();
   }
 
   void _onSwipeRight() {
@@ -98,11 +95,8 @@ class _GameScreenState extends State<GameScreen> {
     AudioService().playSwipeSound();
     VibrationService().vibrateSwipe();
 
-    // Delay for animation then make decision
-    Future.delayed(const Duration(milliseconds: 300), () {
-      _controller.makeDecision(true);
-      _startTimer();
-    });
+    _controller.makeDecision(true);
+    _startTimer();
   }
 
   @override
@@ -329,10 +323,13 @@ class _GameScreenState extends State<GameScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: SwipeDeck<Scenario>(
                       items: controller.scenarios,
-                      cardBuilder: (scenario) => ScenarioCard(
+                      cardBuilder: (scenario, swipeLeft, swipeRight) =>
+                          ScenarioCard(
                         text: scenario.text,
                         leftChoice: scenario.leftText,
                         rightChoice: scenario.rightText,
+                        leftClick: swipeLeft,
+                        rightClick: swipeRight,
                       ),
                       onSwipe: (scenario, isRight) {
                         _resetTimer();

@@ -5,12 +5,16 @@ class ScenarioCard extends StatelessWidget {
   final String text;
   final String leftChoice;
   final String rightChoice;
+  final VoidCallback? rightClick;
+  final VoidCallback? leftClick;
 
   const ScenarioCard({
     super.key,
     required this.text,
     required this.leftChoice,
     required this.rightChoice,
+    this.rightClick,
+    this.leftClick,
   });
 
   @override
@@ -56,8 +60,18 @@ class ScenarioCard extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _choice(leftChoice, Colors.red, Icons.arrow_back),
-                _choice(rightChoice, Colors.green, Icons.arrow_forward),
+                _ChoiceButton(
+                  text: leftChoice,
+                  color: Colors.red,
+                  icon: Icons.arrow_back,
+                  onClick: leftClick,
+                ),
+                _ChoiceButton(
+                  text: rightChoice,
+                  color: Colors.green,
+                  icon: Icons.arrow_forward,
+                  onClick: rightClick,
+                ),
               ],
             ),
           ),
@@ -65,28 +79,74 @@ class ScenarioCard extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _choice(String text, Color color, IconData icon) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+class _ChoiceButton extends StatefulWidget {
+  final String text;
+  final Color color;
+  final IconData icon;
+  final VoidCallback? onClick;
+
+  const _ChoiceButton({
+    required this.text,
+    required this.color,
+    required this.icon,
+    this.onClick,
+  });
+
+  @override
+  State<_ChoiceButton> createState() => _ChoiceButtonState();
+}
+
+class _ChoiceButtonState extends State<_ChoiceButton> {
+  bool _isPressed = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedScale(
+      scale: _isPressed ? 0.92 : 1.0,
+      duration: const Duration(milliseconds: 100),
+      curve: Curves.easeInOut,
+      child: Material(
+        color: Colors.transparent,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: color.withOpacity(0.3)),
-      ),
-      child: Row(
-        children: [
-          if (icon == Icons.arrow_back) Icon(icon, color: color),
-          const SizedBox(width: 8),
-          Text(
-            text,
-            style: TextStyle(color: color, fontWeight: FontWeight.w600),
+        child: InkWell(
+          onTapDown: (_) => setState(() => _isPressed = true),
+          onTapUp: (_) => setState(() => _isPressed = false),
+          onTapCancel: () => setState(() => _isPressed = false),
+          onTap: widget.onClick,
+          borderRadius: BorderRadius.circular(20),
+          splashColor: widget.color.withOpacity(0.2),
+          highlightColor: widget.color.withOpacity(0.1),
+          child: Ink(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            decoration: BoxDecoration(
+              color: widget.color.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: widget.color.withOpacity(0.3)),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (widget.icon == Icons.arrow_back) ...[
+                  Icon(widget.icon, color: widget.color),
+                  const SizedBox(width: 8),
+                ],
+                Text(
+                  widget.text,
+                  style: TextStyle(
+                    color: widget.color,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                if (widget.icon == Icons.arrow_forward) ...[
+                  const SizedBox(width: 8),
+                  Icon(widget.icon, color: widget.color),
+                ],
+              ],
+            ),
           ),
-          if (icon == Icons.arrow_forward) ...[
-            const SizedBox(width: 8),
-            Icon(icon, color: color),
-          ],
-        ],
+        ),
       ),
     );
   }
